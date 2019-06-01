@@ -14,7 +14,7 @@
 		}
 
 		public function ingresar($usuario, $pass){			
-			$consulta = "SELECT * FROM tbl_usuario WHERE usuario = '$usuario'";
+			$consulta = "SELECT * FROM usuarios WHERE nick_usua = '$usuario'";
 			$query = mysqli_query($this->con , $consulta);
 
 			$filas = mysqli_num_rows($query);
@@ -22,7 +22,7 @@
 			$datos = mysqli_fetch_assoc($query);
 			if ($filas >= 1) {
 				//echo "Hay uno o mas usuario";
-				if ($pass == $datos['password']) {
+				if ($pass == $datos['password_usua']) {
 					return true;
 				}
 				else{

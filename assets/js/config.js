@@ -1,4 +1,5 @@
  $(document).ready(function(){
+ 	$('.dropdown-toggle').dropdown();
     
     /*========================================
     =            Formulario Login            =

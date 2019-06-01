@@ -7,7 +7,7 @@
 		private $host = "localhost";
 		private $user = "root";
 		private $pass = "";
-		private $bd = "bd_senati";
+		private $bd = "sistemapvea";
 
 		public function conectar(){
 			$con = mysqli_connect($this->host, $this->user, $this->pass, $this->bd);
