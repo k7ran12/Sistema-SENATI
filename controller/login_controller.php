@@ -26,7 +26,25 @@ session_start();
 		}
 	}
 	else if (!empty($_POST['accion']) && $_POST['accion'] == "registrar") {
-		echo "Se llama a registrar";
+			if (!empty($_POST['nick']) && !empty($_POST['password']) && !empty($_POST['nombres']) && !empty($_POST['apellidos']) && !empty($_POST['nivel'])) {
+				$nick = $_POST['nick'];
+				$password = $_POST['password'];
+				$nombres = $_POST['nombres'];
+				$apellidos = $_POST['apellidos'];
+				$nivel = $_POST['nivel'];				
+
+				$respuesta = $login_model->agregar_usuarios($nick, $password, $nombres, $apellidos, $nivel);
+				if ($respuesta == true) {
+					echo "agregado";
+				}
+				else{
+					echo "incorrecto";
+				}
+			}
+			else{
+				echo "invalidado";
+			}		
+		
 	}
 	else{
 		echo "No cumple las condiciones";
