@@ -4,8 +4,7 @@
 --   DBMS       : MySql 
 --   -------------------------------------------------- 
 
-USE SistemaPVEA
-;
+
 
 SET FOREIGN_KEY_CHECKS=0;
 

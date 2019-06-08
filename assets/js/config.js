@@ -93,14 +93,85 @@
     /*=====  End of Agregar Usuario  ======*/
     
 
-    //Alertify
+   /*=================================
+   =            Tabla CFP            =
+   =================================*/
+   
+   function datos_tabla_cfp(){
+   	$.ajax({
+   		method: "POST",
+   		url: "controller/cfp_controller.php",
+   		success: function(datos){
+   			$("#tabla_cfp_view").html(datos);
+   		}
+   	});
+   }
 
+   datos_tabla_cfp();
 
+   /* Buscar Datos */
 
-   $(".eliminar").click(function(){
-      alertify.confirm('Confirm Title', 'Confirm Message', function(){ alertify.success('Ok') }
-                , function(){ alertify.error('Cancel')});
+   $("#buscar_cfp").click(function(){
+   	let buscar_cfp = $("#buscar").val();
+
+   	console.log(buscar_cfp);
+
+   	if (buscar_cfp == "") {
+   		datos_tabla_cfp();
+   	}
+   	else{
+
+   		$.ajax({
+   		method: "POST",
+   		url: "controller/cfp_controller.php",
+   		data: "buscar="+ buscar_cfp,
+   		success: function(datos){
+   			$("#tabla_cfp_view").html(datos);
+   		}
+   	});
+
+   	}
+   	
    });
+
+   /* Fin Buscar datos */
+
+   /* Agregar datos CFP */
+   $( "#from_agregar_cfp" ).on( "submit", function( event ) {
+    event.preventDefault();   
+    let form_cfp = $( this ).serialize();
+    console.log(form_cfp);
+    $.ajax({
+      method: "POST",
+      url: "controller/cfp_controller.php",
+      data: "accion=registrar&" + form_cfp
+    })
+      .done(function( msg ) {       
+        if (msg == 'agregado') {
+          alertify.alert('Alerta', 'Los datos se agrearon correctamente!', function(){ alertify.success('Guardado');window.location.reload(); });         
+          
+        }
+        else if(msg == 'incorrecto'){
+          alertify.success('No se pudo agregar :(');
+        }
+        else if(msg == 'invalidado'){
+          alertify.success('Ingresar todos los datos');
+        }       
+        else{
+          alertify.success('Error no encontrado');          
+        }       
+        
+    });
+  });
+   
+
+   /* Fin agregar datos CFP */
+   
+   
+   
+   
+   /*=====  End of Tabla CFP  ======*/
+   
     
 
  });
