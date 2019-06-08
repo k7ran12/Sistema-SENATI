@@ -4,122 +4,62 @@
 	$cfp_model = new cfp_model();
 
 	/*===================================
-	=            Mostrar CFP            =
-	===================================*/
-
-	if (!empty($_POST['buscar'])) {
-
-		$buscar = $_POST['buscar'];
-
-		$datos_cfp = $cfp_model->buscar_datos_cfp($buscar);
-
-		if (!empty($datos_cfp)) {
-			?>
-			<table class="table table-hover">
-					<tr>
-						<th>Codigo CFP</th>
-						<th>Descripcion CFP</th>
-						<th>Direccion CFP</th>
-						<th>Departamento Ubicacion</th>
-						<th>Provincia Ubicacion</th>
-						<th>Distrito Ubicacion</th>						
-					</tr>
-			<?php 
-			foreach ($datos_cfp as $value) {
-				?>				
-					<tr>
-						<td><?php echo $value['codigo_cfp'] ?></td>
-						<td><?php echo $value['descripcion_cfp'] ?></td>
-						<td><?php echo $value['direccion_cfp'] ?></td>
-						<td><?php echo $value['departamento_ubi'] ?></td>
-						<td><?php echo $value['provincia_ubi'] ?></td>
-						<td><?php echo $value['distrito_ubi'] ?></td>
-					</tr>
+		=            Agregar CFP            =
+		===================================*/
+		
+		if (!empty($_POST['accion']) && $_POST['accion'] == "agregar") 
+		{			
+			if (!empty($_POST['codigo_cfp']) && !empty($_POST['descripcion_cfp']) && !empty($_POST['direccion_cfp']) && !empty($_POST['ubicacion'])) {
+				$codigo_cfp = $_POST['codigo_cfp'];
+				$descripcion_cfp = $_POST['descripcion_cfp'];
+				$direccion_cfp = $_POST['direccion_cfp'];
+				$ubicacion = $_POST['ubicacion'];
+				$agregar = $cfp_model->agregar_datos_cfp($codigo_cfp, $descripcion_cfp, $direccion_cfp, $ubicacion);
+				if ($agregar == true) 
+					{
+						echo "agregado";
+					}
+				else
+					{
+						echo "incorrecto";
+					}
 				
-				<?php 
 			}
-			?>
-			</table>
-			<?php 
-		}
-		
-		else{
-			?>
-			<table>
-				<tr>
-					<td colspan="6">No hay datos</td>
-				</tr>
-			</table>
-			<?php 
-		}
-
-
-	}
-	else{
-
-		$datos_cfp = $cfp_model->mostrar_cfp();
-
-		if (!empty($datos_cfp)) {
-			?>
-			<table class="table table-hover">
-					<tr>
-						<th>Codigo CFP</th>
-						<th>Descripcion CFP</th>
-						<th>Direccion CFP</th>
-						<th>Departamento Ubicacion</th>
-						<th>Provincia Ubicacion</th>
-						<th>Distrito Ubicacion</th>						
-					</tr>
-			<?php 
-			foreach ($datos_cfp as $value) {
-				?>				
-					<tr>
-						<td><?php echo $value['codigo_cfp'] ?></td>
-						<td><?php echo $value['descripcion_cfp'] ?></td>
-						<td><?php echo $value['direccion_cfp'] ?></td>
-						<td><?php echo $value['departamento_ubi'] ?></td>
-						<td><?php echo $value['provincia_ubi'] ?></td>
-						<td><?php echo $value['distrito_ubi'] ?></td>
-					</tr>
-				
-				<?php 
+			else{
+				echo "invalidado";
 			}
-			?>
-			</table>
-			<?php 
-		}
-		else{
-			?>
-			<table>
-				<tr>
-					<td colspan="6">No hay datos</td>
-				</tr>
-			</table>
-			<?php 
 		}
 
-	}
-	
-		//$buscar = !empty($_POST['buscar']);
-		//$cfp_model->mostrar_cfp($codigo_cfp); 
+		else if (!empty($_POST['accion']) && $_POST['accion'] == "editar") 
+		{
+			
+			if (!empty($_POST['id_cfp']) && !empty($_POST['id_ubi']) && !empty($_POST['codigo_cfp_editar']) && !empty($_POST['descripcion_cfp_editar']) && !empty($_POST['direccion_cfp_editar']) && !empty($_POST['ubicacion_cfp_editar'])) {
+				//Importante el ID para editar
+				$id_cfp = $_POST['id_cfp'];
+				$id_ubi = $_POST['id_ubi'];
+				$codigo_cfp_editar = $_POST['codigo_cfp_editar'];
+				$descripcion_cfp_editar = $_POST['descripcion_cfp_editar'];
+				$direccion_cfp_editar = $_POST['direccion_cfp_editar'];
+				$ubicacion_cfp_editar = $_POST['ubicacion_cfp_editar'];
 
-		
-		
-	
-	/*=====  End of Mostrar CFP  ======*/
+				$editar = $cfp_model->editar_datos_cfp($id_cfp, $id_ubi, $codigo_cfp_editar, $descripcion_cfp_editar, $direccion_cfp_editar, $ubicacion_cfp_editar);
 
-	/*=========================================
-	=            Agregar Datos CFP            =
-	=========================================*/
-	
-	if (!empty($_POST['accion']) && $_POST['accion'] == "agregar") {
-		# code...
-	}
-	
-	/*=====  End of Agregar Datos CFP  ======*/
-	
-	
-	
+				if ($editar == true) 
+				{
+					echo "editado";
+				}
+				else
+				{
+					echo "incorrecto";
+				}
+			}
+			else{
+				echo "invalidado";
+			}
+		}
+		
+		/*=====  End of Agregar CFP  ======*/
+			
 	
 		
 

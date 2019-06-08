@@ -109,32 +109,7 @@
 
    datos_tabla_cfp();
 
-   /* Buscar Datos */
-
-   $("#buscar_cfp").click(function(){
-   	let buscar_cfp = $("#buscar").val();
-
-   	console.log(buscar_cfp);
-
-   	if (buscar_cfp == "") {
-   		datos_tabla_cfp();
-   	}
-   	else{
-
-   		$.ajax({
-   		method: "POST",
-   		url: "controller/cfp_controller.php",
-   		data: "buscar="+ buscar_cfp,
-   		success: function(datos){
-   			$("#tabla_cfp_view").html(datos);
-   		}
-   	});
-
-   	}
-   	
-   });
-
-   /* Fin Buscar datos */
+   
 
    /* Agregar datos CFP */
    $( "#from_agregar_cfp" ).on( "submit", function( event ) {
@@ -144,9 +119,10 @@
     $.ajax({
       method: "POST",
       url: "controller/cfp_controller.php",
-      data: "accion=registrar&" + form_cfp
+      data: "accion=agregar&" + form_cfp
     })
-      .done(function( msg ) {       
+      .done(function( msg ) {
+      console.log(msg);
         if (msg == 'agregado') {
           alertify.alert('Alerta', 'Los datos se agrearon correctamente!', function(){ alertify.success('Guardado');window.location.reload(); });         
           
@@ -166,12 +142,206 @@
    
 
    /* Fin agregar datos CFP */
+
+
+   /* Datos CFP para editar */
+
+   	$(".editar_cfp").click(function() {
+
+        //var valores = "";
+        var valores = [];
+
+        // Obtenemos todos los valores contenidos en los <td> de la fila
+        // seleccionada
+        $(this).parents("tr").find(".datos_cfp_editar").each(function() {
+          valores.push($(this).html());
+        });
+        $("#id_cfp").val(valores[0]);
+        $("#id_ubi").val(valores[1]);
+        $("#codigo_cfp_editar").val(valores[2]);
+        $("#descripcion_cfp_editar").val(valores[3]);
+        $("#direccion_cfp_editar").val(valores[4]);
+        //$("#editar_apellidos").val(valores[2]);        
+        $("#ubicacion_cfp_editar option[value='"+valores[1]+"']").attr("selected", true);
+        console.log(valores);
+        //alert(valores);
+      });
+
+   /* Fin datos CFP para editar */
+
+
+   /* Editar CFP */
+   	
+
+   	$( "#form_editar_cfp" ).on( "submit", function( event ) {
+    event.preventDefault();   
+    let form_cfp = $( this ).serialize();
+    console.log(form_cfp);
+    $.ajax({
+      method: "POST",
+      url: "controller/cfp_controller.php",
+      data: "accion=editar&" + form_cfp
+    })
+      .done(function( msg ) {
+      console.log(msg);
+        if (msg == 'editado') {
+          alertify.alert('Alerta', 'Los datos se editaron correctamente!', function(){ alertify.success('Guardado');window.location.reload(); });         
+          
+        }
+        else if(msg == 'incorrecto'){
+          alertify.success('No se pudo agregar :(');
+        }
+        else if(msg == 'invalidado'){
+          alertify.success('Ingresar todos los datos');
+        }       
+        else{
+          alertify.success('Error no encontrado');          
+        }       
+        
+    });
+  });
+
+   /* Fin editar CFP */
+   
+   
+   
+   
    
    
    
    
    /*=====  End of Tabla CFP  ======*/
+
+   /*=====================================
+   =            Tabla CARRERA            =
+   =====================================*/
+   
+   /* Datos editar CARRERA */
+
+   $(".editar_carrera").click(function() {
+
+        //var valores = "";
+        var valores = [];
+
+        // Obtenemos todos los valores contenidos en los <td> de la fila
+        // seleccionada
+        $(this).parents("tr").find(".datos_carrera_editar").each(function() {
+          valores.push($(this).html());
+        });
+        $("#id_carr").val(valores[0]);
+        $("#codigo_carrera_editar").val(valores[1]);
+        $("#descripcion_carrera_editar").val(valores[2]);
+        
+        console.log(valores);
+        //alert(valores);
+      });
+   /* Fin datos editar CARRERA */
+
+
+   /* Agregar CARRERA */   
+
+   $( "#form_agregar_carrera" ).on( "submit", function( event ) {
+    event.preventDefault();   
+    let form_cfp = $( this ).serialize();
+    console.log(form_cfp);
+    $.ajax({
+      method: "POST",
+      url: "controller/carrera_controller.php",
+      data: "accion=agregar&" + form_cfp
+    })
+      .done(function( msg ) {
+      console.log(msg);
+        if (msg == 'agregado') {
+          alertify.alert('Alerta', 'Los datos se agrearon correctamente!', function(){ alertify.success('Guardado');window.location.reload(); });         
+          
+        }
+        else if(msg == 'incorrecto'){
+          alertify.success('No se pudo agregar :(');
+        }
+        else if(msg == 'invalidado'){
+          alertify.success('Ingresar todos los datos');
+        }       
+        else{
+          alertify.success('Error no encontrado');          
+        }       
+        
+    });
+  });
+
+   /* Fin Agregar CARRERA */
+
+   /* Editar CARRERA */   
+
+   $( "#form_editar_carrera" ).on( "submit", function( event ) {
+    event.preventDefault();   
+    let form_carrera = $( this ).serialize();
+    console.log(form_carrera);
+    $.ajax({
+      method: "POST",
+      url: "controller/carrera_controller.php",
+      data: "accion=editar&" + form_carrera
+    })
+      .done(function( msg ) {
+      console.log(msg);
+        if (msg == 'editado') {
+          alertify.alert('Alerta', 'Los datos se editaron correctamente!', function(){ alertify.success('Guardado');window.location.reload(); });         
+          
+        }
+        else if(msg == 'incorrecto'){
+          alertify.success('No se pudo agregar :(');
+        }
+        else if(msg == 'invalidado'){
+          alertify.success('Ingresar todos los datos');
+        }       
+        else{
+          alertify.success('Error no encontrado');          
+        }       
+        
+    });
+  });
+
+   /* Fin Editar CARRERA */
+   
+   
+   
+   
+   
+   
+   
+   /*=====  End of Tabla CARRERA  ======*/
+
+
+   /*===============================================
+   =            Tabla Actividad Empresa            =
+   ===============================================*/
+   
+   /* Datos Editar Actividad Empresa */
+
+   $(".editar_actividad_empresa").click(function() {
+
+        //var valores = "";
+        var valores = [];
+
+        // Obtenemos todos los valores contenidos en los <td> de la fila
+        // seleccionada
+        $(this).parents("tr").find(".datos_actividad_empresa_editar").each(function() {
+          valores.push($(this).html());
+        });
+        $("#id_carr").val(valores[0]);
+        $("#codigo_actividad_empresa").val(valores[1]);
+        $("#descripcion_actividad_empresa").val(valores[2]);
+        
+        console.log(valores);
+        //alert(valores);
+      });
+   
+   /* Fin Datos Editar Actividad Empresa */
+   
+   /*=====  End of Tabla Actividad Empresa  ======*/
+   
+   
    
     
 
  });
+

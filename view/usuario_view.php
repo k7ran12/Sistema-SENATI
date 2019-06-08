@@ -13,7 +13,7 @@
 
 <div style="float: left;">
 	
-     <button type="button" class="btn btn-success my-2 my-sm-0" data-toggle="modal" data-target=".agregar_cfp">add</button>      
+     <button type="button" class="btn btn-success my-2 my-sm-0" data-toggle="modal" data-target=".agregar_usuario">add</button>      
     
 </div>
 
@@ -45,7 +45,7 @@
       <td class="datos_usuario_editar"><?php echo $value_usu['nombres_usua'] ?></td>
       <td class="datos_usuario_editar"><?php echo $value_usu['apellidos_usua'] ?></td>
       <td class="datos_usuario_editar"><?php echo $value_usu['nivel_usua'] ?></td>      
-      <td><button nick="<?php echo $value_usu['nick_usua'] ?>" type="button" class="btn btn-primary editar_usuario" data-toggle="modal" data-target=".editar_cfp">e</button></td>
+      <td><button nick="<?php echo $value_usu['nick_usua'] ?>" type="button" class="btn btn-primary editar_usuario" data-toggle="modal" data-target=".editar_usuario_modal">e</button></td>
     </tr>
     <?php } ?>    
   </tbody>
@@ -69,7 +69,7 @@
 =            Modal Formulario Agregar            =
 ===============================================-->
 
-<div class="modal fade agregar_cfp" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div class="modal fade agregar_usuario" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">      
 	      <div class="modal-header">
@@ -120,7 +120,7 @@
 =            Modal Formulario Editar            =
 ==============================================-->
 
-<div class="modal fade editar_cfp" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div class="modal fade editar_usuario_modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
