@@ -17,13 +17,13 @@
 
 <div style="float: left;">
 	
-     <button type="button" class="btn btn-success my-2 my-sm-0" data-toggle="modal" data-target=".agregar_cfp">add</button>      
+     <button type="button" class="btn btn-success my-2 my-sm-0" data-toggle="modal" data-target=".agregar_actividad_empresa">add</button>      
     
 </div>
 
 <div style="float: right;">
-	<form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
+	<form class="form-inline my-2 my-lg-0" action="actividadEmpresa" method="POST">
+      <input name="buscar" class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
       <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Buscar</button>
     </form>
 </div><br><br><br>
@@ -34,7 +34,7 @@
 
     $buscar = $_POST['buscar'];
 
-    $datos_carrera = $actividad_empresa_model->mostrar_actividad_empresa($buscar);
+    $datos_carrera = $actividad_empresa_model->buscar_actividad_empresa($buscar);
 
     if (!empty($datos_carrera)) {
       ?>
@@ -80,9 +80,9 @@
   }
   else{
 
-    $datos_carrera = $actividad_empresa_model->mostrar_actividad_empresa();
+    $datos_ae = $actividad_empresa_model->mostrar_actividad_empresa();
 
-    if (!empty($datos_carrera)) {
+    if (!empty($datos_ae)) {
       ?>
       <table class="table table-hover">
           <tr>
@@ -91,7 +91,7 @@
             <th>Accion</th>           
           </tr>
       <?php 
-      foreach ($datos_carrera as $value) {
+      foreach ($datos_ae as $value) {
         ?>        
           <tr>
             <td style="display: none;" class="datos_actividad_empresa_editar"><?php echo $value['id_ae'] ?></td>
@@ -127,7 +127,7 @@
 =            Modal Formulario Agregar            =
 ===============================================-->
 
-<div class="modal fade agregar_cfp" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div class="modal fade agregar_actividad_empresa" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">      
 	      <div class="modal-header">
@@ -137,14 +137,14 @@
 	        </button>
 	      </div>
 	      <div class="modal-body">
-	        <form>
+	        <form id="form_agregar_actividad_empresa">
 			  <div class="form-group">
-			    <label for="codigo_cfp">Codigo Carrera</label>
-			    <input type="text" class="form-control" id="codigo_cfp" name="codigo_cfp" aria-describedby="emailHelp">			    
+			    <label for="codigo_actividad">Codigo Actividad</label>
+			    <input type="text" class="form-control" id="codigo_actividad" name="codigo_actividad" aria-describedby="emailHelp">			    
 			  </div>
 			  <div class="form-group">
-			    <label for="descripcion_cfp">Descripcion</label>
-			    <input type="text" class="form-control" id="descripcion_cfp" name="descripcion_cfp">
+			    <label for="descripcion_actividad">Descripcion Actividad</label>
+			    <input type="text" class="form-control" id="descripcion_actividad" name="descripcion_actividad">
 			  </div>			  
 	      </div>
 		      <div class="modal-footer">
@@ -173,13 +173,14 @@
 	      </div>
 	      <div class="modal-body">
 	        <form id="form_editar_actividad_empresa">
+            <input type="hidden" name="id_ae" id="id_ae">
 			  <div class="form-group">
-			    <label for="codigo_actividad_empresa">Codigo Actividad</label>
-			    <input type="text" class="form-control" id="codigo_actividad_empresa" name="codigo_actividad_empresa" aria-describedby="emailHelp">			    
+			    <label for="codigo_actividad_empresa_editar">Codigo Actividad</label>
+			    <input type="text" class="form-control" id="codigo_actividad_empresa_editar" name="codigo_actividad_empresa_editar" aria-describedby="emailHelp">			    
 			  </div>
 			  <div class="form-group">
-			    <label for="descripcion_actividad_empresa">Descripcion Actividad</label>
-			    <input type="text" class="form-control" id="descripcion_actividad_empresa" name="descripcion_actividad_empresa">
+			    <label for="descripcion_actividad_empresa_editar">Descripcion Actividad</label>
+			    <input type="text" class="form-control" id="descripcion_actividad_empresa_editar" name="descripcion_actividad_empresa_editar">
 			  </div>			  
 	      </div>
 		      <div class="modal-footer">

@@ -16,6 +16,7 @@
 					echo mysqli_connect_errno() . PHP_EOL;		    
 				    exit;
 				}
+			mysqli_set_charset ( $con , 'utf8' );
 
 			return $con;
 

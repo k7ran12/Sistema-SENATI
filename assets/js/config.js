@@ -1,4 +1,7 @@
  $(document).ready(function(){
+
+  $(".dataa").mCustomScrollbar();
+
  	$('.dropdown-toggle').dropdown();
     
     /*========================================
@@ -327,19 +330,187 @@
         $(this).parents("tr").find(".datos_actividad_empresa_editar").each(function() {
           valores.push($(this).html());
         });
-        $("#id_carr").val(valores[0]);
-        $("#codigo_actividad_empresa").val(valores[1]);
-        $("#descripcion_actividad_empresa").val(valores[2]);
+        $("#id_ae").val(valores[0]);
+        $("#codigo_actividad_empresa_editar").val(valores[1]);
+        $("#descripcion_actividad_empresa_editar").val(valores[2]);
         
         console.log(valores);
         //alert(valores);
       });
    
    /* Fin Datos Editar Actividad Empresa */
+
+   /* Agregar Datos Actividad Empresa */  
+   
+
+   $( "#form_agregar_actividad_empresa" ).on( "submit", function( event ) {
+    event.preventDefault();   
+    let form_actividad_empresa = $( this ).serialize();
+    console.log(form_actividad_empresa);
+    $.ajax({
+      method: "POST",
+      url: "controller/actividad_empresa_controller.php",
+      data: "accion=agregar&" + form_actividad_empresa
+    })
+      .done(function( msg ) {
+      console.log(msg);
+        if (msg == 'agregado') {
+          alertify.alert('Alerta', 'Los datos se agrearon correctamente!', function(){ alertify.success('Guardado');window.location.reload(); });         
+          
+        }
+        else if(msg == 'incorrecto'){
+          alertify.success('No se pudo agregar :(');
+        }
+        else if(msg == 'invalidado'){
+          alertify.success('Ingresar todos los datos');
+        }       
+        else{
+          alertify.success('Error no encontrado');          
+        }       
+        
+    });
+  });
+
+  /* Fin Agregar Datos Actividad Empresa */
+
+
+   /* Editar Actividad Empresa */
+
+   $( "#form_editar_actividad_empresa" ).on( "submit", function( event ) {
+    event.preventDefault();   
+    let form_actividad_empresa_editar = $( this ).serialize();
+    console.log(form_actividad_empresa_editar);
+    $.ajax({
+      method: "POST",
+      url: "controller/actividad_empresa_controller.php",
+      data: "accion=editar&" + form_actividad_empresa_editar
+    })
+      .done(function( msg ) {
+      console.log(msg);
+        if (msg == 'editado') {
+          alertify.alert('Alerta', 'Los datos se editaron correctamente!', function(){ alertify.success('Guardado');window.location.reload(); });         
+          
+        }
+        else if(msg == 'incorrecto'){
+          alertify.success('No se pudo agregar :(');
+        }
+        else if(msg == 'invalidado'){
+          alertify.success('Ingresar todos los datos');
+        }       
+        else{
+          alertify.success('Error no encontrado');          
+        }       
+        
+    });
+  });
+
+   /* Fin Editar Actividad Empresa */
+   
+   
+
    
    /*=====  End of Tabla Actividad Empresa  ======*/
    
    
+   /*======================================
+   =            Tabla Convenio            =
+   ======================================*/
+   
+   /* Datos Para Editar */
+
+   $(".editar_convenio").click(function() {
+
+        //var valores = "";
+        var valores = [];
+
+        // Obtenemos todos los valores contenidos en los <td> de la fila
+        // seleccionada
+        $(this).parents("tr").find(".datos_convenio_editar").each(function() {
+          valores.push($(this).html());
+        });
+        $("#id_conv_editar").val(valores[0]);
+        $("#descripcion_convenio_editar").val(valores[1]);        
+        //alert(valores);
+        console.log(valores);
+      });
+
+   /* Fin Datos Para Editar */
+
+   /* Agregar Convenio */
+   
+
+   $( "#form_agregar_convenio" ).on( "submit", function( event ) {
+    event.preventDefault();   
+    let form_convenio = $( this ).serialize();
+    console.log(form_convenio);
+    $.ajax({
+      method: "POST",
+      url: "controller/convenio_controller.php",
+      data: "accion=agregar&" + form_convenio
+    })
+      .done(function( msg ) {
+      console.log(msg);
+        if (msg == 'agregado') {
+          alertify.alert('Alerta', 'Los datos se agrearon correctamente!', function(){ alertify.success('Guardado');window.location.reload(); });         
+          
+        }
+        else if(msg == 'incorrecto'){
+          alertify.success('No se pudo agregar :(');
+        }
+        else if(msg == 'invalidado'){
+          alertify.success('Ingresar todos los datos');
+        }       
+        else{
+          alertify.success('Error no encontrado');          
+        }       
+        
+    });
+  });
+
+
+
+   /* Fin Agregar Convenio */
+
+   /* Editar Convenio */   
+
+   $( "#form_editar_convenio" ).on( "submit", function( event ) {
+    event.preventDefault();   
+    let form_editar_convenio = $( this ).serialize();
+    console.log(form_editar_convenio);
+    $.ajax({
+      method: "POST",
+      url: "controller/convenio_controller.php",
+      data: "accion=editar&" + form_editar_convenio
+    })
+      .done(function( msg ) {
+      console.log(msg);
+        if (msg == 'editado') {
+          alertify.alert('Alerta', 'Los datos se editaron correctamente!', function(){ alertify.success('Guardado');window.location.reload(); });         
+          
+        }
+        else if(msg == 'incorrecto'){
+          alertify.success('No se pudo agregar :(');
+        }
+        else if(msg == 'invalidado'){
+          alertify.success('Ingresar todos los datos');
+        }       
+        else{
+          alertify.success('Error no encontrado');          
+        }       
+        
+    });
+  });
+
+
+   /* Fin Editar Convenio */
+   
+   
+   
+   
+   
+   
+   
+   /*=====  End of Tabla Convenio  ======*/
    
     
 

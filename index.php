@@ -4,6 +4,7 @@ session_start();
 <!doctype html>
 <html lang="en">
   <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <?php require_once("view/head.php"); ?>
   </head>
   <body>
@@ -36,6 +37,12 @@ session_start();
                 }
                 else if ($_GET['pagina'] == 'usuario') {
                   require_once("view/usuario_view.php");
+                }
+                else if ($_GET['pagina'] == 'ubigeo') {
+                  require_once("view/ubigeo_view.php");
+                }
+                else if ($_GET['pagina'] == 'aprendiz') {
+                  require_once("view/aprendiz_view.php");
                 }
               }
               else{

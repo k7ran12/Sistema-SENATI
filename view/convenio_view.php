@@ -4,8 +4,12 @@
 	}
 
 	require_once("model/ubigeo_model.php");
+  require_once("model/convenio_model.php");
+
 	$ubicacion = new ubigeo_model();
 	$ubi = $ubicacion->mostrar_ubigeo();
+
+  $conv = new convenio_model();
 
  ?>
 
@@ -13,7 +17,7 @@
 
 <div style="float: left;">
 	
-     <button type="button" class="btn btn-success my-2 my-sm-0" data-toggle="modal" data-target=".agregar_cfp">add</button>      
+     <button type="button" class="btn btn-success my-2 my-sm-0" data-toggle="modal" data-target=".agregar_convenio">add</button>      
     
 </div>
 
@@ -24,58 +28,99 @@
     </form>
 </div><br><br><br>
 
-<div>
-	<table class="table table-hover">
-  <thead>
-    <tr>
-      <th scope="col">#</th>     
-      <th scope="col">Descripcion</th>      
-      <th scope="col">Accion</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>1</th>      
-      <td>Otto</td>     
-      <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target=".editar_cfp">e</button></td>
-    </tr>
-    <tr>
-      <th>2</th>      
-      <td>Thornton</td>      
-      <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target=".editar_cfp">e</button></td>
-    </tr>
-    <tr>
-      <th>3</th>     
-      <td>@twitter</td>      
-      <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target=".editar_cfp">e</button></td>
-    </tr>
-    <tr>
-      <th>3</th>         
-      <td>3</td>      
-      <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target=".editar_cfp">e</button></td>
-    </tr>
-  </tbody>
-</table>
-<nav aria-label="Page navigation example">
-  <ul class="pagination justify-content-center">
-    <li class="page-item disabled">
-      <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-    </li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item">
-      <a class="page-link" href="#">Next</a>
-    </li>
-  </ul>
-</nav>
-</div>
+<?php 
+  if (!empty($_POST['buscar'])) {
 
+    $buscar = $_POST['buscar'];
+
+    $datos_convenio = $conv->buscar_datos_convenio($buscar);
+
+    if (!empty($datos_convenio)) {
+      ?>
+      <table class="table table-hover">
+          <tr>            
+            <th>Descripcion Convenio</th>            
+            <th>Accion</th>           
+          </tr>
+      <?php 
+      foreach ($datos_convenio as $value) {
+        ?>        
+          <tr>
+            <td style="display: none;" class="datos_convenio_editar"><?php echo $value['id_conv'] ?></td>           
+            <td class="datos_convenio_editar"><?php echo $value['desc_conv'] ?></td>
+            <td><button type="button" class="btn btn-primary editar_convenio" data-toggle="modal" data-target=".editar_convenio_modal">e</button></td>
+          </tr>
+        
+        <?php 
+      }
+      ?>
+      </table>
+      <?php 
+    }
+    
+    else{
+      ?>
+      <table class="table table-hover">
+         <tr>           
+            <th>Descripcion Convenio</th>            
+            <th>Accion</th>           
+          </tr>
+        <tr>
+          <td class="alert alert-danger" role="alert" colspan="3"><center><h5>No hay datos</h5></center></td>
+        </tr>
+      </table>
+      <?php 
+    }
+
+
+  }
+  else{
+
+    $datos_convenio = $conv->mostrar_convenio();
+
+    if (!empty($datos_convenio)) {
+      ?>
+      <table class="table table-hover">
+          <tr>            
+            <th>Descripcion Convenio</th>            
+            <th>Accion</th>           
+          </tr>
+      <?php 
+      foreach ($datos_convenio as $value) {
+        ?>        
+          <tr>
+            <td style="display: none;" class="datos_convenio_editar"><?php echo $value['id_conv'] ?></td>            
+            <td class="datos_convenio_editar"><?php echo $value['desc_conv'] ?></td>
+            <td><button type="button" class="btn btn-primary editar_convenio" data-toggle="modal" data-target=".editar_convenio_modal">e</button></td>
+          </tr>
+        
+        <?php 
+      }
+      ?>
+      </table>
+      <?php 
+    }
+    else{
+      ?>
+      <table class="table table-hover">
+          <tr>            
+            <th>Descripcion Convenio</th>            
+            <th>Accion</th>           
+          </tr>
+        <tr>
+          <td class="alert alert-danger" role="alert" colspan="3"><center><h5>No hay datos</h5></center></td>
+        </tr>
+      </table>
+      <?php 
+    }
+
+  }
+ ?>
 <!--==============================================
 =            Modal Formulario Agregar            =
 ===============================================-->
 
-<div class="modal fade agregar_cfp" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div class="modal fade agregar_convenio" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">      
 	      <div class="modal-header">
@@ -85,14 +130,10 @@
 	        </button>
 	      </div>
 	      <div class="modal-body">
-	        <form>
+	        <form id="form_agregar_convenio">			  
 			  <div class="form-group">
-			    <label for="codigo_cfp">Codigo Carrera</label>
-			    <input type="text" class="form-control" id="codigo_cfp" name="codigo_cfp" aria-describedby="emailHelp">			    
-			  </div>
-			  <div class="form-group">
-			    <label for="descripcion_cfp">Descripcion</label>
-			    <input type="text" class="form-control" id="descripcion_cfp" name="descripcion_cfp">
+			    <label for="descripcion_convenio">Descripcion</label>
+			    <input type="text" class="form-control" id="descripcion_convenio" name="descripcion_convenio">
 			  </div>			  
 	      </div>
 		      <div class="modal-footer">
@@ -110,7 +151,7 @@
 =            Modal Formulario Editar            =
 ==============================================-->
 
-<div class="modal fade editar_cfp" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div class="modal fade editar_convenio_modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -120,14 +161,11 @@
 	        </button>
 	      </div>
 	      <div class="modal-body">
-	        <form>
+	        <form id="form_editar_convenio">
+          <input type="hidden" name="id_conv_editar" id="id_conv_editar">			  
 			  <div class="form-group">
-			    <label for="codigo_cfp">Codigo CFP</label>
-			    <input value="Codigo CFP" type="text" class="form-control" id="codigo_cfp" name="codigo_cfp" aria-describedby="emailHelp">			    
-			  </div>
-			  <div class="form-group">
-			    <label for="descripcion_cfp">Descripcion</label>
-			    <input value="Descripcion" type="text" class="form-control" id="descripcion_cfp" name="descripcion_cfp">
+			    <label for="descripcion_convenio_editar">Descripcion Convenio</label>
+			    <input value="Descripcion" type="text" class="form-control" id="descripcion_convenio_editar" name="descripcion_convenio_editar">
 			  </div>			  
 	      </div>
 		      <div class="modal-footer">
