@@ -285,12 +285,20 @@
 			    <input type="text" class="form-control" id="nombre_ap" name="nombre_ap">
 			  </div>
 			  <div class="form-group">
+			    <label for="apellido_ap">Apellido Aprendiz</label>
+			    <input type="text" class="form-control" id="apellido_ap" name="apellido_ap">
+			  </div>
+			  <div class="form-group">
 			    <label for="telefono_ap">Telefono Aprendiz</label>
 			    <input type="text" class="form-control" id="telefono_ap" name="telefono_ap">
 			  </div>
 			  <div class="form-group">
 			    <label for="correo">Correo Aprendiz</label>
 			    <input type="text" class="form-control" id="correo" name="correo">
+			  </div>
+			  <div class="form-group">
+			    <label for="direccion_ap">Direccion Aprendiz</label>
+			    <input type="text" class="form-control" id="direccion_ap" name="direccion_ap">
 			  </div>
 			  <div class="form-group">
 			    <label for="referencia_lugar_ap">Referencia Lugar Aprendiz</label>
@@ -346,11 +354,11 @@
 			  </div>
 			  <label>Sexo</label>
 			 <div class="custom-control custom-radio">
-				  <input type="radio" id="customRadio1" name="sexo_ap" class="custom-control-input">
+				  <input value="M" type="radio" id="customRadio1" name="sexo_ap" class="custom-control-input">
 				  <label class="custom-control-label" for="customRadio1">M</label>
 				</div>
 				<div class="custom-control custom-radio">
-				  <input type="radio" id="customRadio2" name="sexo_ap" class="custom-control-input">
+				  <input value="F" type="radio" id="customRadio2" name="sexo_ap" class="custom-control-input">
 				  <label class="custom-control-label" for="customRadio2">F</label>
 				</div>			  
 	      	  </div>
@@ -380,6 +388,7 @@
 	      </div>
 	      <div class="modal-body">
 	        <form id="form_editar_aprendiz">
+	        	<input type="hidden" name="id_ap" id="id_ap">
 			  <div class="form-group">
 			    <label for="editar_dni_ap">DNI Aprendiz</label>
 			    <input type="text" class="form-control" id="editar_dni_ap" name="editar_dni_ap" aria-describedby="">			    
@@ -389,7 +398,7 @@
 			    <input type="text" class="form-control" id="editar_nombre_ap" name="editar_nombre_ap">
 			  </div>
 			  <div class="form-group">
-			    <label for="editar_apellidos_ap">Nombre Aprendiz</label>
+			    <label for="editar_apellidos_ap">Apellido Aprendiz</label>
 			    <input type="text" class="form-control" id="editar_apellidos_ap" name="editar_apellidos_ap">
 			  </div>
 			  <div class="form-group">
@@ -399,6 +408,10 @@
 			  <div class="form-group">
 			    <label for="editar_correo">Correo Aprendiz</label>
 			    <input type="text" class="form-control" id="editar_correo" name="editar_correo">
+			  </div>
+			  <div class="form-group">
+			    <label for="editar_direccion_ap">Direccion</label>
+			    <input type="text" class="form-control" id="editar_direccion_ap" name="editar_direccion_ap">
 			  </div>
 			  <div class="form-group">
 			    <label for="editar_referencia_lugar_ap">Referencia Lugar Aprendiz</label>
@@ -454,11 +467,11 @@
 			  </div>
 			  <label for="sexo_ap">Sexo</label>
 			 <div class="custom-control custom-radio">
-				  <input type="radio" id="radio1" name="editar_sexo_ap" class="custom-control-input">
+				  <input value="M" type="radio" id="radio1" name="editar_sexo_ap" class="custom-control-input">
 				  <label class="custom-control-label" for="radio1">M</label>
 				</div>
 				<div class="custom-control custom-radio">
-				  <input type="radio" id="radio2" name="editar_sexo_ap" class="custom-control-input">
+				  <input value="F" type="radio" id="radio2" name="editar_sexo_ap" class="custom-control-input">
 				  <label class="custom-control-label" for="radio2">F</label>
 				</div>			  
 	      	  </div>

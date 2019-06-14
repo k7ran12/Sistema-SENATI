@@ -10,6 +10,7 @@
         <li class="<?php if($_GET['pagina'] == 'usuario'){ echo 'active';} ?>"><a href="usuario"><i class="icon-code"></i><span>Usuario</span> </a> </li>
         <li class="<?php if($_GET['pagina'] == 'ubigeo'){ echo 'active';} ?>"><a href="ubigeo"><i class="icon-code"></i><span>Ubigeo</span> </a> </li>
         <li class="<?php if($_GET['pagina'] == 'aprendiz'){ echo 'active';} ?>"><a href="aprendiz"><i class="icon-code"></i><span>Aprendiz</span> </a> </li>
+        <li class="<?php if($_GET['pagina'] == 'empresa'){ echo 'active';} ?>"><a href="empresa"><i class="icon-code"></i><span>Empresa</span> </a> </li>
         <li class="dropdown">
           <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"><i class=""></i>            
           </i><span>Drops&nbsp;<i class="fas fa-caret-down"></i></span>

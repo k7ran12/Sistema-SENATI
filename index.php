@@ -44,6 +44,9 @@ session_start();
                 else if ($_GET['pagina'] == 'aprendiz') {
                   require_once("view/aprendiz_view.php");
                 }
+                else if ($_GET['pagina'] == 'empresa') {
+                  require_once("view/empresa_view.php");
+                }
               }
               else{
                 require_once("view/dashboard_view.php");

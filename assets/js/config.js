@@ -528,13 +528,13 @@
         $(this).parents("tr").find(".datos_aprendiz_editar").each(function() {
           valores.push($(this).html());
         });
-        //$("#editar_nick").val(valores[0]);
+        $("#id_ap").val(valores[0]);
         $("#editar_dni_ap").val(valores[1]);
         $("#editar_nombre_ap").val(valores[2]);
         $("#editar_apellidos_ap").val(valores[3]);
         $("#editar_telefono_ap").val(valores[4]);        
         $("#editar_correo").val(valores[5]);  
-        $("#editar_direccion_ap").val(valores[6]);  
+        $("#editar_direccion_ap").val(valores[6]);
         $("#editar_referencia_lugar_ap").val(valores[7]);
         $("#editar_ubicacion_ap option[value='"+valores[27]+"'").attr("selected", true);
         //$("#editar_apellidos").val(valores[8]);  //SELECT
@@ -563,6 +563,73 @@
       });
 
    /* Fin Datos Aprendiz Editar */
+
+
+   /* Agregar Datos Aprendiz */
+
+   $( "#form_agregar_aprendiz" ).on( "submit", function( event ) {
+    event.preventDefault();   
+    let form_aprendiz = $( this ).serialize();
+    console.log(form_aprendiz);
+    $.ajax({
+      method: "POST",
+      url: "controller/aprendiz_controller.php",
+      data: "accion=agregar&" + form_aprendiz
+    })
+      .done(function( msg ) {
+      console.log(msg);
+        if (msg == 'agregado') {
+          alertify.alert('Alerta', 'Los datos se agrearon correctamente!', function(){ alertify.success('Guardado');window.location.reload(); });         
+          
+        }
+        else if(msg == 'incorrecto'){
+          alertify.success('No se pudo agregar :(');
+        }
+        else if(msg == 'invalidado'){
+          alertify.success('Ingresar todos los datos');
+        }       
+        else{
+          alertify.success('Error no encontrado');          
+        }       
+        
+    });
+  });
+
+   /* Fin Agregar datos Aprendiz */
+   
+   /* Editar Aprendiz */
+
+   $( "#form_editar_aprendiz" ).on( "submit", function( event ) {
+    event.preventDefault();   
+    let form_editar_aprendiz = $( this ).serialize();
+    console.log(form_editar_aprendiz);
+    $.ajax({
+      method: "POST",
+      url: "controller/aprendiz_controller.php",
+      data: "accion=editar&" + form_editar_aprendiz
+    })
+      .done(function( msg ) {
+      console.log(msg);
+        if (msg == 'editado') {
+          alertify.alert('Alerta', 'Los datos se editaron correctamente!', function(){ alertify.success('Guardado');window.location.reload(); });         
+          
+        }
+        else if(msg == 'incorrecto'){
+          alertify.success('No se pudo agregar :(');
+        }
+        else if(msg == 'invalidado'){
+          alertify.success('Ingresar todos los datos');
+        }       
+        else{
+          alertify.success('Error no encontrado');          
+        }       
+        
+    });
+  });
+
+   /* Fin Editar Aprendiz */
+   
+   
    
    
    
