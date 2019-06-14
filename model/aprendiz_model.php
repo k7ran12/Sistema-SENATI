@@ -3,7 +3,7 @@
 	/**
 	 * 
 	 */
-	class cfp_model extends conexion_model
+	class aprendiz_model extends conexion_model
 	{
 		private $con;
 
@@ -12,46 +12,91 @@
 			$this->con = parent::conectar();
 		}
 
-		public function mostrar_cfp(){
+		public function mostrar_aprendiz(){
 			
-				$consulta = "SELECT c.id_cfp, c.codigo_cfp, c.descripcion_cfp, c.direccion_cfp, c.id_ubi , u.departamento_ubi, u.provincia_ubi, u.distrito_ubi FROM cfp c INNER JOIN ubigeo u ON u.id_ubi = c.id_ubi  ORDER BY u.departamento_ubi LIMIT 10";
+				$consulta = "SELECT a.*, c.codigo_cfp, c.descripcion_cfp, c.direccion_cfp, c.id_ubi, ubigeo.cod_ubi as cod_cfp_ubigeo, ubigeo.departamento_ubi as departamento_cfp_ubigeo, ubigeo.provincia_ubi as provincia_cfp_ubigeo, ubigeo.distrito_ubi as distrito_cfp_ubigeo, u.cod_ubi as cod_ubi_aprendiz, u.departamento_ubi as departamento_ubi_aprendiz, u.provincia_ubi as provincia_ubi_aprendiz, u.distrito_ubi as distrito_ubi_aprendiz FROM aprendiz a INNER JOIN cfp c ON a.id_cfp = c.id_cfp INNER JOIN ubigeo u ON u.id_ubi = a.id_ubi INNER JOIN ubigeo ON ubigeo.id_ubi = c.id_ubi";
 
 			$query = mysqli_query($this->con, $consulta);
-			$array_cfp = array();
-			while ($datos = mysqli_fetch_assoc($query)) {
-				$array['id_cfp'] = $datos['id_cfp'];
-				$array['id_ubi'] = $datos['id_ubi'];
-				$array['codigo_cfp'] = $datos['codigo_cfp'];
-				$array['descripcion_cfp'] = $datos['descripcion_cfp'];
-				$array['direccion_cfp'] = $datos['direccion_cfp'];
-				$array['departamento_ubi'] = $datos['departamento_ubi'];
-				$array['provincia_ubi'] = $datos['provincia_ubi'];
-				$array['distrito_ubi'] = $datos['distrito_ubi'];
-				array_push($array_cfp, $array);
+			$array_aprendiz = array();
+			while ($datos = mysqli_fetch_array($query, MYSQLI_NUM)) {
+				$array[] = $datos[0];
+				$array[] = $datos[1];
+				$array[] = $datos[2];
+				$array[] = $datos[3];
+				$array[] = $datos[4];
+				$array[] = $datos[5];
+				$array[] = $datos[6];
+				$array[] = $datos[7];
+				$array[] = $datos[8];
+				$array[] = $datos[9];
+				$array[] = $datos[10];
+				$array[] = $datos[11];
+				$array[] = $datos[12];
+				$array[] = $datos[13];
+				$array[] = $datos[14];
+				$array[] = $datos[15];
+				$array[] = $datos[16];
+				$array[] = $datos[17];
+				$array[] = $datos[18];
+				$array[] = $datos[19];
+				$array[] = $datos[20];
+				$array[] = $datos[21];
+				$array[] = $datos[22];
+				$array[] = $datos[23];
+				$array[] = $datos[24];
+				$array[] = $datos[25];
+				$array[] = $datos[26];
+				$array[] = $datos[27];
+				$array[] = $datos[28];
+				$array[] = $datos[29];
+				array_push($array_aprendiz, $array);
 			}
 
-			return $array_cfp;
+			return $array_aprendiz;
 			}				
 		
-		public function buscar_datos_cfp($buscar){
+		public function buscar_datos_aprendi($buscar){
 
-			$consulta = "SELECT c.id_cfp, c.codigo_cfp, c.descripcion_cfp, c.direccion_cfp, c.id_ubi , u.departamento_ubi, u.provincia_ubi, u.distrito_ubi FROM cfp c INNER JOIN ubigeo u ON u.id_ubi = c.id_ubi WHERE c.codigo_cfp = '$buscar'";
+			$consulta = "SELECT a.*, c.codigo_cfp, c.descripcion_cfp, c.direccion_cfp, c.id_ubi, ubigeo.cod_ubi as cod_cfp_ubigeo, ubigeo.departamento_ubi as departamento_cfp_ubigeo, ubigeo.provincia_ubi as provincia_cfp_ubigeo, ubigeo.distrito_ubi as distrito_cfp_ubigeo, u.cod_ubi as cod_ubi_aprendiz, u.departamento_ubi as departamento_ubi_aprendiz, u.provincia_ubi as provincia_ubi_aprendiz, u.distrito_ubi as distrito_ubi_aprendiz FROM aprendiz a INNER JOIN cfp c ON a.id_cfp = c.id_cfp INNER JOIN ubigeo u ON u.id_ubi = a.id_ubi INNER JOIN ubigeo ON ubigeo.id_ubi = c.id_ubi WHERE a.id_ap = '$buscar'";
 
 			$query = mysqli_query($this->con, $consulta);
-			$array_cfp = array();
-			while ($datos = mysqli_fetch_assoc($query)) {
-				$array['id_cfp'] = $datos['id_cfp'];
-				$array['id_ubi'] = $datos['id_ubi'];
-				$array['codigo_cfp'] = $datos['codigo_cfp'];
-				$array['descripcion_cfp'] = $datos['descripcion_cfp'];
-				$array['direccion_cfp'] = $datos['direccion_cfp'];
-				$array['departamento_ubi'] = $datos['departamento_ubi'];
-				$array['provincia_ubi'] = $datos['provincia_ubi'];
-				$array['distrito_ubi'] = $datos['distrito_ubi'];
-				array_push($array_cfp, $array);
+			$array_aprendiz = array();
+			while ($datos = mysqli_fetch_array($query, MYSQLI_NUM)) {
+				$array[] = $datos[0];
+				$array[] = $datos[1];
+				$array[] = $datos[2];
+				$array[] = $datos[3];
+				$array[] = $datos[4];
+				$array[] = $datos[5];
+				$array[] = $datos[6];
+				$array[] = $datos[7];
+				$array[] = $datos[8];
+				$array[] = $datos[9];
+				$array[] = $datos[10];
+				$array[] = $datos[11];
+				$array[] = $datos[12];
+				$array[] = $datos[13];
+				$array[] = $datos[14];
+				$array[] = $datos[15];
+				$array[] = $datos[16];
+				$array[] = $datos[17];
+				$array[] = $datos[18];
+				$array[] = $datos[19];
+				$array[] = $datos[20];
+				$array[] = $datos[21];
+				$array[] = $datos[22];
+				$array[] = $datos[23];
+				$array[] = $datos[24];
+				$array[] = $datos[25];
+				$array[] = $datos[26];
+				$array[] = $datos[27];
+				$array[] = $datos[28];
+				$array[] = $datos[29];
+				array_push($array_aprendiz, $array);
 			}
 
-			return $array_cfp;
+			return $array_aprendiz;
+				
 			
 		}
 

@@ -1,8 +1,8 @@
  $(document).ready(function(){
 
-  $(".dataa").mCustomScrollbar();
+   $('#ubicacion_ap').select2();
 
- 	$('.dropdown-toggle').dropdown();
+  $('.dropdown-toggle').dropdown();
     
     /*========================================
     =            Formulario Login            =
@@ -511,6 +511,63 @@
    
    
    /*=====  End of Tabla Convenio  ======*/
+
+   /*======================================
+   =            Tabla Aprendiz            =
+   ======================================*/
+   
+   /* Datos Aprendiz Editar */
+
+   $(".editar_aprendiz").click(function() {
+
+        //var valores = "";
+        var valores = [];
+
+        // Obtenemos todos los valores contenidos en los <td> de la fila
+        // seleccionada
+        $(this).parents("tr").find(".datos_aprendiz_editar").each(function() {
+          valores.push($(this).html());
+        });
+        //$("#editar_nick").val(valores[0]);
+        $("#editar_dni_ap").val(valores[1]);
+        $("#editar_nombre_ap").val(valores[2]);
+        $("#editar_apellidos_ap").val(valores[3]);
+        $("#editar_telefono_ap").val(valores[4]);        
+        $("#editar_correo").val(valores[5]);  
+        $("#editar_direccion_ap").val(valores[6]);  
+        $("#editar_referencia_lugar_ap").val(valores[7]);
+        $("#editar_ubicacion_ap option[value='"+valores[27]+"'").attr("selected", true);
+        //$("#editar_apellidos").val(valores[8]);  //SELECT
+        $("#editar_dni_apoderado_ap").val(valores[8]);  
+        $("#editar_nombre_ape_ap").val(valores[9]);  
+        $("#editar_telefono_apoderado_ap").val(valores[10]);  
+        $("#editar_id_codigo_senati_ap").val(valores[11]);  
+        $("#editar_direccion_zonal_ap").val(valores[12]);  
+        $("#editar_apellidos").val(valores[12]); //SELECT 
+        $("#editar_bloque_ap").val(valores[13]);  
+        $("#editar_programa_ap").val(valores[14]);  
+        //$("#sexo_ap").val(valores[15]); //RADIO
+        if (valores[15] == "M") {                 
+          $('#radio1').attr('checked','checked');
+        }
+        else{
+          $('#radio2').attr('checked','checked');
+        }
+
+        $("#editar_cfp option[value='"+valores[28]+"'").attr("selected", true);
+        //$('input[name=sexo_ap][value="'+valores[15]+'"').attr('checked', 'checked');
+        //$("#editar_nivel option[value='"+valores[4]+"']").attr("selected", true);
+        
+        
+        console.log(valores);
+      });
+
+   /* Fin Datos Aprendiz Editar */
+   
+   
+   
+   /*=====  End of Tabla Aprendiz  ======*/
+   
    
     
 
