@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-06-2019 a las 20:05:51
--- Versión del servidor: 10.1.39-MariaDB
--- Versión de PHP: 7.3.5
+-- Tiempo de generación: 15-06-2019 a las 18:44:23
+-- Versión del servidor: 10.1.37-MariaDB
+-- Versión de PHP: 7.3.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -75,7 +75,9 @@ CREATE TABLE `aprendiz` (
 --
 
 INSERT INTO `aprendiz` (`id_ap`, `dni_ap`, `nombres_ap`, `apellidos_ap`, `telefono_ap`, `correo_ap`, `direccion_ap`, `referencia_lugar_ap`, `id_ubi`, `dni_apoderado_ap`, `nomape_apoderado_ap`, `telefono_apoderado_ap`, `id_senati_ap`, `direccion_zonal_ap`, `id_cfp`, `bloque_ap`, `programa_ap`, `sexo_ap`) VALUES
-(1, '76600398', 'Cristian', 'Antonio Valverde', '251010', 'tauro24_vs@hotmail.com', 'Jr.Gonzales prada 123', 'JPV', 1016, '25632545', 'Juan', '362356', 986349, 'direccion_zonal_ap', 6, 'DC23365', 'DUAL', 'M');
+(1, '76600398', 'Cristian', 'Antonio Valverde', '251010', 'tauro24_vs@hotmail.com', 'Jr.Gonzales prada 123', 'JPV', 1016, '25632545', 'Juan', '362356', 986349, 'direccion_zonal_ap', 6, 'DC23365', 'DUAL', 'M'),
+(2, '76847582', 'Juane', 'Marz Parionae', '5454543', 'franci@gmail.come', 'calle real 3443e', 'centro huancayoe', 1001, '56786783', 'Marcos Val Sede', '5456663', 4567893, 'Huayoe', 5, 'CD8373S3', 'DUALe', 'F'),
+(3, '64545455', 'CRIIIIIIIIIIIIIII', 'asdasd', '343434', 'tau_@hotmail.com', 'Jr mariano pendeivis 346', 'Al costado de la plaza', 21, '54565545', 'fffffgsd dfsf asdasd', '343466', 985564, 'real 5657', 5, 'CTS43434G', 'SMI', 'F');
 
 -- --------------------------------------------------------
 
@@ -159,6 +161,14 @@ CREATE TABLE `empresa` (
   `id_cfp` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `empresa`
+--
+
+INSERT INTO `empresa` (`id_emp`, `ruc_emp`, `razonsocial_emp`, `direccion_emp`, `telefono_emp`, `correo_emp`, `representante_emp`, `dnirepresentante_emp`, `id_ubi`, `id_ae`, `id_cfp`) VALUES
+(1, '20131380951', 'MUNICIPALIDAD METROPOLITANA DE LIMA', 'Jr calle stree', '45678767', 'prueba@gmail.com', 'Jeffery J. McCoy', '13736523', 1007, 3, 6),
+(2, '20550194283', 'Sociedad Anónima (S.E.)', '1116 Preston Street Phoenix, AZ 85043', '623-225-8613', 'RandyBKline@superrito.coe', 'Cristian A. Valverd', '76856893', 1017, 2, 5);
+
 -- --------------------------------------------------------
 
 --
@@ -175,6 +185,15 @@ CREATE TABLE `monitor` (
   `correo_mon` char(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `monitor`
+--
+
+INSERT INTO `monitor` (`id_mon`, `apellidos_mon`, `nombres_mon`, `dni_mon`, `telefono_mon`, `cargo_mon`, `correo_mon`) VALUES
+(1, 'M. Torres', 'Reyna', '85738756', '208-887-2937', 'Supervisor', 'ReynaMTorres@gustr.com'),
+(2, 'Antonio Valverde', 'Cristian', '76876542', '718-667-203', 'Estudiant', 'KristinDAnthony@gustr.co'),
+(3, 'asd', 'asd', '232323', '23232', 'dasd', 'asdads');
+
 -- --------------------------------------------------------
 
 --
@@ -186,6 +205,15 @@ CREATE TABLE `semestre` (
   `codigo_sem` char(2) DEFAULT NULL,
   `descripcion_sem` char(15) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `semestre`
+--
+
+INSERT INTO `semestre` (`id_sem`, `codigo_sem`, `descripcion_sem`) VALUES
+(1, 'CO', 'VI'),
+(2, 'CI', 'VI'),
+(3, 'CR', 'ADD');
 
 -- --------------------------------------------------------
 
@@ -2330,9 +2358,9 @@ CREATE TABLE `vinculacion` (
   `id_vin` int(11) NOT NULL,
   `id_ap` int(11) DEFAULT NULL,
   `id_emp` int(11) DEFAULT NULL,
-  `id_carr` bigint(20) DEFAULT NULL,
+  `id_carr` int(20) DEFAULT NULL,
   `id_cfp` int(11) DEFAULT NULL,
-  `id_sem` bigint(20) DEFAULT NULL,
+  `id_sem` int(20) DEFAULT NULL,
   `fechaini_prac_vin` date DEFAULT NULL,
   `fechafin_prac_vin` date DEFAULT NULL,
   `fechaini_sem_vin` date DEFAULT NULL,
@@ -2383,7 +2411,10 @@ ALTER TABLE `convenio`
 -- Indices de la tabla `empresa`
 --
 ALTER TABLE `empresa`
-  ADD PRIMARY KEY (`id_emp`);
+  ADD PRIMARY KEY (`id_emp`),
+  ADD KEY `id_ubi` (`id_ubi`),
+  ADD KEY `id_ae` (`id_ae`),
+  ADD KEY `id_cfp` (`id_cfp`);
 
 --
 -- Indices de la tabla `monitor`
@@ -2414,7 +2445,14 @@ ALTER TABLE `usuarios`
 -- Indices de la tabla `vinculacion`
 --
 ALTER TABLE `vinculacion`
-  ADD PRIMARY KEY (`id_vin`);
+  ADD PRIMARY KEY (`id_vin`),
+  ADD KEY `id_ap` (`id_ap`),
+  ADD KEY `id_emp` (`id_emp`),
+  ADD KEY `id_carr` (`id_carr`),
+  ADD KEY `id_cfp` (`id_cfp`),
+  ADD KEY `id_sem` (`id_sem`),
+  ADD KEY `id_mon` (`id_mon`),
+  ADD KEY `id_conv` (`id_conv`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -2430,7 +2468,7 @@ ALTER TABLE `actvidadempresa`
 -- AUTO_INCREMENT de la tabla `aprendiz`
 --
 ALTER TABLE `aprendiz`
-  MODIFY `id_ap` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_ap` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `carrera`
@@ -2454,19 +2492,19 @@ ALTER TABLE `convenio`
 -- AUTO_INCREMENT de la tabla `empresa`
 --
 ALTER TABLE `empresa`
-  MODIFY `id_emp` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_emp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `monitor`
 --
 ALTER TABLE `monitor`
-  MODIFY `id_mon` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_mon` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `semestre`
 --
 ALTER TABLE `semestre`
-  MODIFY `id_sem` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_sem` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `ubigeo`
@@ -2502,6 +2540,26 @@ ALTER TABLE `aprendiz`
 --
 ALTER TABLE `cfp`
   ADD CONSTRAINT `cfp_ibfk_1` FOREIGN KEY (`id_ubi`) REFERENCES `ubigeo` (`id_ubi`);
+
+--
+-- Filtros para la tabla `empresa`
+--
+ALTER TABLE `empresa`
+  ADD CONSTRAINT `empresa_ibfk_1` FOREIGN KEY (`id_ubi`) REFERENCES `ubigeo` (`id_ubi`),
+  ADD CONSTRAINT `empresa_ibfk_2` FOREIGN KEY (`id_ae`) REFERENCES `actvidadempresa` (`id_ae`),
+  ADD CONSTRAINT `empresa_ibfk_3` FOREIGN KEY (`id_cfp`) REFERENCES `cfp` (`id_cfp`);
+
+--
+-- Filtros para la tabla `vinculacion`
+--
+ALTER TABLE `vinculacion`
+  ADD CONSTRAINT `vinculacion_ibfk_1` FOREIGN KEY (`id_ap`) REFERENCES `aprendiz` (`id_ap`),
+  ADD CONSTRAINT `vinculacion_ibfk_2` FOREIGN KEY (`id_emp`) REFERENCES `empresa` (`id_emp`),
+  ADD CONSTRAINT `vinculacion_ibfk_3` FOREIGN KEY (`id_carr`) REFERENCES `carrera` (`id_carr`),
+  ADD CONSTRAINT `vinculacion_ibfk_4` FOREIGN KEY (`id_cfp`) REFERENCES `cfp` (`id_cfp`),
+  ADD CONSTRAINT `vinculacion_ibfk_5` FOREIGN KEY (`id_sem`) REFERENCES `semestre` (`id_sem`),
+  ADD CONSTRAINT `vinculacion_ibfk_6` FOREIGN KEY (`id_mon`) REFERENCES `monitor` (`id_mon`),
+  ADD CONSTRAINT `vinculacion_ibfk_7` FOREIGN KEY (`id_conv`) REFERENCES `convenio` (`id_conv`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
