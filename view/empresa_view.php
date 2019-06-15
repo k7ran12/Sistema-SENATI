@@ -360,7 +360,8 @@
 	        </button>
 	      </div>
 	      <div class="modal-body">
-	       <form id="form_agregar_empresa">
+	       <form id="form_editar_empresa">
+	       	<input type="hidden" name="id_emp" id="id_emp">
 			  <div class="form-group">
 			    <label for="editar_ruc">RUC</label>
 			    <input type="text" class="form-control" id="editar_ruc" name="editar_ruc" aria-describedby="">			    

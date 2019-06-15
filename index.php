@@ -47,6 +47,15 @@ session_start();
                 else if ($_GET['pagina'] == 'empresa') {
                   require_once("view/empresa_view.php");
                 }
+                else if ($_GET['pagina'] == 'monitor') {
+                  require_once("view/monitor_view.php");
+                }
+                else if ($_GET['pagina'] == 'semestre') {
+                  require_once("view/semestre_view.php");
+                }
+                else if ($_GET['pagina'] == 'vinculacion') {
+                  require_once("view/vinculacion_view.php");
+                }
               }
               else{
                 require_once("view/dashboard_view.php");

@@ -652,7 +652,7 @@
         $(this).parents("tr").find(".datos_empresa_editar").each(function() {
           valores.push($(this).html());
         });
-        $("#id_ap").val(valores[0]);
+        $("#id_emp").val(valores[0]);
 
         $("#editar_ruc").val(valores[1]);
         $("#editar_razon_social").val(valores[2]);
@@ -674,10 +674,272 @@
         console.log(valores);
       });
     /* Fin Datos Para Editar Empresa */
+
+    /* Agregar Datos Empresa */
+
+    $( "#form_agregar_empresa" ).on( "submit", function( event ) {
+    event.preventDefault();   
+    let form_aprendiz = $( this ).serialize();
+    console.log(form_aprendiz);
+    $.ajax({
+      method: "POST",
+      url: "controller/empresa_controller.php",
+      data: "accion=agregar&" + form_aprendiz
+    })
+      .done(function( msg ) {
+      console.log(msg);
+        if (msg == 'agregado') {
+          alertify.alert('Alerta', 'Los datos se agrearon correctamente!', function(){ alertify.success('Guardado');window.location.reload(); });         
+          
+        }
+        else if(msg == 'incorrecto'){
+          alertify.success('No se pudo agregar :(');
+        }
+        else if(msg == 'invalidado'){
+          alertify.success('Ingresar todos los datos');
+        }       
+        else{
+          alertify.success('Error no encontrado');          
+        }       
+        
+    });
+  });
+
+    /* Fin Agregar Datos Empresa */
+
+    /* Editar Empresa */
     
+
+    $( "#form_editar_empresa" ).on( "submit", function( event ) {
+    event.preventDefault();   
+    let form_editar_empresa = $( this ).serialize();
+    console.log(form_editar_empresa);
+    $.ajax({
+      method: "POST",
+      url: "controller/empresa_controller.php",
+      data: "accion=editar&" + form_editar_empresa
+    })
+      .done(function( msg ) {
+      console.log(msg);
+        if (msg == 'editado') {
+          alertify.alert('Alerta', 'Los datos se editaron correctamente!', function(){ alertify.success('Guardado');window.location.reload(); });         
+          
+        }
+        else if(msg == 'incorrecto'){
+          alertify.success('No se pudo agregar :(');
+        }
+        else if(msg == 'invalidado'){
+          alertify.success('Ingresar todos los datos');
+        }       
+        else{
+          alertify.success('Error no encontrado');          
+        }       
+        
+    });
+  });
+
+    /* Fin Editar Empresa */
     
     
     /*=====  End of Tabla Empresa  ======*/
+
+
+
+    /*=====================================
+    =            Tabla Monitor            =
+    =====================================*/
+    
+    $(".editar_monitor").click(function() {
+
+        //var valores = "";
+        var valores = [];
+
+        // Obtenemos todos los valores contenidos en los <td> de la fila
+        // seleccionada
+        $(this).parents("tr").find(".datos_empresa_editar").each(function() {
+          valores.push($(this).html());
+        });
+        $("#id_mon").val(valores[0]);
+        $("#editar_apellidos").val(valores[1]);
+        $("#editar_nombres").val(valores[2]);
+        $("#editar_dni").val(valores[3]);
+        $("#editar_telefono").val(valores[4]);
+        $("#editar_cargo").val(valores[5]);
+        $("#editar_correo").val(valores[6]);
+        
+        console.log(valores);
+        //alert(valores);
+      });
+    
+
+    /* Agregar Monitor */
+
+     $( "#form_agregar_monitor" ).on( "submit", function( event ) {
+    event.preventDefault();   
+    let form_monitor = $( this ).serialize();
+    console.log(form_monitor);
+    $.ajax({
+      method: "POST",
+      url: "controller/monitor_controller.php",
+      data: "accion=agregar&" + form_monitor
+    })
+      .done(function( msg ) {
+      console.log(msg);
+        if (msg == 'agregado') {
+          alertify.alert('Alerta', 'Los datos se agrearon correctamente!', function(){ alertify.success('Guardado');window.location.reload(); });         
+          
+        }
+        else if(msg == 'incorrecto'){
+          alertify.success('No se pudo agregar :(');
+        }
+        else if(msg == 'invalidado'){
+          alertify.success('Ingresar todos los datos');
+        }       
+        else{
+          alertify.success('Error no encontrado');          
+        }       
+        
+    });
+  });
+
+    /* Fin Agregar Monitor */
+    
+    
+
+    /* Editar Monitor */
+
+    $( "#form_editar_monitor" ).on( "submit", function( event ) {
+    event.preventDefault();   
+    let form_editar_monitor = $( this ).serialize();
+    console.log(form_editar_monitor);
+    $.ajax({
+      method: "POST",
+      url: "controller/monitor_controller.php",
+      data: "accion=editar&" + form_editar_monitor
+    })
+      .done(function( msg ) {
+      console.log(msg);
+        if (msg == 'editado') {
+          alertify.alert('Alerta', 'Los datos se editaron correctamente!', function(){ alertify.success('Guardado');window.location.reload(); });         
+          
+        }
+        else if(msg == 'incorrecto'){
+          alertify.success('No se pudo agregar :(');
+        }
+        else if(msg == 'invalidado'){
+          alertify.success('Ingresar todos los datos');
+        }       
+        else{
+          alertify.success('Error no encontrado');          
+        }       
+        
+    });
+  });
+
+    /* Fin Ediar Monitor */
+    
+    
+
+    /*=====  End of Tabla Monitor  ======*/
+
+    /*======================================
+    =            Tabla Semestre            =
+    ======================================*/
+    
+    /* Datos Para Editar Semetre */
+
+    $(".editar_semestre").click(function() {
+
+        //var valores = "";
+        var valores = [];
+
+        // Obtenemos todos los valores contenidos en los <td> de la fila
+        // seleccionada
+        $(this).parents("tr").find(".datos_empresa_editar").each(function() {
+          valores.push($(this).html());
+        });
+        $("#id_sem").val(valores[0]);
+        $("#editar_codigo_semestre").val(valores[1]);
+        $("#editar_descripcion_semestre").val(valores[2]);
+        
+        console.log(valores);
+        //alert(valores);
+      });
+
+    /* Fin Datos Para Editar Semetre */
+
+    /* Agregar Semestre */
+
+    $( "#form_agregar_semestre" ).on( "submit", function( event ) {
+    event.preventDefault();   
+    let form_semestre = $( this ).serialize();
+    console.log(form_semestre);
+    $.ajax({
+      method: "POST",
+      url: "controller/semestre_controller.php",
+      data: "accion=agregar&" + form_semestre
+    })
+      .done(function( msg ) {
+      console.log(msg);
+        if (msg == 'agregado') {
+          alertify.alert('Alerta', 'Los datos se agrearon correctamente!', function(){ alertify.success('Guardado');window.location.reload(); });         
+          
+        }
+        else if(msg == 'incorrecto'){
+          alertify.success('No se pudo agregar :(');
+        }
+        else if(msg == 'invalidado'){
+          alertify.success('Ingresar todos los datos');
+        }       
+        else{
+          alertify.success('Error no encontrado');          
+        }       
+        
+    });
+  });
+
+    /* Fin Agregar Semestre */
+
+    /* Editar Semestre */
+
+     $( "#form_editar_semestre" ).on( "submit", function( event ) {
+    event.preventDefault();   
+    let form_editar_semestre = $( this ).serialize();
+    console.log(form_editar_semestre);
+    $.ajax({
+      method: "POST",
+      url: "controller/semestre_controller.php",
+      data: "accion=editar&" + form_editar_semestre
+    })
+      .done(function( msg ) {
+      console.log(msg);
+        if (msg == 'editado') {
+          alertify.alert('Alerta', 'Los datos se editaron correctamente!', function(){ alertify.success('Guardado');window.location.reload(); });         
+          
+        }
+        else if(msg == 'incorrecto'){
+          alertify.success('No se pudo agregar :(');
+        }
+        else if(msg == 'invalidado'){
+          alertify.success('Ingresar todos los datos');
+        }       
+        else{
+          alertify.success('Error no encontrado');          
+        }       
+        
+    });
+  });    
+
+    /* Fin Editar Semestre */
+    
+    
+    
+    
+    
+    
+    /*=====  End of Tabla Semestre  ======*/
+    
+    
     
 
  });

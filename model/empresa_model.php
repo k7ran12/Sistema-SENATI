@@ -91,9 +91,9 @@
 			
 		}
 
-		public function agregar_datos_aprendiz($dni_ap, $nombre_ap, $telefono_ap, $correo, $referencia_lugar_ap, $ubicacion_ap, $dni_apoderado_ap, $nombre_ape_ap, $telefono_apoderado_ap, $id_codigo_senati_ap, $direccion_zonal_ap, $cfp, $bloque_ap, $programa_ap, $direccion_ap, $sexo_ap, $apellido_ap)
+		public function agregar_datos_empresa($ruc, $razon_social, $direccion, $telefono, $correo, $representante, $dni_representante, $ubicacion_em, $actividad_empresa,$cfp )
 		{
-			$consulta = "INSERT INTO `aprendiz` (`id_ap`, `dni_ap`, `nombres_ap`, `apellidos_ap`, `telefono_ap`, `correo_ap`, `direccion_ap`, `referencia_lugar_ap`, `id_ubi`, `dni_apoderado_ap`, `nomape_apoderado_ap`, `telefono_apoderado_ap`, `id_senati_ap`, `direccion_zonal_ap`, `id_cfp`, `bloque_ap`, `programa_ap`, `sexo_ap`) VALUES (NULL, '$dni_ap', '$nombre_ap', '$apellido_ap', '$telefono_ap', '$correo', '$direccion_ap', '$referencia_lugar_ap', '$ubicacion_ap', '$dni_apoderado_ap', '$nombre_ape_ap', '$telefono_apoderado_ap', '$id_codigo_senati_ap', '$direccion_zonal_ap', '$cfp', '$bloque_ap', '$programa_ap', '$sexo_ap');";
+			$consulta = "INSERT INTO `empresa` (`id_emp`, `ruc_emp`, `razonsocial_emp`, `direccion_emp`, `telefono_emp`, `correo_emp`, `representante_emp`, `dnirepresentante_emp`, `id_ubi`, `id_ae`, `id_cfp`) VALUES (NULL, '$ruc', '$razon_social', '$direccion', '$telefono', '$correo', '$representante', '$dni_representante', '$ubicacion_em', '$actividad_empresa', '$cfp');";
 
 			
 			$query = mysqli_query($this->con, $consulta);
@@ -105,9 +105,9 @@
 			}
 		}
 
-		public function editar_datos_aprendiz($id_ap, $dni_ap, $nombre_ap, $telefono_ap, $correo, $referencia_lugar_ap, $ubicacion_ap, $dni_apoderado_ap, $nombre_ape_ap, $telefono_apoderado_ap, $id_codigo_senati_ap, $direccion_zonal_ap, $cfp, $bloque_ap, $programa_ap, $direccion_ap, $sexo_ap, $apellido_ap)
+		public function editar_datos_empresa($id_emp, $ruc, $razon_social, $direccion, $telefono, $correo, $representante, $dni_representante, $ubicacion_em, $actividad_empresa,$cfp )
 		{
-			$consulta = "UPDATE `aprendiz` SET `dni_ap` = '$dni_ap', `nombres_ap` = '$nombre_ap', `apellidos_ap` = '$apellido_ap', `telefono_ap` = '$telefono_ap', `correo_ap` = '$correo', `direccion_ap` = '$direccion_ap', `referencia_lugar_ap` = '$referencia_lugar_ap', `id_ubi` = '$ubicacion_ap', `dni_apoderado_ap` = '$dni_apoderado_ap', `nomape_apoderado_ap` = '$nombre_ape_ap', `telefono_apoderado_ap` = '$telefono_apoderado_ap', `id_senati_ap` = '$id_codigo_senati_ap', `direccion_zonal_ap` = '$direccion_zonal_ap', `id_cfp` = '$cfp', `bloque_ap` = '$bloque_ap', `programa_ap` = '$programa_ap', `sexo_ap` = '$sexo_ap' WHERE `aprendiz`.`id_ap` = '$id_ap';";
+			$consulta = "UPDATE `empresa` SET `ruc_emp` = '$ruc', `razonsocial_emp` = '$razon_social', `direccion_emp` = '$direccion', `telefono_emp` = '$telefono', `correo_emp` = '$correo', `representante_emp` = '$representante', `dnirepresentante_emp` = '$dni_representante', `id_ubi` = '$ubicacion_em', `id_ae` = '$actividad_empresa', `id_cfp` = '$cfp' WHERE `empresa`.`id_emp` = '$id_emp';";
 
 			$query = mysqli_query($this->con, $consulta);
 
