@@ -1,6 +1,7 @@
  $(document).ready(function(){
 
    $('#ubicacion_ap').select2();
+   $('#ubicacion_em').select2()
 
   $('.dropdown-toggle').dropdown();
     
@@ -636,6 +637,47 @@
    /*=====  End of Tabla Aprendiz  ======*/
    
    
+    /*=====================================
+    =            Tabla Empresa            =
+    =====================================*/
+    
+    /* Datos Para Editar Empresa */
+    $(".editar_empresa").click(function() {
+
+        //var valores = "";
+        var valores = [];
+
+        // Obtenemos todos los valores contenidos en los <td> de la fila
+        // seleccionada
+        $(this).parents("tr").find(".datos_empresa_editar").each(function() {
+          valores.push($(this).html());
+        });
+        $("#id_ap").val(valores[0]);
+
+        $("#editar_ruc").val(valores[1]);
+        $("#editar_razon_social").val(valores[2]);
+        $("#editar_direccion").val(valores[3]);
+        $("#editar_telefono").val(valores[4]);        
+        $("#editar_correo").val(valores[5]);  
+        $("#editar_representante").val(valores[6]);
+        $("#editar_dni_representante").val(valores[7]);
+
+        $("#editar_ubicacion_em option[value='"+valores[21]+"'").attr("selected", true);
+        $("#editar_actividad_empresa option[value='"+valores[22]+"'").attr("selected", true);
+        $("#editar_cfp option[value='"+valores[23]+"'").attr("selected", true);
+        
+       
+
+        
+        
+        
+        console.log(valores);
+      });
+    /* Fin Datos Para Editar Empresa */
+    
+    
+    
+    /*=====  End of Tabla Empresa  ======*/
     
 
  });

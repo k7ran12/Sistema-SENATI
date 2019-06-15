@@ -15,7 +15,7 @@
 		public function mostrar_actividad_empresa()
 		{
 			
-			$consulta = "SELECT * FROM actvidadempresa ORDER BY codigo_ae LIMIT 10";
+			$consulta = "SELECT * FROM actvidadempresa ORDER BY codigo_ae";
 
 			$query = mysqli_query($this->con, $consulta);
 			$array_actividad_empresa = array();
