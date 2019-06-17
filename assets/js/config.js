@@ -938,6 +938,52 @@
     
     
     /*=====  End of Tabla Semestre  ======*/
+
+    /*=========================================
+    =            Tabla Vinculacion            =
+    =========================================*/
+    
+    /* Datos Para Editar Modal */
+
+    $(".editar_vinculacion").click(function() {
+
+        //var valores = "";
+        var valores = [];
+
+        // Obtenemos todos los valores contenidos en los <td> de la fila
+        // seleccionada
+        $(this).parents("tr").find(".datos_editar_vinculacion").each(function() {
+          valores.push($(this).html());
+        });
+        $("#id_emp").val(valores[0]);
+
+        $("#editar_ruc").val(valores[1]);
+        $("#editar_razon_social").val(valores[2]);
+        $("#editar_direccion").val(valores[3]);
+        $("#editar_telefono").val(valores[4]);        
+        $("#editar_correo").val(valores[5]);  
+        $("#editar_representante").val(valores[6]);
+        $("#editar_dni_representante").val(valores[7]);
+
+        $("#editar_aprendiz option[value='"+valores[36]+"'").attr("selected", true);
+        $("#editar_empresa option[value='"+valores[37]+"'").attr("selected", true);
+        $("#editar_carrera option[value='"+valores[38]+"'").attr("selected", true);
+        $("#editar_cfp option[value='"+valores[39]+"'").attr("selected", true);
+        $("#editar_semestre option[value='"+valores[40]+"'").attr("selected", true);
+
+      /* Datos Para Editar Modal */ 
+
+       
+
+        
+        
+        
+        console.log(valores);
+      });
+    
+    
+    /*=====  End of Tabla Vinculacion  ======*/
+    
     
     
     

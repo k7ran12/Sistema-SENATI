@@ -3,20 +3,32 @@
     header('Location: ../');
   }
 
-  require_once("model/ubigeo_model.php");
-  require_once("model/empresa_model.php");
+  require_once("model/vinculacion_model.php");
   require_once("model/cfp_model.php");
-  require_once("model/actividad_empresa_model.php");
+  require_once("model/aprendiz_model.php");
+  require_once("model/empresa_model.php");
+  require_once("model/carrera_model.php");
+  require_once("model/semestre_model.php");
+  require_once("model/monitor_model.php");
+  require_once("model/convenio_model.php");
 
-  $empresa_model = new empresa_model();
+  $vinculacion_model = new vinculacion_model();
   $cfp_model = new cfp_model();
-  $ubicacion = new ubigeo_model();
-  $actividad_empresa_model = new actividad_empresa_model();
+  $aprendiz_model = new aprendiz_model();
+  $empresa_model = new empresa_model();
+  $carrera_model = new carrera_model();
+  $semestre_model = new semestre_model();
+  $monitor_model = new monitor_model();
+  $convenio_model = new convenio_model();
 
-  $datos_empresa = $empresa_model->mostrar_empresa();
-  $ubi = $ubicacion->mostrar_ubigeo();
+  $datos_vinculacion = $vinculacion_model->mostrar_vinculacion();
   $cfp = $cfp_model->mostrar_cfp();
-  $ae = $actividad_empresa_model->mostrar_actividad_empresa();
+  $aprendiz = $aprendiz_model->mostrar_aprendiz();
+  $empresa = $empresa_model->mostrar_empresa();
+  $carrera = $carrera_model->mostrar_carrera();
+  $semestre = $semestre_model->mostrar_semestre();
+  $monitor = $monitor_model->mostrar_monitor();
+  $convenio = $convenio_model->mostrar_convenio();
 
 
  ?>
@@ -25,12 +37,12 @@
 
 <div style="float: left;">
   
-     <button type="button" class="btn btn-success my-2 my-sm-0" data-toggle="modal" data-target=".agregar_empresa">add</button>      
+     <button type="button" class="btn btn-success my-2 my-sm-0" data-toggle="modal" data-target=".agregar_vinculacion">add</button>      
     
 </div>
 
 <div style="float: right;">
-  <form class="form-inline my-2 my-lg-0" action="empresa" method="POST">
+  <form class="form-inline my-2 my-lg-0" action="vinculacion" method="POST">
       <input id="buscar" name="buscar" class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
       <button id="buscar_cfp" class="btn btn-outline-primary my-2 my-sm-0" type="submit">Buscar</button>
     </form>
@@ -48,63 +60,77 @@
       <div class="table-responsive">
       <table class="table table-hover">
           <tr>
-            <th>RUC</th>
+            <th>Inicio Practicas</th>
+            <th>Fin Practicas</th>
+            <th>Inicio Semestre</th>
+            <th>Fin Semestre</th>
+            <th>Grupo</th>
+            <th>DNI Aprendiz</th>
+            <th>Nombres Apellidos Aprendiz</th>
+            <th>Telefono Aprendiz</th>
+            <th>Correo Aprendiz</th>
+            <th>Direccion Aprendiz</th>
+            <th>Referencia</th>
+            <th>DNI Apoderado</th>
+            <th>Nombre Apellido Apoderado</th>
+            <th>Telefono Apoderado</th>
+            <th>Id SENATI Aprendiz</th>
+            <th>Bloque</th>
+            <th>Programa</th>
+            <th>Genero</th>
+            <th>RUC Empresa</th>                  
             <th>Razon Social</th>
-            <th>Direccion</th>
-            <th>Telefono</th>
-            <th>Correo</th>
-            <th>Representante</th>
+            <th>Direccion Empresa</th>
+            <th>Telefono Empresa</th>
+            <th>Correo Empresa</th>
+            <th>Representante Empresa</th>
             <th>DNI Representante</th>
-            <th>Codigo</th>
-            <th>Departamento</th>
-            <th>Provincia</th>
-            <th>Distrito</th>
-            <th>Codigo Actividad</th>
-            <th>Descripcion Actividad</th>
-            <th>Codigo CFP</th>
-            <th>Descripcion CFP</th>
-            <th>Direccion CFP</th>
-            <th>Codigo Ubicacion CFP</th>
-            <th>Departamento Ubicacion CFP</th>
-            <th>Provincia Ubicacion CFP</th>                  
-            <th>Distrito Ubicacion CFP</th>
-            <th>Accion</th>
+            <th>Carrera</th>
+            <th>CFP</th>
+            <TH>Direccion CFP</TH>
+            <th>Descripcion Semestre</th>
+            <th>Nombre Monitor</th>
+            <th>DNI Monitor</th>
+            <th>Telefono Monitor</th>
+            <th>Cargo</th>
+            <th>Correo Monitor</th>
+            <th>Convenio</th>
           </tr>
       <?php 
       foreach ($datos_empresa_buscar as $value) {
         ?>        
           <tr>
-            <td style="display: none;" class="datos_empresa_editar"><?php echo $value[0] ?></td>            
-            <td class="datos_empresa_editar"><?php echo $value[1] ?></td>
-            <td class="datos_empresa_editar"><?php echo $value[2] ?></td>
-            <td class="datos_empresa_editar"><?php echo $value[3] ?></td>
-            <td class="datos_empresa_editar"><?php echo $value[4] ?></td>
-            <td class="datos_empresa_editar"><?php echo $value[5] ?></td>
-            <td class="datos_empresa_editar"><?php echo $value[6] ?></td>
-            <td class="datos_empresa_editar"><?php echo $value[7] ?></td>
+            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[0] ?></td>            
+            <td class="datos_editar_vinculacion"><?php echo $value[1] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value[2] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value[3] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value[4] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value[5] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value[6] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value[7] ?></td>
 
-            <td class="datos_empresa_editar"><?php echo $value[9] ?></td>
-            <td class="datos_empresa_editar"><?php echo $value[10] ?></td>
-            <td class="datos_empresa_editar"><?php echo $value[11] ?></td>
-            <td class="datos_empresa_editar"><?php echo $value[12] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value[9] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value[10] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value[11] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value[12] ?></td>
 
-            <td class="datos_empresa_editar"><?php echo $value[14] ?></td>
-            <td class="datos_empresa_editar"><?php echo $value[15] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value[14] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value[15] ?></td>
 
-            <td class="datos_empresa_editar"><?php echo $value[17] ?></td>
-            <td class="datos_empresa_editar"><?php echo $value[18] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value[17] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value[18] ?></td>
 
-            <td class="datos_empresa_editar"><?php echo $value[20] ?></td>
-            <td class="datos_empresa_editar"><?php echo $value[21] ?></td>
-            <td class="datos_empresa_editar"><?php echo $value[22] ?></td>    
-            <td class="datos_empresa_editar"><?php echo $value[23] ?></td>  
-            <td class="datos_empresa_editar"><?php echo $value[24] ?></td>  
+            <td class="datos_editar_vinculacion"><?php echo $value[20] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value[21] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value[22] ?></td>    
+            <td class="datos_editar_vinculacion"><?php echo $value[23] ?></td>  
+            <td class="datos_editar_vinculacion"><?php echo $value[24] ?></td>  
                                           
-            <td style="display: none;" class="datos_empresa_editar"><?php echo $value[8] ?></td>
-            <td style="display: none;" class="datos_empresa_editar"><?php echo $value[13] ?></td>
-            <td style="display: none;" class="datos_empresa_editar"><?php echo $value[14] ?></td> 
-            <td style="display: none;" class="datos_empresa_editar"><?php echo $value[16] ?></td>
-            <td><button type="button" class="btn btn-primary editar_empresa" data-toggle="modal" data-target=".editar_empresa_modal">e</button></td>
+            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[8] ?></td>
+            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[13] ?></td>
+            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[14] ?></td> 
+            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[16] ?></td>
+            <td><button type="button" class="btn btn-primary editar_vinculacion" data-toggle="modal" data-target=".editar_vinculacion_modal">e</button></td>
           </tr>
         
         
@@ -121,30 +147,44 @@
       <div class="table-responsive">
       <table class="table table-hover">
           <tr>
-            <th>RUC</th>
+            <th>Inicio Practicas</th>
+            <th>Fin Practicas</th>
+            <th>Inicio Semestre</th>
+            <th>Fin Semestre</th>
+            <th>Grupo</th>
+            <th>DNI Aprendiz</th>
+            <th>Nombres Apellidos Aprendiz</th>
+            <th>Telefono Aprendiz</th>
+            <th>Correo Aprendiz</th>
+            <th>Direccion Aprendiz</th>
+            <th>Referencia</th>
+            <th>DNI Apoderado</th>
+            <th>Nombre Apellido Apoderado</th>
+            <th>Telefono Apoderado</th>
+            <th>Id SENATI Aprendiz</th>
+            <th>Bloque</th>
+            <th>Programa</th>
+            <th>Genero</th>
+            <th>RUC Empresa</th>                  
             <th>Razon Social</th>
-            <th>Direccion</th>
-            <th>Telefono</th>
-            <th>Correo</th>
-            <th>Representante</th>
+            <th>Direccion Empresa</th>
+            <th>Telefono Empresa</th>
+            <th>Correo Empresa</th>
+            <th>Representante Empresa</th>
             <th>DNI Representante</th>
-            <th>Codigo</th>
-            <th>Departamento</th>
-            <th>Provincia</th>
-            <th>Distrito</th>
-            <th>Codigo Actividad</th>
-            <th>Descripcion Actividad</th>
-            <th>Codigo CFP</th>
-            <th>Descripcion CFP</th>
-            <th>Direccion CFP</th>
-            <th>Codigo Ubicacion CFP</th>
-            <th>Departamento Ubicacion CFP</th>
-            <th>Provincia Ubicacion CFP</th>                  
-            <th>Distrito Ubicacion CFP</th>
-            <th>Accion</th>
+            <th>Carrera</th>
+            <th>CFP</th>
+            <TH>Direccion CFP</TH>
+            <th>Descripcion Semestre</th>
+            <th>Nombre Monitor</th>
+            <th>DNI Monitor</th>
+            <th>Telefono Monitor</th>
+            <th>Cargo</th>
+            <th>Correo Monitor</th>
+            <th>Convenio</th>
           </tr>
         <tr>
-          <td class="alert alert-danger" role="alert" colspan="27"><center><h5>No hay datos</h5></center></td>
+          <td class="alert alert-danger" role="alert" colspan="36"><center><h5>No hay datos</h5></center></td>
         </tr>
       </table>
       <div>
@@ -157,65 +197,104 @@
 
     //$datos_cfp = $cfp_model->mostrar_cfp();
 
-    if (!empty($datos_empresa)) {
+    if (!empty($datos_vinculacion)) {
       ?>
       <div class="table-responsive">
       <table class="table table-hover">
           <tr>
-            <th>RUC</th>
+            <th>Inicio Practicas</th>
+            <th>Fin Practicas</th>
+            <th>Inicio Semestre</th>
+            <th>Fin Semestre</th>
+            <th>Grupo</th>
+            <th>DNI Aprendiz</th>
+            <th>Nombres Apellidos Aprendiz</th>
+            <th>Telefono Aprendiz</th>
+            <th>Correo Aprendiz</th>
+            <th>Direccion Aprendiz</th>
+            <th>Referencia</th>
+            <th>DNI Apoderado</th>
+            <th>Nombre Apellido Apoderado</th>
+            <th>Telefono Apoderado</th>
+            <th>Id SENATI Aprendiz</th>
+            <th>Bloque</th>
+            <th>Programa</th>
+            <th>Genero</th>
+            <th>RUC Empresa</th>                  
             <th>Razon Social</th>
-            <th>Direccion</th>
-            <th>Telefono</th>
-            <th>Correo</th>
-            <th>Representante</th>
+            <th>Direccion Empresa</th>
+            <th>Telefono Empresa</th>
+            <th>Correo Empresa</th>
+            <th>Representante Empresa</th>
             <th>DNI Representante</th>
-            <th>Codigo</th>
-            <th>Departamento</th>
-            <th>Provincia</th>
-            <th>Distrito</th>
-            <th>Codigo Actividad</th>
-            <th>Descripcion Actividad</th>
-            <th>Codigo CFP</th>
-            <th>Descripcion CFP</th>
-            <th>Direccion CFP</th>
-            <th>Codigo Ubicacion CFP</th>
-            <th>Departamento Ubicacion CFP</th>
-            <th>Provincia Ubicacion CFP</th>                  
-            <th>Distrito Ubicacion CFP</th>
-            <th>Accion</th>
+            <th>Carrera</th>
+            <th>CFP</th>
+            <TH>Direccion CFP</TH>
+            <th>Descripcion Semestre</th>
+            <th>Nombre Monitor</th>
+            <th>DNI Monitor</th>
+            <th>Telefono Monitor</th>
+            <th>Cargo</th>
+            <th>Correo Monitor</th>
+            <th>Convenio</th>
           </tr>
       <?php 
-      foreach ($datos_empresa as $value) {
+      foreach ($datos_vinculacion as $value) {
         ?>        
           <tr>
-            <td style="display: none;" class="datos_empresa_editar"><?php echo $value[0] ?></td>            
-            <td class="datos_empresa_editar"><?php echo $value[1] ?></td>
-            <td class="datos_empresa_editar"><?php echo $value[2] ?></td>
-            <td class="datos_empresa_editar"><?php echo $value[3] ?></td>
-            <td class="datos_empresa_editar"><?php echo $value[4] ?></td>
-            <td class="datos_empresa_editar"><?php echo $value[5] ?></td>
-            <td class="datos_empresa_editar"><?php echo $value[6] ?></td>
-            <td class="datos_empresa_editar"><?php echo $value[7] ?></td>
+            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[0] ?></td>            
+            <td class="datos_editar_vinculacion"><?php echo $value[1] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value[2] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value[3] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value[4] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value[5] ?></td>
+            
+            <td class="datos_editar_vinculacion"><?php echo $value[7] ?></td>
 
-            <td class="datos_empresa_editar"><?php echo $value[9] ?></td>
-            <td class="datos_empresa_editar"><?php echo $value[10] ?></td>
-            <td class="datos_empresa_editar"><?php echo $value[11] ?></td>
-            <td class="datos_empresa_editar"><?php echo $value[12] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value[8]. " ".$value[9] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value[10] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value[11] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value[12] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value[13] ?></td>
 
-            <td class="datos_empresa_editar"><?php echo $value[14] ?></td>
-            <td class="datos_empresa_editar"><?php echo $value[15] ?></td>
-            <td class="datos_empresa_editar"><?php echo $value[17] ?></td>
-            <td class="datos_empresa_editar"><?php echo $value[18] ?></td>
-            <td class="datos_empresa_editar"><?php echo $value[20] ?></td>
-            <td class="datos_empresa_editar"><?php echo $value[21] ?></td>
-            <td class="datos_empresa_editar"><?php echo $value[22] ?></td>    
-            <td class="datos_empresa_editar"><?php echo $value[23] ?></td>  
-            <td class="datos_empresa_editar"><?php echo $value[24] ?></td>  
+            <td class="datos_editar_vinculacion"><?php echo $value[15] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value[16] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value[17] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value[18] ?></td>
+
+            <td class="datos_editar_vinculacion"><?php echo $value[21] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value[22] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value[23] ?></td>
+
+            <td class="datos_editar_vinculacion"><?php echo $value[25] ?></td>    
+            <td class="datos_editar_vinculacion"><?php echo $value[26] ?></td>  
+            <td class="datos_editar_vinculacion"><?php echo $value[27] ?></td>  
+            <td class="datos_editar_vinculacion"><?php echo $value[28] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value[29] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value[30] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value[31] ?></td>
+
+            <td class="datos_editar_vinculacion"><?php echo $value[37] ?></td>
+
+            <td class="datos_editar_vinculacion"><?php echo $value[40] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value[41] ?></td>
+
+            <td class="datos_editar_vinculacion"><?php echo $value[45] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value[47]. " " . $value[48] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value[49] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value[50] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value[51] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value[52] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value[54] ?></td>
                                           
-            <td style="display: none;" class="datos_empresa_editar"><?php echo $value[8] ?></td>
-            <td style="display: none;" class="datos_empresa_editar"><?php echo $value[13] ?></td>             
-            <td style="display: none;" class="datos_empresa_editar"><?php echo $value[16] ?></td>
-            <td><button type="button" class="btn btn-primary editar_empresa" data-toggle="modal" data-target=".editar_empresa_modal">e</button></td>
+            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[6] ?></td>
+            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[24] ?></td>             
+            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[35] 
+            ?></td>
+            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[20] ?></td>
+            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[42] ?></td>
+
+            <td><button type="button" class="btn btn-primary editar_vinculacion" data-toggle="modal" data-target=".editar_vinculacion_modal">e</button></td>
           </tr>
         
         <?php 
@@ -228,31 +307,44 @@
     else{
       ?>
       <table class="table table-hover">
-          <tr>
-            <th>RUC</th>
+         <tr>
+            <th>Inicio Practicas</th>
+            <th>Fin Practicas</th>
+            <th>Inicio Semestre</th>
+            <th>Fin Semestre</th>
+            <th>Grupo</th>
+            <th>DNI Aprendiz</th>
+            <th>Nombres Apellidos Aprendiz</th>
+            <th>Telefono Aprendiz</th>
+            <th>Correo Aprendiz</th>
+            <th>Direccion Aprendiz</th>
+            <th>Referencia</th>
+            <th>DNI Apoderado</th>
+            <th>Nombre Apellido Apoderado</th>
+            <th>Telefono Apoderado</th>
+            <th>Id SENATI Aprendiz</th>
+            <th>Bloque</th>
+            <th>Programa</th>
+            <th>Genero</th>
+            <th>RUC Empresa</th>                  
             <th>Razon Social</th>
-            <th>Direccion</th>
-            <th>Telefono</th>
-            <th>Correo</th>
-            <th>Representante</th>
+            <th>Direccion Empresa</th>
+            <th>Telefono Empresa</th>
+            <th>Correo Empresa</th>
+            <th>Representante Empresa</th>
             <th>DNI Representante</th>
-            <th>Codigo</th>
-            <th>Departamento</th>
-            <th>Provincia</th>
-            <th>Distrito</th>
-            <th>Codigo Actividad</th>
-            <th>Descripcion Actividad</th>
-            <th>Codigo CFP</th>
-            <th>Descripcion CFP</th>
-            <th>Direccion CFP</th>
-            <th>Codigo Ubicacion CFP</th>
-            <th>Departamento Ubicacion CFP</th>
-            <th>Provincia Ubicacion CFP</th>                  
-            <th>Distrito Ubicacion CFP</th>
-            <th>Accion</th>
+            <th>Carrera</th>
+            <th>CFP</th>
+            <TH>Direccion CFP</TH>
+            <th>Descripcion Semestre</th>
+            <th>Nombre Monitor</th>
+            <th>DNI Monitor</th>
+            <th>Telefono Monitor</th>
+            <th>Cargo</th>
+            <th>Correo Monitor</th>
+            <th>Convenio</th>
           </tr>
-        <tr>
-          <td class="alert alert-danger" role="alert" colspan="21"><center><h5>No hay datos</h5></center></td>
+          <td class="alert alert-danger" role="alert" colspan="36"><center><h5>No hay datos</h5></center></td>
         </tr>
       </table>
       <?php 
@@ -265,65 +357,47 @@
 =            Modal Formulario Agregar            =
 ===============================================-->
 
-<div class="modal fade agregar_empresa" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div class="modal fade agregar_vinculacion" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">      
         <div class="modal-header">
-          <h5 style="text-align: center !important;" class="modal-title">Agregar Empresa</h5>
+          <h5 style="text-align: center !important;" class="modal-title">Agregar Vinculacion</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <form id="form_agregar_empresa">
+          <form id="form_agregar_vinculacion">
         <div class="form-group">
-          <label for="ruc">RUC</label>
-          <input type="text" class="form-control" id="ruc" name="ruc" aria-describedby="">          
-        </div>
-        <div class="form-group">
-          <label for="razon_social">Razon Social</label>
-          <input type="text" class="form-control" id="razon_social" name="razon_social">
-        </div>
-        <div class="form-group">
-          <label for="direccion">Direccion</label>
-          <input type="text" class="form-control" id="direccion" name="direccion">
-        </div>
-        <div class="form-group">
-          <label for="telefono">Telefono</label>
-          <input type="text" class="form-control" id="telefono" name="telefono">
-        </div>
-        <div class="form-group">
-          <label for="correo">Correo</label>
-          <input type="text" class="form-control" id="correo" name="correo">
-        </div>
-        <div class="form-group">
-          <label for="representante">Representante</label>
-          <input type="text" class="form-control" id="representante" name="representante">
-        </div>
-        <div class="form-group">
-          <label for="dni_representante">DNI Representante</label>
-          <input type="text" class="form-control" id="dni_representante" name="dni_representante">
-        </div>
-        <div class="form-group">
-            <label>Ubicacion</label><br>          
-            <select style="width: 100%;" class="custom-select" name="ubicacion_em" id="ubicacion_em">
+            <label>Aprendiz</label><br>          
+            <select style="width: 100%;" class="custom-select" name="aprendiz" id="aprendiz">
               <?php 
-              foreach ($ubi as $value) {
+              foreach ($aprendiz as $value) {
              ?>           
-            <option value="<?php echo $value['id_ubi'] ?>"><?php echo $value['departamento_ubi']." - ".$value['provincia_ubi']." - ".$value['distrito_ubi']; ?></option>            
+            <option value="<?php echo $value[0] ?>"><?php echo $value[2]." ".$value[3] ?></option>           
             <?php } ?>
           </select>
         </div>
         <div class="form-group">
-            <label>Actividad Empresa</label><br>          
-            <select style="width: 100%;" class="custom-select" name="actividad_empresa" id="actividad_empresa">
+            <label>Empresa</label><br>          
+            <select style="width: 100%;" class="custom-select" name="empresa" id="empresa">
               <?php 
-              foreach ($ae as $value) {
+              foreach ($empresa as $value) {
              ?>           
-            <option value="<?php echo $value['id_ae'] ?>"><?php echo $value['descripcion_ae'] ?></option>           
+            <option value="<?php echo $value[0] ?>"><?php echo $value[2] ?></option>           
             <?php } ?>
           </select>
-        </div>        
+        </div>
+        <div class="form-group">
+            <label>Carrera</label><br>          
+            <select style="width: 100%;" class="custom-select" name="carrera" id="carrera">
+              <?php 
+              foreach ($carrera as $value) {
+             ?>           
+            <option value="<?php echo $value['id_carr'] ?>"><?php echo $value['descripcion_carr'] ?></option>           
+            <?php } ?>
+          </select>
+        </div>
         <div class="form-group">
             <label>CFP</label>            
             <select class="custom-select" name="cfp" id="cfp">
@@ -333,7 +407,57 @@
             <option value="<?php echo $value['id_cfp'] ?>"><?php echo $value['descripcion_cfp'] ?></option>           
             <?php } ?>
           </select>
-        </div>      
+        </div> 
+        <div class="form-group">
+            <label>Semestre</label>            
+            <select class="custom-select" name="semestre" id="semestre">
+              <?php 
+              foreach ($semestre as $value) {
+             ?>           
+            <option value="<?php echo $value['id_sem'] ?>"><?php echo $value['descripcion_sem'] ?></option>           
+            <?php } ?>
+          </select>
+        </div> 
+        <div class="form-group">
+          <label for="fechaini_prac">Fecha Inicion Practicas</label>
+          <input type="date" class="form-control" id="fechaini_prac" name="fechaini_prac">
+        </div>
+        <div class="form-group">
+          <label for="fechafin_prac">Fecha Fin Practicas</label>
+          <input type="date" class="form-control" id="fechafin_prac" name="fechafin_prac">
+        </div>
+        <div class="form-group">
+          <label for="fechaini_sem">Fecha Inicion Semestre</label>
+          <input type="date" class="form-control" id="fechaini_sem" name="fechaini_sem">
+        </div>
+        <div class="form-group">
+          <label for="fechafin_sem">Fecha Fin Semestre</label>
+          <input type="date" class="form-control" id="fechafin_sem" name="fechafin_sem">
+        </div>
+        <div class="form-group">
+            <label>Monitor</label><br>          
+            <select style="width: 100%;" class="custom-select" name="monitor" id="monitor">
+              <?php 
+              foreach ($monitor as $value) {
+             ?>           
+            <option value="<?php echo $value['id_mon'] ?>"><?php echo $value['apellidos_mon']." ".$value['nombres_mon']?></option>            
+            <?php } ?>
+          </select>
+        </div>
+        <div class="form-group">
+            <label>Convenio</label><br>          
+            <select style="width: 100%;" class="custom-select" name="convenio" id="convenio">
+              <?php 
+              foreach ($convenio as $value) {
+             ?>           
+            <option value="<?php echo $value['id_conv'] ?>"><?php echo $value['desc_conv'] ?></option>           
+            <?php } ?>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="grupo">Grupo</label>
+          <input type="text" class="form-control" id="grupo" name="grupo">
+        </div>              
             </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -350,66 +474,47 @@
 =            Modal Formulario Editar            =
 ==============================================-->
 
-<div class="modal fade editar_empresa_modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div class="modal fade editar_vinculacion_modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-          <h5 style="text-align: center !important;" class="modal-title">Editar Aprendiz</h5>
+          <h5 style="text-align: center !important;" class="modal-title">Editar Vinculacion</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-         <form id="form_editar_empresa">
-          <input type="hidden" name="id_emp" id="id_emp">
+         <form id="form_editar_vinculacion">
         <div class="form-group">
-          <label for="editar_ruc">RUC</label>
-          <input type="text" class="form-control" id="editar_ruc" name="editar_ruc" aria-describedby="">          
-        </div>
-        <div class="form-group">
-          <label for="editar_razon_social">Razon Social</label>
-          <input type="text" class="form-control" id="editar_razon_social" name="editar_razon_social">
-        </div>
-        <div class="form-group">
-          <label for="editar_direccion">Direccion</label>
-          <input type="text" class="form-control" id="editar_direccion" name="editar_direccion">
-        </div>
-        <div class="form-group">
-          <label for="editar_telefono">Telefono</label>
-          <input type="text" class="form-control" id="editar_telefono" name="editar_telefono">
-        </div>
-        <div class="form-group">
-          <label for="editar_correo">Correo</label>
-          <input type="text" class="form-control" id="editar_correo" name="editar_correo">
-        </div>
-        <div class="form-group">
-          <label for="editar_representante">Representante</label>
-          <input type="text" class="form-control" id="editar_representante" name="editar_representante">
-        </div>
-        <div class="form-group">
-          <label for="editar_dni_representante">DNI Representante</label>
-          <input type="text" class="form-control" id="editar_dni_representante" name="editar_dni_representante">
-        </div>
-        <div class="form-group">
-            <label>Ubicacion</label><br>          
-            <select style="width: 100%;" class="custom-select" name="editar_ubicacion_em" id="editar_ubicacion_em">
+            <label>Aprendiz</label><br>          
+            <select style="width: 100%;" class="custom-select" name="editar_aprendiz" id="editar_aprendiz">
               <?php 
-              foreach ($ubi as $value) {
+              foreach ($aprendiz as $value) {
              ?>           
-            <option value="<?php echo $value['id_ubi'] ?>"><?php echo $value['departamento_ubi']." - ".$value['provincia_ubi']." - ".$value['distrito_ubi']; ?></option>            
+            <option value="<?php echo $value[0] ?>"><?php echo $value[2]." ".$value[3] ?></option>           
             <?php } ?>
           </select>
         </div>
         <div class="form-group">
-            <label>Actividad Empresa</label><br>          
-            <select style="width: 100%;" class="custom-select" name="editar_actividad_empresa" id="editar_actividad_empresa">
+            <label>Empresa</label><br>          
+            <select style="width: 100%;" class="custom-select" name="editar_empresa" id="editar_empresa">
               <?php 
-              foreach ($ae as $value) {
+              foreach ($empresa as $value) {
              ?>           
-            <option value="<?php echo $value['id_ae'] ?>"><?php echo $value['descripcion_ae'] ?></option>           
+            <option value="<?php echo $value[0] ?>"><?php echo $value[2] ?></option>           
             <?php } ?>
           </select>
-        </div>        
+        </div>
+        <div class="form-group">
+            <label>Carrera</label><br>          
+            <select style="width: 100%;" class="custom-select" name="editar_carrera" id="editar_carrera">
+              <?php 
+              foreach ($carrera as $value) {
+             ?>           
+            <option value="<?php echo $value['id_carr'] ?>"><?php echo $value['descripcion_carr'] ?></option>           
+            <?php } ?>
+          </select>
+        </div>
         <div class="form-group">
             <label>CFP</label>            
             <select class="custom-select" name="editar_cfp" id="editar_cfp">
@@ -419,7 +524,57 @@
             <option value="<?php echo $value['id_cfp'] ?>"><?php echo $value['descripcion_cfp'] ?></option>           
             <?php } ?>
           </select>
-        </div>      
+        </div> 
+        <div class="form-group">
+            <label>Semestre</label>            
+            <select class="custom-select" name="editar_semestre" id="editar_semestre">
+              <?php 
+              foreach ($semestre as $value) {
+             ?>           
+            <option value="<?php echo $value['id_sem'] ?>"><?php echo $value['descripcion_sem'] ?></option>           
+            <?php } ?>
+          </select>
+        </div> 
+        <div class="form-group">
+          <label for="editar_fechaini_prac">Fecha Inicion Practicas</label>
+          <input type="date" class="form-control" id="editar_fechaini_prac" name="editar_fechaini_prac">
+        </div>
+        <div class="form-group">
+          <label for="fechafin_prac">Fecha Fin Practicas</label>
+          <input type="date" class="editar_form-control" id="editar_fechafin_prac" name="editar_fechafin_prac">
+        </div>
+        <div class="form-group">
+          <label for="editar_fechaini_sem">Fecha Inicion Semestre</label>
+          <input type="date" class="editar_form-control" id="editar_fechaini_sem" name="editar_fechaini_sem">
+        </div>
+        <div class="form-group">
+          <label for="editar_fechafin_sem">Fecha Fin Semestre</label>
+          <input type="date" class="form-control" id="editar_fechafin_sem" name="editar_fechafin_sem">
+        </div>
+        <div class="form-group">
+            <label>Monitor</label><br>          
+            <select style="width: 100%;" class="custom-select" name="editar_monitor" id="editar_monitor">
+              <?php 
+              foreach ($monitor as $value) {
+             ?>           
+            <option value="<?php echo $value['id_mon'] ?>"><?php echo $value['apellidos_mon']." ".$value['nombres_mon']?></option>            
+            <?php } ?>
+          </select>
+        </div>
+        <div class="form-group">
+            <label>Convenio</label><br>          
+            <select style="width: 100%;" class="custom-select" name="editar_convenio" id="editar_convenio">
+              <?php 
+              foreach ($convenio as $value) {
+             ?>           
+            <option value="<?php echo $value['id_conv'] ?>"><?php echo $value['desc_conv'] ?></option>           
+            <?php } ?>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="grupo">Grupo</label>
+          <input type="text" class="form-control" id="editar_grupo" name="editar_grupo">
+        </div>              
             </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
