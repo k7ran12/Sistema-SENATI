@@ -1,8 +1,95 @@
  $(document).ready(function(){
 
-  function pag(dato){
-    console.log(this);
+/*==================================
+=            Paginacion            =
+==================================*/
+  
+  $('button[value="'+1+'"]').parents("li").addClass('active');
+
+  var incrementador = 2;
+
+  var array = [];
+
+  $(".pagina").click(function(){
+    $("li").removeClass("disabled");
+    $("li").removeClass("active");
+
+    $(this).parents("li").addClass( "active" );
+    
+    var pagina = $(this).text();
+
+    array.push(pagina);
+
+    var ultimo = array[array.length - 1];
+
+
+    //console.log(ultimo);
+
+    incrementador = parseFloat(ultimo) + parseFloat(1);
+
+    var enviar_ajax = (incrementador - 1);
+
+    //console.log(enviar_ajax);
+
+    $.ajax({
+      method: "GET",
+      url: "aprendiz",
+      data: { pagin: enviar_ajax}
+    })      
+
+  }); 
+
+
+
+  $(".s_pagina").click(function(){
+
+    $("li").removeClass("disabled");
+    $("li").removeClass("active");
+
+    incrementador - 1;      
+
+    if (incrementador >= $("#cantidad_de_datos").val()) {
+      console.log("Hola" + ($("#cantidad_de_datos").val() - 1))
+    $('button[value="'+ ($("#cantidad_de_datos").val() - 1) +'"]').parents("li").addClass('active');
+    $("#s_pagina").parents("li").addClass('disabled');
+  } 
+  else{         
+    $('button[value="'+(incrementador ++)+'"]').parents("li").addClass('active');
+    var enviar_ajax = (incrementador-1);
+    //console.log(enviar_ajax);
+  }  
+
+
+  });
+
+  $(".a_pagina").click(function(){ 
+    $("li").removeClass("disabled");
+    $("li").removeClass("active");
+
+    //$('button[value="'+incrementador+'"]').parents("li").addClass('active');
+
+    if (incrementador <= 2) {
+    $("#a_pagina").parents("li").addClass('disabled');
+    $('button[value="'+1+'"]').parents("li").addClass('active');
   }
+  else{
+    //console.log((incrementador --) - 2);
+    $('button[value="'+((incrementador --) - 2)+'"]').parents("li").addClass('active');
+    var enviar_ajax = (incrementador - 1);
+    //console.log(enviar_ajax);
+  }
+
+  });
+
+  //console.log(enviar_ajax);
+
+
+/*=====  End of Paginacion  ======*/
+
+
+
+  
+  
 
    $('#ubicacion_ap').select2();
    $('#ubicacion_em').select2()

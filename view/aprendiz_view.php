@@ -10,20 +10,26 @@
 	$aprendiz_model = new aprendiz_model();
 	$cfp_model = new cfp_model();
 	$ubicacion = new ubigeo_model();
+	
+	$pagin = 1;
+		
 
-	$datos_aprendiz = $aprendiz_model->mostrar_aprendiz();
+	$datos_aprendiz = $aprendiz_model->mostrar_aprendiz($pagin);
 	$cantidad_de_datos = $aprendiz_model->catidad_de_datos();
 
 	
-	echo $cantidad_de_datos;
+	$cantidad_de_datos;
 
 	$ubi = $ubicacion->mostrar_ubigeo();
 	$cfp = $cfp_model->mostrar_cfp();
 
 
  ?>
+ 
 
 <center><h2>Aprendiz</h2></center>
+
+<input type="hidden" name="cantidad_de_datos" id="cantidad_de_datos" value="<?php echo $cantidad_de_datos ?>">
 
 <div style="float: left;">
 	
@@ -244,16 +250,16 @@
 			</div>			
 
 			<ul class="pagination" style="float: left;">
-				<li class="page-item"><a class="page-link" href="#">Anterior</a></li>
+				<li class="page-item"><button id="a_pagina" class="page-link a_pagina">Anterior</button></li>
 			</ul>
 
 			<nav aria-label="Page navigation example" style="width: 84%;float: left;">
 				<div class="table-responsive">
 				  <ul class="pagination">							  	     
-				    <?php for ($i=0; $i < $cantidad_de_datos; $i++) { 
+				    <?php for ($i=1; $i < $cantidad_de_datos; $i++) { 
 
 				     ?>				     
-				    <li onclick="pag(<?php echo $i; ?>)" class="page-item"><a class="page-link" href="#"><?php echo $i + 1; ?></a></li>
+				    <li class="page-item"><button class="page-link pagina" value="<?php echo $i; ?>"><?php echo $i; ?></button></li>
 				    
 				    <?php } ?>				    		   
 			 	</ul>
@@ -261,7 +267,7 @@
 			</nav>	
 
 			<ul class="pagination" style="float: right;">
-				<li class="page-item"><a class="page-link" href="#">Siguiente</a></li>
+				<li class="page-item"><button id="s_pagina" class="page-link s_pagina">Siguiente</button></li>
 			</ul>		
 			<?php 
 		}
