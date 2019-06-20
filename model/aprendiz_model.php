@@ -12,9 +12,21 @@
 			$this->con = parent::conectar();
 		}
 
+		public function catidad_de_datos(){
+			$consulta = "SELECT a.*, c.codigo_cfp, c.descripcion_cfp, c.direccion_cfp, c.id_ubi, ubigeo.cod_ubi as cod_cfp_ubigeo, ubigeo.departamento_ubi as departamento_cfp_ubigeo, ubigeo.provincia_ubi as provincia_cfp_ubigeo, ubigeo.distrito_ubi as distrito_cfp_ubigeo, u.cod_ubi as cod_ubi_aprendiz, u.departamento_ubi as departamento_ubi_aprendiz, u.provincia_ubi as provincia_ubi_aprendiz, u.distrito_ubi as distrito_ubi_aprendiz FROM aprendiz a INNER JOIN cfp c ON a.id_cfp = c.id_cfp INNER JOIN ubigeo u ON u.id_ubi = a.id_ubi INNER JOIN ubigeo ON ubigeo.id_ubi = c.id_ubi";
+
+			$query = mysqli_query($this->con , $consulta);
+
+			$columnas = mysqli_num_rows ($query);
+
+			$pag = $columnas / 50;
+
+			return ceil ($pag);
+		}
+
 		public function mostrar_aprendiz(){
 			
-				$consulta = "SELECT a.*, c.codigo_cfp, c.descripcion_cfp, c.direccion_cfp, c.id_ubi, ubigeo.cod_ubi as cod_cfp_ubigeo, ubigeo.departamento_ubi as departamento_cfp_ubigeo, ubigeo.provincia_ubi as provincia_cfp_ubigeo, ubigeo.distrito_ubi as distrito_cfp_ubigeo, u.cod_ubi as cod_ubi_aprendiz, u.departamento_ubi as departamento_ubi_aprendiz, u.provincia_ubi as provincia_ubi_aprendiz, u.distrito_ubi as distrito_ubi_aprendiz FROM aprendiz a INNER JOIN cfp c ON a.id_cfp = c.id_cfp INNER JOIN ubigeo u ON u.id_ubi = a.id_ubi INNER JOIN ubigeo ON ubigeo.id_ubi = c.id_ubi";
+				$consulta = "SELECT a.*, c.codigo_cfp, c.descripcion_cfp, c.direccion_cfp, c.id_ubi, ubigeo.cod_ubi as cod_cfp_ubigeo, ubigeo.departamento_ubi as departamento_cfp_ubigeo, ubigeo.provincia_ubi as provincia_cfp_ubigeo, ubigeo.distrito_ubi as distrito_cfp_ubigeo, u.cod_ubi as cod_ubi_aprendiz, u.departamento_ubi as departamento_ubi_aprendiz, u.provincia_ubi as provincia_ubi_aprendiz, u.distrito_ubi as distrito_ubi_aprendiz FROM aprendiz a INNER JOIN cfp c ON a.id_cfp = c.id_cfp INNER JOIN ubigeo u ON u.id_ubi = a.id_ubi INNER JOIN ubigeo ON ubigeo.id_ubi = c.id_ubi LIMIT 10";
 
 			$query = mysqli_query($this->con, $consulta);
 			$array_aprendiz = array();

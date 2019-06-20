@@ -12,6 +12,11 @@
 	$ubicacion = new ubigeo_model();
 
 	$datos_aprendiz = $aprendiz_model->mostrar_aprendiz();
+	$cantidad_de_datos = $aprendiz_model->catidad_de_datos();
+
+	
+	echo $cantidad_de_datos;
+
 	$ubi = $ubicacion->mostrar_ubigeo();
 	$cfp = $cfp_model->mostrar_cfp();
 
@@ -236,7 +241,28 @@
 			}
 			?>
 			</table>
-			</div>
+			</div>			
+
+			<ul class="pagination" style="float: left;">
+				<li class="page-item"><a class="page-link" href="#">Anterior</a></li>
+			</ul>
+
+			<nav aria-label="Page navigation example" style="width: 84%;float: left;">
+				<div class="table-responsive">
+				  <ul class="pagination">							  	     
+				    <?php for ($i=0; $i < $cantidad_de_datos; $i++) { 
+
+				     ?>				     
+				    <li onclick="pag(<?php echo $i; ?>)" class="page-item"><a class="page-link" href="#"><?php echo $i + 1; ?></a></li>
+				    
+				    <?php } ?>				    		   
+			 	</ul>
+			  </div>
+			</nav>	
+
+			<ul class="pagination" style="float: right;">
+				<li class="page-item"><a class="page-link" href="#">Siguiente</a></li>
+			</ul>		
 			<?php 
 		}
 		else{

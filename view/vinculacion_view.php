@@ -306,6 +306,7 @@
     }
     else{
       ?>
+    <div class="table-responsive">
       <table class="table table-hover">
          <tr>
             <th>Inicio Practicas</th>
@@ -347,6 +348,7 @@
           <td class="alert alert-danger" role="alert" colspan="36"><center><h5>No hay datos</h5></center></td>
         </tr>
       </table>
+      </div>
       <?php 
     }
 
@@ -540,12 +542,12 @@
           <input type="date" class="form-control" id="editar_fechaini_prac" name="editar_fechaini_prac">
         </div>
         <div class="form-group">
-          <label for="fechafin_prac">Fecha Fin Practicas</label>
-          <input type="date" class="editar_form-control" id="editar_fechafin_prac" name="editar_fechafin_prac">
+          <label for="editar_fechafin_prac">Fecha Fin Practicas</label>
+          <input type="date" class="form-control" id="editar_fechafin_prac" name="editar_fechafin_prac">
         </div>
         <div class="form-group">
           <label for="editar_fechaini_sem">Fecha Inicion Semestre</label>
-          <input type="date" class="editar_form-control" id="editar_fechaini_sem" name="editar_fechaini_sem">
+          <input type="date" class="form-control" id="editar_fechaini_sem" name="editar_fechaini_sem">
         </div>
         <div class="form-group">
           <label for="editar_fechafin_sem">Fecha Fin Semestre</label>

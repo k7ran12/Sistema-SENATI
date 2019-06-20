@@ -1,5 +1,9 @@
  $(document).ready(function(){
 
+  function pag(dato){
+    console.log(this);
+  }
+
    $('#ubicacion_ap').select2();
    $('#ubicacion_em').select2()
 
@@ -957,14 +961,14 @@
         });
         $("#id_emp").val(valores[0]);
 
-        $("#editar_ruc").val(valores[1]);
-        $("#editar_razon_social").val(valores[2]);
-        $("#editar_direccion").val(valores[3]);
-        $("#editar_telefono").val(valores[4]);        
-        $("#editar_correo").val(valores[5]);  
-        $("#editar_representante").val(valores[6]);
-        $("#editar_dni_representante").val(valores[7]);
+         //Fecha
+        $("#editar_fechaini_prac").val(valores[1]);
+        $("#editar_fechafin_prac").val(valores[2]);
+        $("#editar_fechaini_sem").val(valores[3]);
+        $("#editar_fechafin_sem").val(valores[4]);
 
+        $("#editar_grupo").val(valores[5]);
+        
         $("#editar_aprendiz option[value='"+valores[36]+"'").attr("selected", true);
         $("#editar_empresa option[value='"+valores[37]+"'").attr("selected", true);
         $("#editar_carrera option[value='"+valores[38]+"'").attr("selected", true);
