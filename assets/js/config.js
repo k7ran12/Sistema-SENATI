@@ -1062,16 +1062,45 @@
         $("#editar_cfp option[value='"+valores[39]+"'").attr("selected", true);
         $("#editar_semestre option[value='"+valores[40]+"'").attr("selected", true);
 
-      /* Datos Para Editar Modal */ 
-
+      /* Datos Para Editar Modal */
+        
+        
+        
        
-
-        
-        
-        
-        console.log(valores);
       });
-    
+    /* Agregar Datos */
+      
+
+      $( "#form_agregar_vinculacion" ).on( "submit", function( event ) {
+        console.log("hola");
+    event.preventDefault();   
+    let form_vinculacion = $( this ).serialize();
+    console.log(form_vinculacion);
+    $.ajax({
+      method: "POST",
+      url: "controller/vinculacion_controller.php",
+      data: "accion=agregar&" + form_vinculacion
+    })
+      .done(function( msg ) {
+      console.log(msg);
+        if (msg == 'agregado') {
+          alertify.alert('Alerta', 'Los datos se agrearon correctamente!', function(){ alertify.success('Guardado');window.location.reload(); });         
+          
+        }
+        else if(msg == 'incorrecto'){
+          alertify.success('No se pudo agregar :(');
+        }
+        else if(msg == 'invalidado'){
+          alertify.success('Ingresar todos los datos');
+        }       
+        else{
+          alertify.success('Error no encontrado');          
+        }       
+        
+    });
+  });
+
+      /* Fin Agregar Datos */
     
     /*=====  End of Tabla Vinculacion  ======*/
     

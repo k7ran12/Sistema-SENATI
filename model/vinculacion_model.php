@@ -64,9 +64,9 @@
 			
 		}
 
-		public function agregar_datos_empresa($ruc, $razon_social, $direccion, $telefono, $correo, $representante, $dni_representante, $ubicacion_em, $actividad_empresa,$cfp )
+		public function agregar_datos_vinculacion($aprendiz, $empresa, $carrera, $cfp, $semestre, $fechaini_prac, $fechafin_prac, $fechaini_sem, $fechafin_sem, $monitor, $convenio, $grupo)
 		{
-			$consulta = "INSERT INTO `empresa` (`id_emp`, `ruc_emp`, `razonsocial_emp`, `direccion_emp`, `telefono_emp`, `correo_emp`, `representante_emp`, `dnirepresentante_emp`, `id_ubi`, `id_ae`, `id_cfp`) VALUES (NULL, '$ruc', '$razon_social', '$direccion', '$telefono', '$correo', '$representante', '$dni_representante', '$ubicacion_em', '$actividad_empresa', '$cfp');";
+			$consulta = "INSERT INTO vinculacion (`id_vin`, `id_ap`, `id_emp`, `id_carr`, `id_cfp`, `id_sem`, `fechaini_prac_vin`, `fechafin_prac_vin`, `fechaini_sem_vin`, `fechafin_sem_vin`, `id_mon`, `id_conv`, `grupo_vin`) VALUES (NULL, '$aprendiz', '$empresa', '$carrera', '$cfp', '$semestre', '$fechaini_prac', '$fechafin_prac', '$fechaini_sem', '$fechafin_sem', '$monitor', '$convenio', '$grupo');";
 
 			
 			$query = mysqli_query($this->con, $consulta);

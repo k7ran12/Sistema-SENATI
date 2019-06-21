@@ -23,10 +23,20 @@
 
 			return ceil ($pag);
 		}
+		public function select_aprendiz(){
+			$consulta = "SELECT id_ap, nombres_ap, apellidos_ap FROM aprendiz LIMIT 50";
 
-		public function mostrar_aprendiz($cantidad_paginas){
+			$query = mysqli_query($this->con, $consulta);
+
+			$array_aprendiz = mysqli_fetch_all ( $query );
+
+			return $array_aprendiz;
+
+		}
+
+		public function mostrar_aprendiz(){
 			
-				$consulta = "SELECT a.*, c.codigo_cfp, c.descripcion_cfp, c.direccion_cfp, c.id_ubi, ubigeo.cod_ubi as cod_cfp_ubigeo, ubigeo.departamento_ubi as departamento_cfp_ubigeo, ubigeo.provincia_ubi as provincia_cfp_ubigeo, ubigeo.distrito_ubi as distrito_cfp_ubigeo, u.cod_ubi as cod_ubi_aprendiz, u.departamento_ubi as departamento_ubi_aprendiz, u.provincia_ubi as provincia_ubi_aprendiz, u.distrito_ubi as distrito_ubi_aprendiz FROM aprendiz a INNER JOIN cfp c ON a.id_cfp = c.id_cfp INNER JOIN ubigeo u ON u.id_ubi = a.id_ubi INNER JOIN ubigeo ON ubigeo.id_ubi = c.id_ubi LIMIT $cantidad_paginas, 20";
+				$consulta = "SELECT a.*, c.codigo_cfp, c.descripcion_cfp, c.direccion_cfp, c.id_ubi, ubigeo.cod_ubi as cod_cfp_ubigeo, ubigeo.departamento_ubi as departamento_cfp_ubigeo, ubigeo.provincia_ubi as provincia_cfp_ubigeo, ubigeo.distrito_ubi as distrito_cfp_ubigeo, u.cod_ubi as cod_ubi_aprendiz, u.departamento_ubi as departamento_ubi_aprendiz, u.provincia_ubi as provincia_ubi_aprendiz, u.distrito_ubi as distrito_ubi_aprendiz FROM aprendiz a INNER JOIN cfp c ON a.id_cfp = c.id_cfp INNER JOIN ubigeo u ON u.id_ubi = a.id_ubi INNER JOIN ubigeo ON ubigeo.id_ubi = c.id_ubi LIMIT 20";
 
 			$query = mysqli_query($this->con, $consulta);
 			$array_aprendiz = array();

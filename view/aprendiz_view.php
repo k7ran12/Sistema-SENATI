@@ -14,7 +14,7 @@
 	$pagin = 1;
 		
 
-	$datos_aprendiz = $aprendiz_model->mostrar_aprendiz($pagin);
+	$datos_aprendiz = $aprendiz_model->mostrar_aprendiz();
 	$cantidad_de_datos = $aprendiz_model->catidad_de_datos();
 
 	
