@@ -18,7 +18,7 @@
 
 <div style="float: left;">
 	
-     <button type="button" class="btn btn-success my-2 my-sm-0" data-toggle="modal" data-target=".agregar_monitor">add</button>      
+     <button type="button" class="btn btn-success my-2 my-sm-0" data-toggle="modal" data-target=".agregar_monitor">Agregar</button>      
     
 </div>
 
@@ -59,7 +59,7 @@
             <td class="datos_empresa_editar"><?php echo $value['telefono_mon'] ?></td>
             <td class="datos_empresa_editar"><?php echo $value['cargo_mon'] ?></td>
             <td class="datos_empresa_editar"><?php echo $value['correo_mon'] ?></td>
-            <td><button type="button" class="btn btn-primary editar_monitor" data-toggle="modal" data-target=".editar_monitor_modal">e</button></td>
+            <td><button type="button" class="btn btn-primary editar_monitor" data-toggle="modal" data-target=".editar_monitor_modal">E</button></td>
           </tr>
         
         <?php 
@@ -115,7 +115,7 @@
             <td class="datos_empresa_editar"><?php echo $value['telefono_mon'] ?></td>
             <td class="datos_empresa_editar"><?php echo $value['cargo_mon'] ?></td>
             <td class="datos_empresa_editar"><?php echo $value['correo_mon'] ?></td>
-            <td><button type="button" class="btn btn-primary editar_monitor" data-toggle="modal" data-target=".editar_monitor_modal">e</button></td>
+            <td><button type="button" class="btn btn-primary editar_monitor" data-toggle="modal" data-target=".editar_monitor_modal">E</button></td>
           </tr>
         
         <?php 

@@ -18,7 +18,7 @@
 
 <div style="float: left;">
 	
-     <button type="button" class="btn btn-success my-2 my-sm-0" data-toggle="modal" data-target=".agregar_cfp">add</button>      
+     <button type="button" class="btn btn-success my-2 my-sm-0" data-toggle="modal" data-target=".agregar_cfp">Agregar</button>      
     
 </div>
 
@@ -60,7 +60,7 @@
 						<td class="datos_cfp_editar"><?php echo $value['departamento_ubi'] ?></td>
 						<td class="datos_cfp_editar"><?php echo $value['provincia_ubi'] ?></td>
 						<td class="datos_cfp_editar"><?php echo $value['distrito_ubi'] ?></td>
-						<td><button type="button" class="btn btn-primary editar_cfp" data-toggle="modal" data-target=".editar_cfp_modal">e</button></td>
+						<td><button type="button" class="btn btn-primary editar_cfp" data-toggle="modal" data-target=".editar_cfp_modal">E</button></td>
 					</tr>
 				
 				<?php 
@@ -119,7 +119,7 @@
 						<td class="datos_cfp_editar"><?php echo $value['departamento_ubi'] ?></td>
 						<td class="datos_cfp_editar"><?php echo $value['provincia_ubi'] ?></td>
 						<td class="datos_cfp_editar"><?php echo $value['distrito_ubi'] ?></td>
-						<td><button type="button" class="btn btn-primary editar_cfp" data-toggle="modal" data-target=".editar_cfp_modal">e</button></td>
+						<td><button type="button" class="btn btn-primary editar_cfp" data-toggle="modal" data-target=".editar_cfp_modal">E</button></td>
 					</tr>
 				
 				<?php 

@@ -17,7 +17,7 @@
 
 <div style="float: left;">
 	
-     <button type="button" class="btn btn-success my-2 my-sm-0" data-toggle="modal" data-target=".agregar_actividad_empresa">add</button>      
+     <button type="button" class="btn btn-success my-2 my-sm-0" data-toggle="modal" data-target=".agregar_actividad_empresa">Agregar</button>      
     
 </div>
 
@@ -51,7 +51,7 @@
             <td style="display: none;" class="datos_actividad_empresa_editar"><?php echo $value['id_ae'] ?></td>
             <td class="datos_actividad_empresa_editar"><?php echo $value['codigo_ae'] ?></td>
             <td class="datos_actividad_empresa_editar"><?php echo $value['descripcion_ae'] ?></td>
-            <td><button type="button" class="btn btn-primary editar_actividad_empresa" data-toggle="modal" data-target=".editar_actividad_empresa_modal">e</button></td>
+            <td><button type="button" class="btn btn-primary editar_actividad_empresa" data-toggle="modal" data-target=".editar_actividad_empresa_modal">E</button></td>
           </tr>
         
         <?php 
@@ -97,7 +97,7 @@
             <td style="display: none;" class="datos_actividad_empresa_editar"><?php echo $value['id_ae'] ?></td>
             <td class="datos_actividad_empresa_editar"><?php echo $value['codigo_ae'] ?></td>
             <td class="datos_actividad_empresa_editar"><?php echo $value['descripcion_ae'] ?></td>
-            <td><button type="button" class="btn btn-primary editar_actividad_empresa" data-toggle="modal" data-target=".editar_actividad_empresa_modal">e</button></td>
+            <td><button type="button" class="btn btn-primary editar_actividad_empresa" data-toggle="modal" data-target=".editar_actividad_empresa_modal">E</button></td>
           </tr>
         
         <?php 

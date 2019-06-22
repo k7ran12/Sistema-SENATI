@@ -18,7 +18,7 @@
 
 <div style="float: left;">
 	
-     <button type="button" class="btn btn-success my-2 my-sm-0" data-toggle="modal" data-target=".agregar_semestre">add</button>      
+     <button type="button" class="btn btn-success my-2 my-sm-0" data-toggle="modal" data-target=".agregar_semestre">Agregar</button>      
     
 </div>
 
@@ -52,7 +52,7 @@
             <td style="display: none;" class="datos_empresa_editar"><?php echo $value['id_sem'] ?></td>
             <td class="datos_empresa_editar"><?php echo $value['codigo_sem'] ?></td>
             <td class="datos_empresa_editar"><?php echo $value['descripcion_sem'] ?></td>
-            <td><button type="button" class="btn btn-primary editar_semestre" data-toggle="modal" data-target=".editar_semestre_modal">e</button></td>
+            <td><button type="button" class="btn btn-primary editar_semestre" data-toggle="modal" data-target=".editar_semestre_modal">E</button></td>
           </tr>
         
         <?php 
@@ -96,7 +96,7 @@
             <td style="display: none;" class="datos_empresa_editar"><?php echo $value['id_sem'] ?></td>
             <td class="datos_empresa_editar"><?php echo $value['codigo_sem'] ?></td>
             <td class="datos_empresa_editar"><?php echo $value['descripcion_sem'] ?></td>
-            <td><button type="button" class="btn btn-primary editar_semestre" data-toggle="modal" data-target=".editar_semestre_modal">e</button></td>
+            <td><button type="button" class="btn btn-primary editar_semestre" data-toggle="modal" data-target=".editar_semestre_modal">E</button></td>
           </tr>
         
         <?php 

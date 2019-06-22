@@ -37,7 +37,7 @@
 
 <div style="float: left;">
   
-     <button type="button" class="btn btn-success my-2 my-sm-0" data-toggle="modal" data-target=".agregar_vinculacion">add</button>      
+     <button type="button" class="btn btn-success my-2 my-sm-0" data-toggle="modal" data-target=".agregar_vinculacion">Agregar</button>      
     
 </div>
 
@@ -60,26 +60,35 @@
       <div class="table-responsive">
       <table class="table table-hover">
           <tr>
+            <!-- 
             <th>Inicio Practicas</th>
             <th>Fin Practicas</th>
             <th>Inicio Semestre</th>
             <th>Fin Semestre</th>
             <th>Grupo</th>
+             -->
+            
             <th>DNI Aprendiz</th>
             <th>Nombres Apellidos Aprendiz</th>
             <th>Telefono Aprendiz</th>
+            <!-- 
             <th>Correo Aprendiz</th>
             <th>Direccion Aprendiz</th>
             <th>Referencia</th>
             <th>DNI Apoderado</th>
             <th>Nombre Apellido Apoderado</th>
             <th>Telefono Apoderado</th>
+             -->
+            
             <th>Id SENATI Aprendiz</th>
-            <th>Bloque</th>
+            <!-- 
+            <th>Bloque</th>           
             <th>Programa</th>
             <th>Genero</th>
+            -->  
             <th>RUC Empresa</th>                  
             <th>Razon Social</th>
+            <!-- 
             <th>Direccion Empresa</th>
             <th>Telefono Empresa</th>
             <th>Correo Empresa</th>
@@ -95,6 +104,8 @@
             <th>Cargo</th>
             <th>Correo Monitor</th>
             <th>Convenio</th>
+             -->
+            
           </tr>
       <?php 
       foreach ($datos_empresa_buscar as $value) {
@@ -130,7 +141,7 @@
             <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[13] ?></td>
             <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[14] ?></td> 
             <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[16] ?></td>
-            <td><button type="button" class="btn btn-primary editar_vinculacion" data-toggle="modal" data-target=".editar_vinculacion_modal">e</button></td>
+            <td><button type="button" class="btn btn-primary editar_vinculacion" data-toggle="modal" data-target=".editar_vinculacion_modal">E</button></td>
           </tr>
         
         
@@ -147,26 +158,35 @@
       <div class="table-responsive">
       <table class="table table-hover">
           <tr>
+            <!-- 
             <th>Inicio Practicas</th>
             <th>Fin Practicas</th>
             <th>Inicio Semestre</th>
             <th>Fin Semestre</th>
             <th>Grupo</th>
+             -->
+            
             <th>DNI Aprendiz</th>
             <th>Nombres Apellidos Aprendiz</th>
             <th>Telefono Aprendiz</th>
+            <!-- 
             <th>Correo Aprendiz</th>
             <th>Direccion Aprendiz</th>
             <th>Referencia</th>
             <th>DNI Apoderado</th>
             <th>Nombre Apellido Apoderado</th>
             <th>Telefono Apoderado</th>
+             -->
+            
             <th>Id SENATI Aprendiz</th>
-            <th>Bloque</th>
+            <!-- 
+            <th>Bloque</th>           
             <th>Programa</th>
             <th>Genero</th>
+            -->  
             <th>RUC Empresa</th>                  
             <th>Razon Social</th>
+            <!-- 
             <th>Direccion Empresa</th>
             <th>Telefono Empresa</th>
             <th>Correo Empresa</th>
@@ -182,6 +202,8 @@
             <th>Cargo</th>
             <th>Correo Monitor</th>
             <th>Convenio</th>
+             -->
+            
           </tr>
         <tr>
           <td class="alert alert-danger" role="alert" colspan="36"><center><h5>No hay datos</h5></center></td>
@@ -202,26 +224,35 @@
       <div class="table-responsive">
       <table class="table table-hover">
           <tr>
+            <!-- 
             <th>Inicio Practicas</th>
             <th>Fin Practicas</th>
             <th>Inicio Semestre</th>
             <th>Fin Semestre</th>
             <th>Grupo</th>
+             -->
+            
             <th>DNI Aprendiz</th>
             <th>Nombres Apellidos Aprendiz</th>
             <th>Telefono Aprendiz</th>
+            <!-- 
             <th>Correo Aprendiz</th>
             <th>Direccion Aprendiz</th>
             <th>Referencia</th>
             <th>DNI Apoderado</th>
             <th>Nombre Apellido Apoderado</th>
             <th>Telefono Apoderado</th>
+             -->
+            
             <th>Id SENATI Aprendiz</th>
-            <th>Bloque</th>
+            <!-- 
+            <th>Bloque</th>           
             <th>Programa</th>
             <th>Genero</th>
+            -->  
             <th>RUC Empresa</th>                  
             <th>Razon Social</th>
+            <!-- 
             <th>Direccion Empresa</th>
             <th>Telefono Empresa</th>
             <th>Correo Empresa</th>
@@ -237,22 +268,29 @@
             <th>Cargo</th>
             <th>Correo Monitor</th>
             <th>Convenio</th>
+             -->
+            
           </tr>
       <?php 
       foreach ($datos_vinculacion as $value) {
         ?>        
           <tr>
             <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[0] ?></td>            
+            <!-- 
             <td class="datos_editar_vinculacion"><?php echo $value[1] ?></td>
             <td class="datos_editar_vinculacion"><?php echo $value[2] ?></td>
             <td class="datos_editar_vinculacion"><?php echo $value[3] ?></td>
             <td class="datos_editar_vinculacion"><?php echo $value[4] ?></td>
-            <td class="datos_editar_vinculacion"><?php echo $value[5] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value[5] ?></td> 
+            -->
+            
             
             <td class="datos_editar_vinculacion"><?php echo $value[7] ?></td>
 
             <td class="datos_editar_vinculacion"><?php echo $value[8]. " ".$value[9] ?></td>
             <td class="datos_editar_vinculacion"><?php echo $value[10] ?></td>
+
+            <!-- 
             <td class="datos_editar_vinculacion"><?php echo $value[11] ?></td>
             <td class="datos_editar_vinculacion"><?php echo $value[12] ?></td>
             <td class="datos_editar_vinculacion"><?php echo $value[13] ?></td>
@@ -261,12 +299,18 @@
             <td class="datos_editar_vinculacion"><?php echo $value[16] ?></td>
             <td class="datos_editar_vinculacion"><?php echo $value[17] ?></td>
             <td class="datos_editar_vinculacion"><?php echo $value[18] ?></td>
+             -->
+              
 
-            <td class="datos_editar_vinculacion"><?php echo $value[21] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value[18] ?></td>
+            <!-- 
             <td class="datos_editar_vinculacion"><?php echo $value[22] ?></td>
             <td class="datos_editar_vinculacion"><?php echo $value[23] ?></td>
+             -->
+            
 
             <td class="datos_editar_vinculacion"><?php echo $value[25] ?></td>    
+            <!-- 
             <td class="datos_editar_vinculacion"><?php echo $value[26] ?></td>  
             <td class="datos_editar_vinculacion"><?php echo $value[27] ?></td>  
             <td class="datos_editar_vinculacion"><?php echo $value[28] ?></td>
@@ -286,6 +330,8 @@
             <td class="datos_editar_vinculacion"><?php echo $value[51] ?></td>
             <td class="datos_editar_vinculacion"><?php echo $value[52] ?></td>
             <td class="datos_editar_vinculacion"><?php echo $value[54] ?></td>
+             -->
+              
                                           
             <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[6] ?></td>
             <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[24] ?></td>             
@@ -294,7 +340,7 @@
             <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[20] ?></td>
             <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[42] ?></td>
 
-            <td><button type="button" class="btn btn-primary editar_vinculacion" data-toggle="modal" data-target=".editar_vinculacion_modal">e</button></td>
+            <td><button type="button" class="btn btn-primary editar_vinculacion" data-toggle="modal" data-target=".editar_vinculacion_modal">E</button></td>
           </tr>
         
         <?php 
@@ -309,26 +355,35 @@
     <div class="table-responsive">
       <table class="table table-hover">
          <tr>
+            <!-- 
             <th>Inicio Practicas</th>
             <th>Fin Practicas</th>
             <th>Inicio Semestre</th>
             <th>Fin Semestre</th>
             <th>Grupo</th>
+             -->
+            
             <th>DNI Aprendiz</th>
             <th>Nombres Apellidos Aprendiz</th>
             <th>Telefono Aprendiz</th>
+            <!-- 
             <th>Correo Aprendiz</th>
             <th>Direccion Aprendiz</th>
             <th>Referencia</th>
             <th>DNI Apoderado</th>
             <th>Nombre Apellido Apoderado</th>
             <th>Telefono Apoderado</th>
+             -->
+            
             <th>Id SENATI Aprendiz</th>
-            <th>Bloque</th>
+            <!-- 
+            <th>Bloque</th>           
             <th>Programa</th>
             <th>Genero</th>
+            -->  
             <th>RUC Empresa</th>                  
             <th>Razon Social</th>
+            <!-- 
             <th>Direccion Empresa</th>
             <th>Telefono Empresa</th>
             <th>Correo Empresa</th>
@@ -344,6 +399,8 @@
             <th>Cargo</th>
             <th>Correo Monitor</th>
             <th>Convenio</th>
+             -->
+            
           </tr>
           <td class="alert alert-danger" role="alert" colspan="36"><center><h5>No hay datos</h5></center></td>
         </tr>

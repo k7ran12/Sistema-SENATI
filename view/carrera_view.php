@@ -18,7 +18,7 @@
 
 <div style="float: left;">
 	
-     <button type="button" class="btn btn-success my-2 my-sm-0" data-toggle="modal" data-target=".agregar_carrera">add</button>      
+     <button type="button" class="btn btn-success my-2 my-sm-0" data-toggle="modal" data-target=".agregar_carrera">Agregar</button>      
     
 </div>
 
@@ -52,7 +52,7 @@
             <td style="display: none;" class="datos_carrera_editar"><?php echo $value['id_carr'] ?></td>
             <td class="datos_carrera_editar"><?php echo $value['codigo_carr'] ?></td>
             <td class="datos_carrera_editar"><?php echo $value['descripcion_carr'] ?></td>
-            <td><button type="button" class="btn btn-primary editar_carrera" data-toggle="modal" data-target=".editar_carrera_modal">e</button></td>
+            <td><button type="button" class="btn btn-primary editar_carrera" data-toggle="modal" data-target=".editar_carrera_modal">E</button></td>
           </tr>
         
         <?php 
@@ -98,7 +98,7 @@
             <td style="display: none;" class="datos_carrera_editar"><?php echo $value['id_carr'] ?></td>
             <td class="datos_carrera_editar"><?php echo $value['codigo_carr'] ?></td>
             <td class="datos_carrera_editar"><?php echo $value['descripcion_carr'] ?></td>
-            <td><button type="button" class="btn btn-primary editar_carrera" data-toggle="modal" data-target=".editar_carrera_modal">e</button></td>
+            <td><button type="button" class="btn btn-primary editar_carrera" data-toggle="modal" data-target=".editar_carrera_modal">E</button></td>
           </tr>
         
         <?php 

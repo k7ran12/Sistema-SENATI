@@ -33,7 +33,7 @@
 
 <div style="float: left;">
 	
-     <button type="button" class="btn btn-success my-2 my-sm-0" data-toggle="modal" data-target=".agregar_aprendiz">add</button>      
+     <button type="button" class="btn btn-success my-2 my-sm-0" data-toggle="modal" data-target=".agregar_aprendiz">Agregar</button>      
     
 </div>
 
@@ -59,29 +59,10 @@
 						<th>DNI</th>
 						<th>Nombres</th>
 						<th>Apellidos</th>
-						<th>Telefono</th>
-						<th>Correo</th>
-						<th>Direccion</th>
-						<th>Referencia</th>
-						<th>DNI Apoderado</th>
-						<th>Nombre Apellido del Apoderado</th>
-						<th>Telefono Apoderado</th>
+						<th>Telefono</th>						
 						<th>Id SENATI</th>
-						<th>Direccion Zonal</th>
-						<th>Bloque</th>
-						<th>Programa</th>
-						<th>Sexo</th>
-						<th>CFP Codigo</th>
 						<th>CFP Descripcion</th>
-						<th>CFP Direccion</th>
-						<th>CFP Codigo Ubicacion</th>
-						<th>CFP Departamento</th>
-						<th>CFP Provincia</th>
-						<th>CFP Distrito</th>
-						<th>Aprendiz Codigo Ubicacion</th>
-						<th>Aprendiz Departamento</th>
-						<th>Aprendiz Provincia</th>
-						<th>Aprendiz Distrito</th>						
+						<th>Bloque</th>			
 						<th>Accion</th>						
 					</tr>
 			<?php 
@@ -93,30 +74,41 @@
 						<td class="datos_aprendiz_editar"><?php echo $value[2] ?></td>
 						<td class="datos_aprendiz_editar"><?php echo $value[3] ?></td>
 						<td class="datos_aprendiz_editar"><?php echo $value[4] ?></td>
-						<td class="datos_aprendiz_editar"><?php echo $value[5] ?></td>
+						<td class="datos_aprendiz_editar"><?php echo $value[12] ?></td>
+						<!-- 
+						
+						
 						<td class="datos_aprendiz_editar"><?php echo $value[6] ?></td>						
 						<td class="datos_aprendiz_editar"><?php echo $value[7] ?></td>
 						<td class="datos_aprendiz_editar"><?php echo $value[9] ?></td>
 						<td class="datos_aprendiz_editar"><?php echo $value[10] ?></td>
 						<td class="datos_aprendiz_editar"><?php echo $value[11] ?></td>
+						 -->
+						<!-- 
 						<td class="datos_aprendiz_editar"><?php echo $value[12] ?></td>
 						<td class="datos_aprendiz_editar"><?php echo $value[13] ?></td>
 						<td class="datos_aprendiz_editar"><?php echo $value[15] ?></td>
 						<td class="datos_aprendiz_editar"><?php echo $value[16] ?></td>
 						<td class="datos_aprendiz_editar"><?php echo $value[17] ?></td>
-						<td class="datos_aprendiz_editar"><?php echo $value[18] ?></td>
+						 -->
+						
+						
 						<td class="datos_aprendiz_editar"><?php echo $value[19] ?></td>
-						<td class="datos_aprendiz_editar"><?php echo $value[20] ?></td>
-						<td class="datos_aprendiz_editar"><?php echo $value[22] ?></td>
+						<td class="datos_aprendiz_editar"><?php echo $value[8] ?></td>
+						<!-- 
+							<td class="datos_aprendiz_editar"><?php echo $value[22] ?></td>
 						<td class="datos_aprendiz_editar"><?php echo $value[23] ?></td>
 						<td class="datos_aprendiz_editar"><?php echo $value[24] ?></td>
 						<td class="datos_aprendiz_editar"><?php echo $value[25] ?></td>
 						<td class="datos_aprendiz_editar"><?php echo $value[26] ?></td>
 						<td class="datos_aprendiz_editar"><?php echo $value[27] ?></td>
 						<td class="datos_aprendiz_editar"><?php echo $value[28] ?></td>
-						<td class="datos_aprendiz_editar"><?php echo $value[29] ?></td>						
-						<td><button type="button" class="btn btn-primary editar_aprendiz" data-toggle="modal" data-target=".editar_aprendiz_modal">e</button></td>
+						<td class="datos_aprendiz_editar"><?php echo $value[29] ?></td>
+						 -->
+																			
+						<td><button type="button" class="btn btn-primary editar_aprendiz" data-toggle="modal" data-target=".editar_aprendiz_modal">E</button></td>
 					</tr>
+				
 				
 				
 				<?php 
@@ -135,29 +127,10 @@
 						<th>DNI</th>
 						<th>Nombres</th>
 						<th>Apellidos</th>
-						<th>Telefono</th>
-						<th>Correo</th>
-						<th>Direccion</th>
-						<th>Referencia</th>
-						<th>DNI Apoderado</th>
-						<th>Nombre Apellido del Apoderado</th>
-						<th>Telefono Apoderado</th>
+						<th>Telefono</th>						
 						<th>Id SENATI</th>
-						<th>Direccion Zonal</th>
-						<th>Bloque</th>
-						<th>Programa</th>
-						<th>Sexo</th>
-						<th>CFP Codigo</th>
 						<th>CFP Descripcion</th>
-						<th>CFP Direccion</th>
-						<th>CFP Codigo Ubicacion</th>
-						<th>CFP Departamento</th>
-						<th>CFP Provincia</th>
-						<th>CFP Distrito</th>
-						<th>Aprendiz Codigo Ubicacion</th>
-						<th>Aprendiz Departamento</th>
-						<th>Aprendiz Provincia</th>
-						<th>Aprendiz Distrito</th>						
+						<th>Bloque</th>			
 						<th>Accion</th>						
 					</tr>
 				<tr>
@@ -182,65 +155,54 @@
 						<th>DNI</th>
 						<th>Nombres</th>
 						<th>Apellidos</th>
-						<th>Telefono</th>
-						<th>Correo</th>
-						<th>Direccion</th>
-						<th>Referencia</th>
-						<th>DNI Apoderado</th>
-						<th>Nombre Apellido del Apoderado</th>
-						<th>Telefono Apoderado</th>
+						<th>Telefono</th>						
 						<th>Id SENATI</th>
-						<th>Direccion Zonal</th>
-						<th>Bloque</th>
-						<th>Programa</th>
-						<th>Sexo</th>
-						<th>CFP Codigo</th>
 						<th>CFP Descripcion</th>
-						<th>CFP Direccion</th>
-						<th>CFP Codigo Ubicacion</th>
-						<th>CFP Departamento</th>
-						<th>CFP Provincia</th>
-						<th>CFP Distrito</th>
-						<th>Aprendiz Codigo Ubicacion</th>
-						<th>Aprendiz Departamento</th>
-						<th>Aprendiz Provincia</th>
-						<th>Aprendiz Distrito</th>						
+						<th>Bloque</th>			
 						<th>Accion</th>						
 					</tr>
 			<?php 
 			foreach ($datos_aprendiz as $value) {
 				?>				
 					<tr>
-						<td style="display: none;" class="datos_aprendiz_editar"><?php echo $value[0] ?></td>						
+						<td style="display: none;" class="datos_aprendiz_editar"><?php echo $value[0] ?></td>
 						<td class="datos_aprendiz_editar"><?php echo $value[1] ?></td>
 						<td class="datos_aprendiz_editar"><?php echo $value[2] ?></td>
 						<td class="datos_aprendiz_editar"><?php echo $value[3] ?></td>
 						<td class="datos_aprendiz_editar"><?php echo $value[4] ?></td>
-						<td class="datos_aprendiz_editar"><?php echo $value[5] ?></td>
-						<td class="datos_aprendiz_editar"><?php echo $value[6] ?></td>					
+						<td class="datos_aprendiz_editar"><?php echo $value[12] ?></td>
+						<!-- 
+						
+						
+						<td class="datos_aprendiz_editar"><?php echo $value[6] ?></td>						
 						<td class="datos_aprendiz_editar"><?php echo $value[7] ?></td>
 						<td class="datos_aprendiz_editar"><?php echo $value[9] ?></td>
 						<td class="datos_aprendiz_editar"><?php echo $value[10] ?></td>
 						<td class="datos_aprendiz_editar"><?php echo $value[11] ?></td>
+						 -->
+						<!-- 
 						<td class="datos_aprendiz_editar"><?php echo $value[12] ?></td>
 						<td class="datos_aprendiz_editar"><?php echo $value[13] ?></td>
 						<td class="datos_aprendiz_editar"><?php echo $value[15] ?></td>
 						<td class="datos_aprendiz_editar"><?php echo $value[16] ?></td>
 						<td class="datos_aprendiz_editar"><?php echo $value[17] ?></td>
-						<td class="datos_aprendiz_editar"><?php echo $value[18] ?></td>
+						 -->
+						
+						
 						<td class="datos_aprendiz_editar"><?php echo $value[19] ?></td>
-						<td class="datos_aprendiz_editar"><?php echo $value[20] ?></td>
-						<td class="datos_aprendiz_editar"><?php echo $value[22] ?></td>
+						<td class="datos_aprendiz_editar"><?php echo $value[15] ?></td>
+						<!-- 
+							<td class="datos_aprendiz_editar"><?php echo $value[22] ?></td>
 						<td class="datos_aprendiz_editar"><?php echo $value[23] ?></td>
 						<td class="datos_aprendiz_editar"><?php echo $value[24] ?></td>
 						<td class="datos_aprendiz_editar"><?php echo $value[25] ?></td>
 						<td class="datos_aprendiz_editar"><?php echo $value[26] ?></td>
 						<td class="datos_aprendiz_editar"><?php echo $value[27] ?></td>
 						<td class="datos_aprendiz_editar"><?php echo $value[28] ?></td>
-						<td class="datos_aprendiz_editar"><?php echo $value[29] ?></td>					
-						<td style="display: none;" class="datos_aprendiz_editar"><?php echo $value[8] ?></td>
-						<td style="display: none;" class="datos_aprendiz_editar"><?php echo $value[14] ?></td>	
-						<td><button type="button" class="btn btn-primary editar_aprendiz" data-toggle="modal" data-target=".editar_aprendiz_modal">e</button></td>
+						<td class="datos_aprendiz_editar"><?php echo $value[29] ?></td>
+						 -->
+																			
+						<td><button type="button" class="btn btn-primary editar_aprendiz" data-toggle="modal" data-target=".editar_aprendiz_modal">E</button></td>
 					</tr>
 				
 				<?php 
@@ -275,12 +237,13 @@
 			?>
 			<table class="table table-hover">
 					<tr>
-						<th>Codigo CFP</th>
-						<th>Descripcion CFP</th>
-						<th>Direccion CFP</th>
-						<th>Departamento Ubicacion</th>
-						<th>Provincia Ubicacion</th>
-						<th>Distrito Ubicacion</th>
+						<th>DNI</th>
+						<th>Nombres</th>
+						<th>Apellidos</th>
+						<th>Telefono</th>						
+						<th>Id SENATI</th>
+						<th>CFP Descripcion</th>
+						<th>Bloque</th>			
 						<th>Accion</th>						
 					</tr>
 				<tr>

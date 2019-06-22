@@ -13,7 +13,7 @@
 
 <div style="float: left;">
 	
-     <button type="button" class="btn btn-success my-2 my-sm-0" data-toggle="modal" data-target=".agregar_usuario">add</button>      
+     <button type="button" class="btn btn-success my-2 my-sm-0" data-toggle="modal" data-target=".agregar_usuario">Agregar</button>      
     
 </div>
 
@@ -28,7 +28,7 @@
 	<table class="table table-hover">
   <thead>
     <tr>    
-      <th scope="col">#</th>  
+      <th scope="col">Nro</th>  
       <th scope="col">Nick</th>      
       <th scope="col">Nombres</th>
       <th scope="col">Apellidos</th>
@@ -45,7 +45,7 @@
       <td class="datos_usuario_editar"><?php echo $value_usu['nombres_usua'] ?></td>
       <td class="datos_usuario_editar"><?php echo $value_usu['apellidos_usua'] ?></td>
       <td class="datos_usuario_editar"><?php echo $value_usu['nivel_usua'] ?></td>      
-      <td><button nick="<?php echo $value_usu['nick_usua'] ?>" type="button" class="btn btn-primary editar_usuario" data-toggle="modal" data-target=".editar_usuario_modal">e</button></td>
+      <td><button nick="<?php echo $value_usu['nick_usua'] ?>" type="button" class="btn btn-primary editar_usuario" data-toggle="modal" data-target=".editar_usuario_modal">E</button></td>
     </tr>
     <?php } ?>    
   </tbody>

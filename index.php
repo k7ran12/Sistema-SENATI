@@ -5,6 +5,7 @@ session_start();
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="UTF-8">
     <?php require_once("view/head.php"); ?>
   </head>
   <body>

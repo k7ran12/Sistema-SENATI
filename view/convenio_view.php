@@ -17,7 +17,7 @@
 
 <div style="float: left;">
 	
-     <button type="button" class="btn btn-success my-2 my-sm-0" data-toggle="modal" data-target=".agregar_convenio">add</button>      
+     <button type="button" class="btn btn-success my-2 my-sm-0" data-toggle="modal" data-target=".agregar_convenio">Agregar</button>      
     
 </div>
 
@@ -48,7 +48,7 @@
           <tr>
             <td style="display: none;" class="datos_convenio_editar"><?php echo $value['id_conv'] ?></td>           
             <td class="datos_convenio_editar"><?php echo $value['desc_conv'] ?></td>
-            <td><button type="button" class="btn btn-primary editar_convenio" data-toggle="modal" data-target=".editar_convenio_modal">e</button></td>
+            <td><button type="button" class="btn btn-primary editar_convenio" data-toggle="modal" data-target=".editar_convenio_modal">E</button></td>
           </tr>
         
         <?php 
@@ -91,7 +91,7 @@
           <tr>
             <td style="display: none;" class="datos_convenio_editar"><?php echo $value['id_conv'] ?></td>            
             <td class="datos_convenio_editar"><?php echo $value['desc_conv'] ?></td>
-            <td><button type="button" class="btn btn-primary editar_convenio" data-toggle="modal" data-target=".editar_convenio_modal">e</button></td>
+            <td><button type="button" class="btn btn-primary editar_convenio" data-toggle="modal" data-target=".editar_convenio_modal">E</button></td>
           </tr>
         
         <?php 

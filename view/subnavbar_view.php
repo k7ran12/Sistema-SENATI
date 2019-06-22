@@ -1,8 +1,7 @@
 <div class="subnavbar">
   <div class="subnavbar-inner">
     <div class="container">
-      <ul class="mainnav">
-        <li class="<?php if($_GET['pagina'] == 'index' OR empty($_GET['pagina'])){ echo 'active';} ?>"><a href="index"><i class="fas fa-tachometer-alt"></i></i><span>Dashboard</span> </a> </li>
+      <ul class="mainnav">        
         <li class="<?php if($_GET['pagina'] == 'cfp'){ echo 'active';} ?>"><a href="cfp"><i class="icon-list-alt"></i><span>CFP</span> </a> </li>
         <li class="<?php if($_GET['pagina'] == 'carrera'){ echo 'active';} ?>"><a href="carrera"><i class="icon-facetime-video"></i><span>Carrera</span> </a></li>
         <li class="<?php if($_GET['pagina'] == 'actividadEmpresa'){ echo 'active';} ?>"><a href="actividadEmpresa"><i class="icon-bar-chart"></i><span>Actividad</span> </a> </li>

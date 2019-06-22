@@ -25,7 +25,7 @@
 
 <div style="float: left;">
 	
-     <button type="button" class="btn btn-success my-2 my-sm-0" data-toggle="modal" data-target=".agregar_empresa">add</button>      
+     <button type="button" class="btn btn-success my-2 my-sm-0" data-toggle="modal" data-target=".agregar_empresa">Agregar</button>      
     
 </div>
 
@@ -51,23 +51,11 @@
 						<th>RUC</th>
 						<th>Razon Social</th>
 						<th>Direccion</th>
-						<th>Telefono</th>
+						<!-- <th>Telefono</th> -->
+						
 						<th>Correo</th>
 						<th>Representante</th>
-						<th>DNI Representante</th>
-						<th>Codigo</th>
-						<th>Departamento</th>
-						<th>Provincia</th>
-						<th>Distrito</th>
-						<th>Codigo Actividad</th>
-						<th>Descripcion Actividad</th>
-						<th>Codigo CFP</th>
-						<th>Descripcion CFP</th>
-						<th>Direccion CFP</th>
-						<th>Codigo Ubicacion CFP</th>
-						<th>Departamento Ubicacion CFP</th>
-						<th>Provincia Ubicacion CFP</th>									
-						<th>Distrito Ubicacion CFP</th>
+						<th>DNI Representante</th>						
 						<th>Accion</th>
 					</tr>
 			<?php 
@@ -78,11 +66,13 @@
 						<td class="datos_empresa_editar"><?php echo $value[1] ?></td>
 						<td class="datos_empresa_editar"><?php echo $value[2] ?></td>
 						<td class="datos_empresa_editar"><?php echo $value[3] ?></td>
-						<td class="datos_empresa_editar"><?php echo $value[4] ?></td>
+						<!-- <td class="datos_empresa_editar"><?php echo $value[4] ?></td> -->
+						
 						<td class="datos_empresa_editar"><?php echo $value[5] ?></td>
 						<td class="datos_empresa_editar"><?php echo $value[6] ?></td>
 						<td class="datos_empresa_editar"><?php echo $value[7] ?></td>
 
+						<!-- 
 						<td class="datos_empresa_editar"><?php echo $value[9] ?></td>
 						<td class="datos_empresa_editar"><?php echo $value[10] ?></td>
 						<td class="datos_empresa_editar"><?php echo $value[11] ?></td>
@@ -98,13 +88,15 @@
 						<td class="datos_empresa_editar"><?php echo $value[21] ?></td>
 						<td class="datos_empresa_editar"><?php echo $value[22] ?></td>		
 						<td class="datos_empresa_editar"><?php echo $value[23] ?></td>	
-						<td class="datos_empresa_editar"><?php echo $value[24] ?></td>	
+						<td class="datos_empresa_editar"><?php echo $value[24] ?></td>
+						 -->	
+								
 																					
 						<td style="display: none;" class="datos_empresa_editar"><?php echo $value[8] ?></td>
 						<td style="display: none;" class="datos_empresa_editar"><?php echo $value[13] ?></td>
 						<td style="display: none;" class="datos_empresa_editar"><?php echo $value[14] ?></td>	
 						<td style="display: none;" class="datos_empresa_editar"><?php echo $value[16] ?></td>
-						<td><button type="button" class="btn btn-primary editar_empresa" data-toggle="modal" data-target=".editar_empresa_modal">e</button></td>
+						<td><button type="button" class="btn btn-primary editar_empresa" data-toggle="modal" data-target=".editar_empresa_modal">E</button></td>
 					</tr>
 				
 				
@@ -124,23 +116,11 @@
 						<th>RUC</th>
 						<th>Razon Social</th>
 						<th>Direccion</th>
-						<th>Telefono</th>
+						<!-- <th>Telefono</th> -->
+						
 						<th>Correo</th>
 						<th>Representante</th>
-						<th>DNI Representante</th>
-						<th>Codigo</th>
-						<th>Departamento</th>
-						<th>Provincia</th>
-						<th>Distrito</th>
-						<th>Codigo Actividad</th>
-						<th>Descripcion Actividad</th>
-						<th>Codigo CFP</th>
-						<th>Descripcion CFP</th>
-						<th>Direccion CFP</th>
-						<th>Codigo Ubicacion CFP</th>
-						<th>Departamento Ubicacion CFP</th>
-						<th>Provincia Ubicacion CFP</th>									
-						<th>Distrito Ubicacion CFP</th>
+						<th>DNI Representante</th>						
 						<th>Accion</th>
 					</tr>
 				<tr>
@@ -165,23 +145,11 @@
 						<th>RUC</th>
 						<th>Razon Social</th>
 						<th>Direccion</th>
-						<th>Telefono</th>
+						<!-- <th>Telefono</th> -->
+						
 						<th>Correo</th>
 						<th>Representante</th>
-						<th>DNI Representante</th>
-						<th>Codigo</th>
-						<th>Departamento</th>
-						<th>Provincia</th>
-						<th>Distrito</th>
-						<th>Codigo Actividad</th>
-						<th>Descripcion Actividad</th>
-						<th>Codigo CFP</th>
-						<th>Descripcion CFP</th>
-						<th>Direccion CFP</th>
-						<th>Codigo Ubicacion CFP</th>
-						<th>Departamento Ubicacion CFP</th>
-						<th>Provincia Ubicacion CFP</th>									
-						<th>Distrito Ubicacion CFP</th>
+						<th>DNI Representante</th>						
 						<th>Accion</th>
 					</tr>
 			<?php 
@@ -192,11 +160,13 @@
 						<td class="datos_empresa_editar"><?php echo $value[1] ?></td>
 						<td class="datos_empresa_editar"><?php echo $value[2] ?></td>
 						<td class="datos_empresa_editar"><?php echo $value[3] ?></td>
-						<td class="datos_empresa_editar"><?php echo $value[4] ?></td>
+						<!-- <td class="datos_empresa_editar"><?php echo $value[4] ?></td> -->
+						
 						<td class="datos_empresa_editar"><?php echo $value[5] ?></td>
 						<td class="datos_empresa_editar"><?php echo $value[6] ?></td>
 						<td class="datos_empresa_editar"><?php echo $value[7] ?></td>
 
+						<!-- 
 						<td class="datos_empresa_editar"><?php echo $value[9] ?></td>
 						<td class="datos_empresa_editar"><?php echo $value[10] ?></td>
 						<td class="datos_empresa_editar"><?php echo $value[11] ?></td>
@@ -204,18 +174,23 @@
 
 						<td class="datos_empresa_editar"><?php echo $value[14] ?></td>
 						<td class="datos_empresa_editar"><?php echo $value[15] ?></td>
+
 						<td class="datos_empresa_editar"><?php echo $value[17] ?></td>
 						<td class="datos_empresa_editar"><?php echo $value[18] ?></td>
+
 						<td class="datos_empresa_editar"><?php echo $value[20] ?></td>
 						<td class="datos_empresa_editar"><?php echo $value[21] ?></td>
 						<td class="datos_empresa_editar"><?php echo $value[22] ?></td>		
 						<td class="datos_empresa_editar"><?php echo $value[23] ?></td>	
-						<td class="datos_empresa_editar"><?php echo $value[24] ?></td>	
+						<td class="datos_empresa_editar"><?php echo $value[24] ?></td>
+						 -->	
+								
 																					
 						<td style="display: none;" class="datos_empresa_editar"><?php echo $value[8] ?></td>
-						<td style="display: none;" class="datos_empresa_editar"><?php echo $value[13] ?></td>							
+						<td style="display: none;" class="datos_empresa_editar"><?php echo $value[13] ?></td>
+						<td style="display: none;" class="datos_empresa_editar"><?php echo $value[14] ?></td>	
 						<td style="display: none;" class="datos_empresa_editar"><?php echo $value[16] ?></td>
-						<td><button type="button" class="btn btn-primary editar_empresa" data-toggle="modal" data-target=".editar_empresa_modal">e</button></td>
+						<td><button type="button" class="btn btn-primary editar_empresa" data-toggle="modal" data-target=".editar_empresa_modal">E</button></td>
 					</tr>
 				
 				<?php 
