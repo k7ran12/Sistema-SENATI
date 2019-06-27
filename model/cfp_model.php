@@ -6,10 +6,48 @@
 	class cfp_model extends conexion_model
 	{
 		private $con;
+		private $cantidad_filas = 10;
 
 		function __construct()
 		{
 			$this->con = parent::conectar();
+		}
+
+		public function catidad_de_datos_cfp($buscar){
+			if ($buscar != "") {
+
+				$consulta = "SELECT c.id_cfp, c.codigo_cfp, c.descripcion_cfp, c.direccion_cfp, c.id_ubi , u.departamento_ubi, u.provincia_ubi, u.distrito_ubi FROM cfp c INNER JOIN ubigeo u ON u.id_ubi = c.id_ubi WHERE c.codigo_cfp = '$buscar'";
+
+				$query = mysqli_query($this->con , $consulta);
+
+				$columnas = mysqli_num_rows ($query);
+
+				$pag = $columnas / 10;
+
+				return ceil ($pag);
+			}
+			else{
+				$consulta = "SELECT * FROM cfp";
+
+				$query = mysqli_query($this->con , $consulta);
+
+				$columnas = mysqli_num_rows ($query);
+
+				//echo $columnas;
+
+				if ($columnas < $this->cantidad_filas) {
+					return 0;
+				}
+				else{
+					//echo "Menor";				
+
+					$pag = $columnas / 10;
+
+					return ceil ($pag);
+				}
+
+				
+			}
 		}
 
 		public function mostrar_cfp(){

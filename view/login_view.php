@@ -1,4 +1,15 @@
-<div class="center_login">
+<?php 
+session_start();
+ ?>
+<!DOCTYPE html>
+<html>
+<head>
+  <?php require_once("head.php") ?>
+  <title></title>
+</head>
+<body>
+  
+  <div class="center_login">
   <div class="card">
     <div class="card-header">
       <center><h3>Login</h3></center>
@@ -21,3 +32,6 @@
     </div>
   </div>
 </div>
+
+</body>
+</html>

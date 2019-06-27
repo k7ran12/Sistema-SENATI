@@ -1,16 +1,17 @@
 <?php 
+session_start();
   if (empty($_SESSION['usuario'])) {
     header('Location: ../');
   }
 
-  require_once("model/vinculacion_model.php");
-  require_once("model/cfp_model.php");
-  require_once("model/aprendiz_model.php");
-  require_once("model/empresa_model.php");
-  require_once("model/carrera_model.php");
-  require_once("model/semestre_model.php");
-  require_once("model/monitor_model.php");
-  require_once("model/convenio_model.php");
+  require_once("../model/vinculacion_model.php");
+  require_once("../model/cfp_model.php");
+  require_once("../model/aprendiz_model.php");
+  require_once("../model/empresa_model.php");
+  require_once("../model/carrera_model.php");
+  require_once("../model/semestre_model.php");
+  require_once("../model/monitor_model.php");
+  require_once("../model/convenio_model.php");
 
   $vinculacion_model = new vinculacion_model();
   $cfp_model = new cfp_model();
@@ -23,7 +24,7 @@
 
   $datos_vinculacion = $vinculacion_model->mostrar_vinculacion();
   $cfp = $cfp_model->mostrar_cfp();
-  $aprendiz = $aprendiz_model->mostrar_aprendiz();
+  $aprendiz = $aprendiz_model->select_aprendiz();
   $empresa = $empresa_model->mostrar_empresa();
   $carrera = $carrera_model->mostrar_carrera();
   $semestre = $semestre_model->mostrar_semestre();
@@ -33,7 +34,25 @@
 
  ?>
 
-<center><h2>Vinculacion</h2></center>
+<!DOCTYPE html>
+<html>
+<head>
+  <?php require_once("head.php") ?>
+  <title></title>
+</head>
+<body>
+
+  <?php 
+       
+        require_once("navbar_view.php"); 
+        require_once("subnavbar_view.php");
+      
+      
+      ?>
+  
+  <div class="container">
+      
+      <center><h2>Vinculacion</h2></center>
 
 <div style="float: left;">
   
@@ -88,6 +107,7 @@
             -->  
             <th>RUC Empresa</th>                  
             <th>Razon Social</th>
+            <th>Accion</th>
             <!-- 
             <th>Direccion Empresa</th>
             <th>Telefono Empresa</th>
@@ -112,35 +132,71 @@
         ?>        
           <tr>
             <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[0] ?></td>            
+            <!-- 
             <td class="datos_editar_vinculacion"><?php echo $value[1] ?></td>
             <td class="datos_editar_vinculacion"><?php echo $value[2] ?></td>
             <td class="datos_editar_vinculacion"><?php echo $value[3] ?></td>
             <td class="datos_editar_vinculacion"><?php echo $value[4] ?></td>
-            <td class="datos_editar_vinculacion"><?php echo $value[5] ?></td>
-            <td class="datos_editar_vinculacion"><?php echo $value[6] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value[5] ?></td> 
+            -->
+            
+            
             <td class="datos_editar_vinculacion"><?php echo $value[7] ?></td>
 
-            <td class="datos_editar_vinculacion"><?php echo $value[9] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value[8]. " ".$value[9] ?></td>
             <td class="datos_editar_vinculacion"><?php echo $value[10] ?></td>
+
+            <!-- 
             <td class="datos_editar_vinculacion"><?php echo $value[11] ?></td>
             <td class="datos_editar_vinculacion"><?php echo $value[12] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value[13] ?></td>
 
-            <td class="datos_editar_vinculacion"><?php echo $value[14] ?></td>
             <td class="datos_editar_vinculacion"><?php echo $value[15] ?></td>
-
+            <td class="datos_editar_vinculacion"><?php echo $value[16] ?></td>
             <td class="datos_editar_vinculacion"><?php echo $value[17] ?></td>
             <td class="datos_editar_vinculacion"><?php echo $value[18] ?></td>
+             -->
+              
 
-            <td class="datos_editar_vinculacion"><?php echo $value[20] ?></td>
-            <td class="datos_editar_vinculacion"><?php echo $value[21] ?></td>
-            <td class="datos_editar_vinculacion"><?php echo $value[22] ?></td>    
-            <td class="datos_editar_vinculacion"><?php echo $value[23] ?></td>  
-            <td class="datos_editar_vinculacion"><?php echo $value[24] ?></td>  
+            <td class="datos_editar_vinculacion"><?php echo $value[18] ?></td>
+            <!-- 
+            <td class="datos_editar_vinculacion"><?php echo $value[22] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value[23] ?></td>
+             -->
+            
+
+            <td class="datos_editar_vinculacion"><?php echo $value[25] ?></td>  
+            <td class="datos_editar_vinculacion"><?php echo $value[26] ?></td>  
+            <!-- 
+              
+            <td class="datos_editar_vinculacion"><?php echo $value[27] ?></td>  
+            <td class="datos_editar_vinculacion"><?php echo $value[28] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value[29] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value[30] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value[31] ?></td>
+
+            <td class="datos_editar_vinculacion"><?php echo $value[37] ?></td>
+
+            <td class="datos_editar_vinculacion"><?php echo $value[40] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value[41] ?></td>
+
+            <td class="datos_editar_vinculacion"><?php echo $value[45] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value[47]. " " . $value[48] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value[49] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value[50] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value[51] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value[52] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value[54] ?></td>
+             -->
+              
                                           
-            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[8] ?></td>
-            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[13] ?></td>
-            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[14] ?></td> 
-            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[16] ?></td>
+            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[6] ?></td>
+            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[24] ?></td>             
+            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[35] 
+            ?></td>
+            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[20] ?></td>
+            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[42] ?></td>
+
             <td><button type="button" class="btn btn-primary editar_vinculacion" data-toggle="modal" data-target=".editar_vinculacion_modal">E</button></td>
           </tr>
         
@@ -178,7 +234,7 @@
             <th>Telefono Apoderado</th>
              -->
             
-            <th>Id SENATI Aprendiz</th>
+            <th>Id SENATI</th>
             <!-- 
             <th>Bloque</th>           
             <th>Programa</th>
@@ -186,6 +242,7 @@
             -->  
             <th>RUC Empresa</th>                  
             <th>Razon Social</th>
+            <th>Accion</th>
             <!-- 
             <th>Direccion Empresa</th>
             <th>Telefono Empresa</th>
@@ -244,7 +301,7 @@
             <th>Telefono Apoderado</th>
              -->
             
-            <th>Id SENATI Aprendiz</th>
+            <th>Id SENATI</th>
             <!-- 
             <th>Bloque</th>           
             <th>Programa</th>
@@ -252,6 +309,7 @@
             -->  
             <th>RUC Empresa</th>                  
             <th>Razon Social</th>
+            <th style="width: 9%;">Accion</th>
             <!-- 
             <th>Direccion Empresa</th>
             <th>Telefono Empresa</th>
@@ -309,9 +367,10 @@
              -->
             
 
-            <td class="datos_editar_vinculacion"><?php echo $value[25] ?></td>    
-            <!-- 
+            <td class="datos_editar_vinculacion"><?php echo $value[25] ?></td>  
             <td class="datos_editar_vinculacion"><?php echo $value[26] ?></td>  
+            <!-- 
+              
             <td class="datos_editar_vinculacion"><?php echo $value[27] ?></td>  
             <td class="datos_editar_vinculacion"><?php echo $value[28] ?></td>
             <td class="datos_editar_vinculacion"><?php echo $value[29] ?></td>
@@ -340,7 +399,9 @@
             <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[20] ?></td>
             <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[42] ?></td>
 
-            <td><button type="button" class="btn btn-primary editar_vinculacion" data-toggle="modal" data-target=".editar_vinculacion_modal">E</button></td>
+            <td><button type="button" class="btn btn-primary editar_vinculacion" data-toggle="modal" data-target=".editar_vinculacion_modal">E</button>
+              <button class="btn btn-secondary imprimir_vinculacion">I</button>
+            </td>
           </tr>
         
         <?php 
@@ -375,7 +436,7 @@
             <th>Telefono Apoderado</th>
              -->
             
-            <th>Id SENATI Aprendiz</th>
+            <th>Id SENATI</th>
             <!-- 
             <th>Bloque</th>           
             <th>Programa</th>
@@ -383,6 +444,7 @@
             -->  
             <th>RUC Empresa</th>                  
             <th>Razon Social</th>
+            <th>Accion</th>
             <!-- 
             <th>Direccion Empresa</th>
             <th>Telefono Empresa</th>
@@ -433,7 +495,7 @@
               <?php 
               foreach ($aprendiz as $value) {
              ?>           
-            <option value="<?php echo $value[0] ?>"><?php echo $value[2]." ".$value[3] ?></option>           
+            <option value="<?php echo $value[0] ?>"><?php echo $value[1]." ".$value[2] ?></option>           
             <?php } ?>
           </select>
         </div>
@@ -550,7 +612,7 @@
               <?php 
               foreach ($aprendiz as $value) {
              ?>           
-            <option value="<?php echo $value[0] ?>"><?php echo $value[2]." ".$value[3] ?></option>           
+            <option value="<?php echo $value[0] ?>"><?php echo $value[1]." ".$value[2] ?></option>           
             <?php } ?>
           </select>
         </div>
@@ -646,4 +708,9 @@
 
 <!--====  End of Modal Formulario Editar  ====-->
 
+
+  </div>
+
+</body>
+</html>
 

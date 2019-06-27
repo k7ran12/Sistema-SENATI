@@ -1,20 +1,67 @@
 <?php 
+
+session_start();
+
 	if (empty($_SESSION['usuario'])) {
 		header('Location: ../');
 	}
 
-	require_once("model/ubigeo_model.php");
-	require_once("model/cfp_model.php");
+	require_once("../model/ubigeo_model.php");
+	require_once("../model/cfp_model.php");
 
 	$cfp_model = new cfp_model();
 	$ubicacion = new ubigeo_model();
 
 	$datos_cfp = $cfp_model->mostrar_cfp();
-	$ubi = $ubicacion->mostrar_ubigeo();
+	$ubi = $ubicacion->mostrar_ubigeo();	
+
+	
+
+	if (isset($_GET['pagina'])) {
+		$pagina = $_GET['pagina'];
+	}
+	else{
+		$pagina = 0;
+	}
+
+	//Verificar si hay un post con datos para la busqueda
+	//
+
+	if (isset($_POST['buscar'])) {
+		$busqueda = $_POST['buscar'];
+		$_SESSION["buscar"] = $busqueda;
+
+	}
+	else{
+		$_SESSION["buscar"] = "";
+	}
+
+	$cantidad_datos_cfp = $cfp_model->catidad_de_datos_cfp($_SESSION["buscar"]);
+
+	echo $cantidad_datos_cfp;
+
+	$cantidad_f = $cantidad_datos_cfp - 1;
 
  ?>
 
-<center><h2>CFP</h2></center>
+<!DOCTYPE html>
+<html>
+<head>
+	<?php require_once("head.php") ?>
+	<title></title>
+</head>
+<body>
+
+	<?php 
+       
+        require_once("navbar_view.php"); 
+        require_once("subnavbar_view.php");
+      
+      
+      ?>
+
+	<div class="container">
+		<center><h2>CFP</h2></center>
 
 <div style="float: left;">
 	
@@ -23,7 +70,7 @@
 </div>
 
 <div style="float: right;">
-	<form class="form-inline my-2 my-lg-0" action="cfp" method="POST">
+	<form class="form-inline my-2 my-lg-0" action="cfp_view.php" method="POST">
       <input id="buscar" name="buscar" class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
       <button id="buscar_cfp" class="btn btn-outline-primary my-2 my-sm-0" type="submit">Buscar</button>
     </form>
@@ -126,6 +173,54 @@
 			}
 			?>
 			</table>
+
+			<ul class="pagination" style="float: left;">
+				<?php 
+
+				$pag = isset($_GET['pagina']) - 1;
+				
+
+
+
+				?>
+				<li class="page-item <?php if(!isset($_GET['pagina']) || $_GET['pagina'] == 0){echo 'disabled';} ?>"><a id="a_pagina" href="cfp_view.php?pagina=<?php echo $pag ?>" class="page-link a_pagina">Anterior</a></li>
+			</ul>
+
+			<nav aria-label="Page navigation example" style="width: 84%;float: left;">
+				<div class="table-responsive">
+				  <ul class="pagination">							  	     
+				    <?php for ($i=0; $i < $cantidad_datos_cfp; $i++) { 
+
+				     ?>				     
+				    <li class="page-item <?php if($i == $_GET['pagina']){ echo 'active';} ?>"><a class="page-link" href="cfp_view.php?pagina=<?php echo $i ?>" value="<?php echo $i; ?>"><?php echo $i; ?></a></li>
+				    
+				    <?php } ?>				    		   
+			 	</ul>
+			  </div>
+			</nav>	
+
+			<?php 
+				$sig = 1;
+				if (isset($_GET['pagina'])) {
+					if ($_GET['pagina'] == $cantidad_f) {
+					 	$sig = $cantidad_f;
+					 }
+					 else{
+					 	$sig = $_GET['pagina'] + 1;
+					 }
+				}
+				else{
+					$sig = $sig++;
+				}
+				
+
+			 ?>
+
+			<ul class="pagination" style="float: right;">
+				<li class="page-item <?php if($_GET['pagina'] == $cantidad_f){ echo 'disabled';} ?>"><a id="s_pagina" href="cfp_view.php?pagina=<?php echo $sig ?>" class="page-link s_pagina">Siguiente</a></li>
+			</ul>
+
+
 			<?php 
 		}
 		else{
@@ -249,5 +344,8 @@
 </div>
 
 <!--====  End of Modal Formulario Editar  ====-->
+	</div>
+</body>
+</html>
 
 

@@ -104,9 +104,11 @@
 	  event.preventDefault();
 	  let form_login = $( this ).serialize();
 
+    console.log(form_login);
+
 	  $.ajax({
 		  method: "POST",
-		  url: "controller/login_controller.php",
+		  url: "../controller/login_controller.php",
 		  data: "accion=ingresar&" + form_login
 		})
 		  .done(function( msg ) {
@@ -118,7 +120,8 @@
 		  	}
 		  	else{
 		  		$("#respuesta_servidor_login").html('<div class="alert alert-success" role="alert">Ingresando al sistema!</div>')
-		  		window.location.reload();
+		  		//window.location.reload();
+        window.location.href = "dashboard_view.php"  //
 		  	}		  	
 		    
 		});
@@ -164,7 +167,7 @@
 	  console.log(form_usuario);
 	  $.ajax({
 		  method: "POST",
-		  url: "controller/login_controller.php",
+		  url: "../controller/login_controller.php",
 		  data: "accion=registrar&" + form_usuario
 		})
 		  .done(function( msg ) {		  	
@@ -213,7 +216,7 @@
     console.log(form_cfp);
     $.ajax({
       method: "POST",
-      url: "controller/cfp_controller.php",
+      url: "../controller/cfp_controller.php",
       data: "accion=agregar&" + form_cfp
     })
       .done(function( msg ) {
@@ -274,7 +277,7 @@
     console.log(form_cfp);
     $.ajax({
       method: "POST",
-      url: "controller/cfp_controller.php",
+      url: "../controller/cfp_controller.php",
       data: "accion=editar&" + form_cfp
     })
       .done(function( msg ) {
@@ -341,7 +344,7 @@
     console.log(form_cfp);
     $.ajax({
       method: "POST",
-      url: "controller/carrera_controller.php",
+      url: "../controller/carrera_controller.php",
       data: "accion=agregar&" + form_cfp
     })
       .done(function( msg ) {
@@ -373,7 +376,7 @@
     console.log(form_carrera);
     $.ajax({
       method: "POST",
-      url: "controller/carrera_controller.php",
+      url: "../controller/carrera_controller.php",
       data: "accion=editar&" + form_carrera
     })
       .done(function( msg ) {
@@ -441,7 +444,7 @@
     console.log(form_actividad_empresa);
     $.ajax({
       method: "POST",
-      url: "controller/actividad_empresa_controller.php",
+      url: "../controller/actividad_empresa_controller.php",
       data: "accion=agregar&" + form_actividad_empresa
     })
       .done(function( msg ) {
@@ -474,7 +477,7 @@
     console.log(form_actividad_empresa_editar);
     $.ajax({
       method: "POST",
-      url: "controller/actividad_empresa_controller.php",
+      url: "../controller/actividad_empresa_controller.php",
       data: "accion=editar&" + form_actividad_empresa_editar
     })
       .done(function( msg ) {
@@ -537,7 +540,7 @@
     console.log(form_convenio);
     $.ajax({
       method: "POST",
-      url: "controller/convenio_controller.php",
+      url: "../controller/convenio_controller.php",
       data: "accion=agregar&" + form_convenio
     })
       .done(function( msg ) {
@@ -571,7 +574,7 @@
     console.log(form_editar_convenio);
     $.ajax({
       method: "POST",
-      url: "controller/convenio_controller.php",
+      url: "../controller/convenio_controller.php",
       data: "accion=editar&" + form_editar_convenio
     })
       .done(function( msg ) {
@@ -665,7 +668,7 @@
     console.log(form_aprendiz);
     $.ajax({
       method: "POST",
-      url: "controller/aprendiz_controller.php",
+      url: "../controller/aprendiz_controller.php",
       data: "accion=agregar&" + form_aprendiz
     })
       .done(function( msg ) {
@@ -697,7 +700,7 @@
     console.log(form_editar_aprendiz);
     $.ajax({
       method: "POST",
-      url: "controller/aprendiz_controller.php",
+      url: "../controller/aprendiz_controller.php",
       data: "accion=editar&" + form_editar_aprendiz
     })
       .done(function( msg ) {
@@ -774,7 +777,7 @@
     console.log(form_aprendiz);
     $.ajax({
       method: "POST",
-      url: "controller/empresa_controller.php",
+      url: "../controller/empresa_controller.php",
       data: "accion=agregar&" + form_aprendiz
     })
       .done(function( msg ) {
@@ -807,7 +810,7 @@
     console.log(form_editar_empresa);
     $.ajax({
       method: "POST",
-      url: "controller/empresa_controller.php",
+      url: "../controller/empresa_controller.php",
       data: "accion=editar&" + form_editar_empresa
     })
       .done(function( msg ) {
@@ -871,7 +874,7 @@
     console.log(form_monitor);
     $.ajax({
       method: "POST",
-      url: "controller/monitor_controller.php",
+      url: "../controller/monitor_controller.php",
       data: "accion=agregar&" + form_monitor
     })
       .done(function( msg ) {
@@ -905,7 +908,7 @@
     console.log(form_editar_monitor);
     $.ajax({
       method: "POST",
-      url: "controller/monitor_controller.php",
+      url: "../controller/monitor_controller.php",
       data: "accion=editar&" + form_editar_monitor
     })
       .done(function( msg ) {
@@ -967,7 +970,7 @@
     console.log(form_semestre);
     $.ajax({
       method: "POST",
-      url: "controller/semestre_controller.php",
+      url: "../controller/semestre_controller.php",
       data: "accion=agregar&" + form_semestre
     })
       .done(function( msg ) {
@@ -999,7 +1002,7 @@
     console.log(form_editar_semestre);
     $.ajax({
       method: "POST",
-      url: "controller/semestre_controller.php",
+      url: "../controller/semestre_controller.php",
       data: "accion=editar&" + form_editar_semestre
     })
       .done(function( msg ) {
@@ -1062,9 +1065,38 @@
         $("#editar_cfp option[value='"+valores[39]+"'").attr("selected", true);
         $("#editar_semestre option[value='"+valores[40]+"'").attr("selected", true);
 
+        console.log(valores);
+
       /* Datos Para Editar Modal */
         
         
+        
+       
+      });
+
+    $(".imprimir_vinculacion").click(function() {
+
+        //var valores = "";
+        var valores = [];
+
+        // Obtenemos todos los valores contenidos en los <td> de la fila
+        // seleccionada
+        $(this).parents("tr").find(".datos_editar_vinculacion").each(function() {
+          valores.push($(this).html());
+        });
+         var id_vinculacion = valores[0]; 
+
+         console.log(id_vinculacion);             
+
+        $.ajax({
+          method : "POST",
+          url : "imprimir_carta.php",
+           data: "id_vinculacion=xDddd"
+        })
+        .done(function( msg ){
+           //window.open("../librerias/tcpdf_master/examples/imprimir.php?id_vinculacion="+id_vinculacion, '', '');
+           window.open("../librerias/tcpdf_master/examples/imprimir.php?id_vinculacion="+id_vinculacion, '', '');
+        })
         
        
       });
@@ -1078,7 +1110,7 @@
     console.log(form_vinculacion);
     $.ajax({
       method: "POST",
-      url: "controller/vinculacion_controller.php",
+      url: "../controller/vinculacion_controller.php",
       data: "accion=agregar&" + form_vinculacion
     })
       .done(function( msg ) {
@@ -1109,4 +1141,6 @@
     
 
  });
+
+
 

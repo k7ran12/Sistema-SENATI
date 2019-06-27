@@ -1,12 +1,13 @@
 <?php 
+session_start();
 	if (empty($_SESSION['usuario'])) {
 		header('Location: ../');
 	}
 
-	require_once("model/ubigeo_model.php");
-	require_once("model/empresa_model.php");
-	require_once("model/cfp_model.php");
-	require_once("model/actividad_empresa_model.php");
+	require_once("../model/ubigeo_model.php");
+	require_once("../model/empresa_model.php");
+	require_once("../model/cfp_model.php");
+	require_once("../model/actividad_empresa_model.php");
 
 	$empresa_model = new empresa_model();
 	$cfp_model = new cfp_model();
@@ -21,7 +22,25 @@
 
  ?>
 
-<center><h2>Empresa</h2></center>
+<!DOCTYPE html>
+<html>
+<head>
+	<?php require_once("head.php") ?>
+	<title></title>
+</head>
+<body>
+
+	<?php 
+       
+        require_once("navbar_view.php"); 
+        require_once("subnavbar_view.php");
+      
+      
+      ?>
+	
+	<div class="container">
+		
+		<center><h2>Empresa</h2></center>
 
 <div style="float: left;">
 	
@@ -406,5 +425,10 @@
 </div>
 
 <!--====  End of Modal Formulario Editar  ====-->
+
+	</div>
+
+</body>
+</html>
 
 

@@ -1,4 +1,0 @@
-Options -Indexes
-IndexIgnore *.php *.html
-RewriteEngine On
-RewriteRule ^([a-zA-Z0-9]+)$ index.php?pagina=$1

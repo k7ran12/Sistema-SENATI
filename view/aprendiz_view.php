@@ -1,35 +1,58 @@
 <?php 
+session_start();
+
 	if (empty($_SESSION['usuario'])) {
 		header('Location: ../');
 	}
 
-	require_once("model/ubigeo_model.php");
-	require_once("model/aprendiz_model.php");
-	require_once("model/cfp_model.php");
+	require_once("../model/ubigeo_model.php");
+	require_once("../model/aprendiz_model.php");
+	require_once("../model/cfp_model.php");
 
 	$aprendiz_model = new aprendiz_model();
 	$cfp_model = new cfp_model();
-	$ubicacion = new ubigeo_model();
+	$ubicacion = new ubigeo_model();	
 	
-	$pagin = 1;
-		
+	
+	if (isset($_GET['pagina'])) {
+		$pagina = $_GET['pagina'];
+	}
+	else{
+		$pagina = 0;
+	}
 
-	$datos_aprendiz = $aprendiz_model->mostrar_aprendiz();
+	$datos_aprendiz = $aprendiz_model->mostrar_aprendiz($pagina);
 	$cantidad_de_datos = $aprendiz_model->catidad_de_datos();
 
 	
-	$cantidad_de_datos;
+	$cantidad_f = $cantidad_de_datos - 1;
 
-	$ubi = $ubicacion->mostrar_ubigeo();
+	$ubi = $ubicacion->mostrar_ubigeo(0);
 	$cfp = $cfp_model->mostrar_cfp();
 
 
  ?>
  
 
-<center><h2>Aprendiz</h2></center>
+<!DOCTYPE html>
+<html>
+<head>
+	<?php require_once("head.php") ?>
+	<title></title>
+</head>
+<body>
 
-<input type="hidden" name="cantidad_de_datos" id="cantidad_de_datos" value="<?php echo $cantidad_de_datos ?>">
+	<?php 
+       
+        require_once("navbar_view.php"); 
+        require_once("subnavbar_view.php");
+      
+      
+      ?>
+	
+	<div class="container">
+		<center><h2>Aprendiz</h2></center>
+
 
 <div style="float: left;">
 	
@@ -38,7 +61,7 @@
 </div>
 
 <div style="float: right;">
-	<form class="form-inline my-2 my-lg-0" action="aprendiz" method="POST">
+	<form class="form-inline my-2 my-lg-0" action="aprendiz_view.php" method="POST">
       <input id="buscar" name="buscar" class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
       <button id="buscar_cfp" class="btn btn-outline-primary my-2 my-sm-0" type="submit">Buscar</button>
     </form>
@@ -202,7 +225,11 @@
 						<td class="datos_aprendiz_editar"><?php echo $value[29] ?></td>
 						 -->
 																			
-						<td><button type="button" class="btn btn-primary editar_aprendiz" data-toggle="modal" data-target=".editar_aprendiz_modal">E</button></td>
+						<td>
+							<button type="button" class="btn btn-primary editar_aprendiz" data-toggle="modal" data-target=".editar_aprendiz_modal">E</button>
+							<button type="button" class="btn btn-primary editar_aprendiz" data-toggle="modal" data-target=".mas_datos_aprendiz_modal">+</button>
+						</td>						
+
 					</tr>
 				
 				<?php 
@@ -212,24 +239,55 @@
 			</div>			
 
 			<ul class="pagination" style="float: left;">
-				<li class="page-item"><button id="a_pagina" class="page-link a_pagina">Anterior</button></li>
+				<?php 
+
+				if (isset($_GET['pagina'])) {
+					if ($_GET['pagina'] == 0) {
+					 	$pag = 0;
+					 }
+					 else{
+					 	$pag = $_GET['pagina'] - 1;
+					 }
+				}
+				else{
+					$pag = 0;
+				}
+
+
+
+				?>
+				<li class="page-item <?php if(!isset($_GET['pagina'])){echo 'disabled';} elseif($pag == 0){ echo 'disabled';} ?>"><a id="a_pagina" href="aprendiz_view.php?pagina=<?php echo $pag ?>" class="page-link a_pagina">Anterior</a></li>
 			</ul>
 
 			<nav aria-label="Page navigation example" style="width: 84%;float: left;">
 				<div class="table-responsive">
 				  <ul class="pagination">							  	     
-				    <?php for ($i=1; $i < $cantidad_de_datos; $i++) { 
+				    <?php for ($i=0; $i < $cantidad_de_datos; $i++) { 
 
 				     ?>				     
-				    <li class="page-item"><button class="page-link pagina" value="<?php echo $i; ?>"><?php echo $i; ?></button></li>
+				    <li class="page-item <?php if($i == $_GET['pagina']){ echo 'active';} ?>"><a class="page-link" href="aprendiz_view.php?pagina=<?php echo $i ?>" value="<?php echo $i; ?>"><?php echo $i; ?></a></li>
 				    
 				    <?php } ?>				    		   
 			 	</ul>
 			  </div>
 			</nav>	
 
+			<?php 
+
+				if (isset($_GET['pagina'])) {
+					if ($_GET['pagina'] == $cantidad_f) {
+					 	$sig = $cantidad_f;
+					 }
+					 else{
+					 	$sig = $_GET['pagina'] + 1;
+					 }
+				}
+				
+
+			 ?>
+
 			<ul class="pagination" style="float: right;">
-				<li class="page-item"><button id="s_pagina" class="page-link s_pagina">Siguiente</button></li>
+				<li class="page-item <?php if($_GET['pagina'] == $cantidad_f){ echo 'disabled';} ?>"><a id="s_pagina" href="aprendiz_view.php?pagina=<?php echo $sig ?>" class="page-link s_pagina">Siguiente</a></li>
 			</ul>		
 			<?php 
 		}
@@ -480,5 +538,9 @@
 </div>
 
 <!--====  End of Modal Formulario Editar  ====-->
+	</div>
+
+</body>
+</html>
 
 

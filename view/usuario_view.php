@@ -1,15 +1,33 @@
 <?php 
+session_start();
 	if (empty($_SESSION['usuario'])) {
 		header('Location: ../');
 	}
 
-	require_once("model/login_model.php");
+	require_once("../model/login_model.php");
 	$usuarios = new login_model();
 	$usu = $usuarios->mostrar_usuarios();
 
  ?>
 
-<center><h2>Usuarios</h2></center>
+<!DOCTYPE html>
+<html>
+<head>
+	<?php require_once("head.php") ?>
+	<title></title>
+</head>
+<body>
+
+	 <?php 
+       
+        require_once("navbar_view.php"); 
+        require_once("subnavbar_view.php");
+      
+      
+      ?>
+	
+	<div class="container">
+		<center><h2>Usuarios</h2></center>
 
 <div style="float: left;">
 	
@@ -165,5 +183,9 @@
 </div>
 
 <!--====  End of Modal Formulario Editar  ====-->
+	</div>
+
+</body>
+</html>
 
 
