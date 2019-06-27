@@ -46,6 +46,32 @@ session_start();
 			}		
 		
 	}
+	elseif(!empty($_POST['accion']) && $_POST['accion'] == "editar"){
+
+		if (!empty($_POST['editar_nick']) && !empty($_POST['editar_nombres']) && !empty($_POST['editar_apellidos']) && !empty($_POST['editar_nivel']) && !empty($_POST['id_usua'])) {
+
+				$nick = $_POST['editar_nick'];
+				$id_usua = $_POST['id_usua'];
+				$nombres = $_POST['editar_nombres'];
+				$apellidos = $_POST['editar_apellidos'];
+				$nivel = $_POST['editar_nivel'];				
+
+				$respuesta = $login_model->editar_usuario($id_usua, $nick, $nombres, $apellidos, $nivel);
+				if ($respuesta == true) 
+				{
+					echo "editado";
+				}
+				else
+				{
+					echo "incorrecto";
+				}
+			}
+
+			else{
+				echo "invalidado";
+			}
+	}
+
 	else{
 		echo "No cumple las condiciones";
 	}

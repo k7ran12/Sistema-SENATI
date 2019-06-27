@@ -143,14 +143,44 @@
         $(this).parents("tr").find(".datos_usuario_editar").each(function() {
           valores.push($(this).html());
         });
-        $("#editar_nick").val(valores[0]);
+
+        $("#id_usua").val(valores[0]);
+        $("#editar_nick").val(valores[1]);
         $("#editar_password").val("password");
-        $("#editar_nombres").val(valores[1]);
-        $("#editar_apellidos").val(valores[2]);        
-        $("#editar_nivel option[value='"+valores[3]+"']").attr("selected", true);
+        $("#editar_nombres").val(valores[2]);
+        $("#editar_apellidos").val(valores[3]);        
+        $("#editar_nivel option[value='"+valores[4]+"']").attr("selected", true);
         //console.log(valores);
         //alert(valores);
       });
+
+    $( "#form_editar_usuario" ).on( "submit", function( event ) {
+    event.preventDefault();   
+    let form_usuario = $( this ).serialize();
+    console.log(form_usuario);
+    $.ajax({
+      method: "POST",
+      url: "../controller/login_controller.php",
+      data: "accion=editar&" + form_usuario
+    })
+      .done(function( msg ) {
+      console.log(msg);
+        if (msg == 'editado') {
+          alertify.alert('Alerta', 'Los datos se editaron correctamente!', function(){ alertify.success('Guardado');window.location.reload(); });         
+          
+        }
+        else if(msg == 'incorrecto'){
+          alertify.success('No se pudo agregar :(');
+        }
+        else if(msg == 'invalidado'){
+          alertify.success('Ingresar todos los datos');
+        }       
+        else{
+          alertify.success('Error no encontrado');          
+        }       
+        
+    });
+  });
 
  
     

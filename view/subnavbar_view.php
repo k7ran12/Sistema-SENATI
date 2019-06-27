@@ -6,9 +6,9 @@ $url= $_SERVER["REQUEST_URI"];
   <div class="subnavbar-inner">
     <div class="container">
       <ul class="mainnav">        
-        <li class="<?php if ("/sena/view/cfp_view.php" == $url) { echo "active";} ?>"><a href="/sena/view/cfp_view.php"><i class="icon-list-alt"></i><span>CFP</span> </a> </li>
-        <li class="<?php if ("/sena/view/carrera_view.php" == $url) { echo "active";} ?>"><a href="/sena/view/carrera_view.php"><i class="icon-facetime-video"></i><span>Carrera</span> </a></li>
-        <li class="<?php if ("/sena/view/actividad_empresa_view.php" == $url) { echo "active";} ?>"><a href="/sena/view/actividad_empresa_view.php"><i class="icon-bar-chart"></i><span>Actividad</span> </a> </li>
+        <li class="<?php if ("/sena/view/cfp_view.php" == $url) { echo "active";} ?>"><a href="cfp_view.php"><i class="icon-list-alt"></i><span>CFP</span> </a> </li>
+        <li class="<?php if ("/sena/view/carrera_view.php" == $url) { echo "active";} ?>"><a href="carrera_view.php"><i class="icon-facetime-video"></i><span>Carrera</span> </a></li>
+        <li class="<?php if ("/sena/view/actividad_empresa_view.php" == $url) { echo "active";} ?>"><a href="actividad_empresa_view.php"><i class="icon-bar-chart"></i><span>Actividad</span> </a> </li>
         <li class="<?php if ("/sena/view/convenio_view.php" == $url) { echo "active";} ?>"><a href="convenio_view.php"><i class="icon-code"></i><span>Convenio</span> </a> </li>
         <li class="<?php if ("/sena/view/usuario_view.php" == $url) { echo "active";} ?>"><a href="usuario_view.php"><i class="icon-code"></i><span>Usuario</span> </a> </li>
         <li class="<?php if ("/sena/view/ubigeo_view.php" == $url) { echo "active";} ?>"><a href="ubigeo_view.php"><i class="icon-code"></i><span>Ubigeo</span> </a> </li>

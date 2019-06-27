@@ -64,6 +64,20 @@
 				return false;
 			}
 		}
+
+		public function editar_usuario($id_usua, $nick, $nombres, $apellidos, $nivel)
+		{
+			$consulta = "UPDATE `usuarios` SET `nick_usua` = '$nick', `nombres_usua` = '$nombres', `apellidos_usua` = '$apellidos', `nivel_usua` = '$nivel' WHERE `usuarios`.`id_usua` = '$id_usua';";
+
+			$query = mysqli_query($this->con, $consulta);
+			if ($query) {
+				return true;
+			}
+			else{
+				return false;
+			}
+			
+		}
 		
 
 	}

@@ -17,11 +17,51 @@
 				$consulta = "SELECT v.id_vin, v.fechaini_prac_vin, v.fechafin_prac_vin, v.fechaini_sem_vin, v.fechafin_sem_vin, v.grupo_vin, a.*, e.*, c.*, cf.*, s.*, m.*, con.* FROM vinculacion v INNER JOIN aprendiz a ON v.id_ap = a.id_ap INNER JOIN empresa e ON e.id_emp = v.id_emp INNER JOIN carrera c ON c.id_carr = v.id_carr INNER JOIN cfp cf ON cf.id_cfp = v.id_cfp INNER JOIN semestre s ON s.id_sem = v.id_sem INNER JOIN monitor m ON m.id_mon = v.id_mon INNER JOIN convenio con ON con.id_conv = v.id_conv";
 
 			$query = mysqli_query($this->con, $consulta);
-			//$array_vinculacion = array();
+			$array_vinculacion = array();
 
-			$array_vinculacion = mysqli_fetch_all ( $query );
+			//55 columnas
+
+			//$array_vinculacion = mysqli_fetch_all ( $query );
+
+			while ($datos = mysqli_fetch_array($query, MYSQLI_NUM)) {
+				$array[0] = $datos[0];
+				$array[1] = $datos[1];
+				$array[2] = $datos[2];
+				$array[3] = $datos[3];
+				$array[4] = $datos[4];
+				$array[5] = $datos[5];
+				$array[6] = $datos[6];
+				$array[7] = $datos[7];
+				$array[8] = $datos[8];
+				$array[9] = $datos[9];
+				$array[10] = $datos[10];
+				$array[11] = $datos[11];
+				$array[12] = $datos[12];
+				$array[13] = $datos[13];
+				$array[14] = $datos[14];
+				$array[15] = $datos[15];
+				$array[16] = $datos[16];
+				$array[17] = $datos[17];
+				$array[18] = $datos[18];
+				$array[19] = $datos[19];
+				$array[20] = $datos[20];
+				$array[21] = $datos[21];
+				$array[22] = $datos[22];
+				$array[23] = $datos[23];
+				$array[24] = $datos[24];				
+				$array[25] = $datos[25];
+				$array[26] = $datos[26];
+				$array[27] = $datos[27];
+				$array[28] = $datos[28];
+				$array[29] = $datos[29];
+				$array[30] = $datos[30];
+				$array[31] = $datos[31];
+
+				array_push($array_vinculacion, $array);
+			}
 
 			return $array_vinculacion;
+
 			}				
 		
 		public function buscar_datos_empresa($buscar){

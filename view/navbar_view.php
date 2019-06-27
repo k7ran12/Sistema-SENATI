@@ -25,7 +25,7 @@ $hora_imp = ucfirst(iconv("ISO-8859-1","UTF-8",$dateutf));
           <a class="dropdown-item" href="#">Action</a>
           <a class="dropdown-item" href="#">Another action</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="controller/salir_controller.php">Salir</a>
+          <a class="dropdown-item" href="../controller/salir_controller.php">Salir</a>
         </div>
       </li>      
     </ul>    

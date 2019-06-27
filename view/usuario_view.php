@@ -59,11 +59,12 @@ session_start();
   	 ?>
     <tr>
       <th><?php echo $value_usu['autoincrement'] ?></th>
+      <td style="display: none;" class="datos_usuario_editar"><?php echo $value_usu['id_usua'] ?></td>
       <td class="datos_usuario_editar"><?php echo $value_usu['nick_usua'] ?></td>      
       <td class="datos_usuario_editar"><?php echo $value_usu['nombres_usua'] ?></td>
       <td class="datos_usuario_editar"><?php echo $value_usu['apellidos_usua'] ?></td>
       <td class="datos_usuario_editar"><?php echo $value_usu['nivel_usua'] ?></td>      
-      <td><button nick="<?php echo $value_usu['nick_usua'] ?>" type="button" class="btn btn-primary editar_usuario" data-toggle="modal" data-target=".editar_usuario_modal">E</button></td>
+      <td><button type="button" class="btn btn-primary editar_usuario" data-toggle="modal" data-target=".editar_usuario_modal">E</button></td>
     </tr>
     <?php } ?>    
   </tbody>
@@ -148,7 +149,8 @@ session_start();
 	        </button>
 	      </div>
 	      <div class="modal-body">
-	        <form>
+	        <form id="form_editar_usuario">
+	        	<input type="hidden" name="id_usua" id="id_usua">
 			  <div class="form-group">
 			    <label for="editar_nick">Nick</label>
 			    <input type="text" class="form-control" id="editar_nick" name="editar_nick" aria-describedby="emailHelp">			    
