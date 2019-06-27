@@ -28,7 +28,15 @@
 
 			$query = mysqli_query($this->con, $consulta);
 
-			$array_aprendiz = mysqli_fetch_all ( $query );
+			//$array_aprendiz = mysqli_fetch_all ( $query );
+
+			$array_aprendiz = array();
+			while ($datos = mysqli_fetch_array($query, MYSQLI_NUM)) {
+				$array[0] = $datos[0];
+				$array[1] = $datos[1];
+				$array[2] = $datos[2];
+				array_push($array_aprendiz, $array);
+			}
 
 			return $array_aprendiz;
 

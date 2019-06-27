@@ -1125,7 +1125,10 @@
         })
         .done(function( msg ){
            //window.open("../librerias/tcpdf_master/examples/imprimir.php?id_vinculacion="+id_vinculacion, '', '');
-           window.open("../librerias/tcpdf_master/examples/imprimir.php?id_vinculacion="+id_vinculacion, '', '');
+           //window.open("../librerias/tcpdf_master/examples/imprimir.php?id_vinculacion="+id_vinculacion, '', '');
+
+          window.open('http://URL.....1...', '_blank');
+          window.open('http://URL.....2...', '_blank');
         })
         
        
