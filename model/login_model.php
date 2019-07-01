@@ -23,7 +23,9 @@
 			if ($filas >= 1) {
 				//echo "Hay uno o mas usuario";
 				if ($pass == $datos['password_usua']) {
-					return true;
+					$dato = [$datos['nivel_usua'], $datos['nick_usua']];
+
+					return $dato;
 				}
 				else{
 					return false;

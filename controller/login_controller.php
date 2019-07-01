@@ -12,10 +12,10 @@ session_start();
 			$pass = $_POST['password'];
 			$respuesta = $login_model->ingresar($usuario, $pass);
 
-			if ($respuesta == true) {
+			if ($respuesta != "") {
 				$_SESSION['usuario'] = $usuario;
 				//Tipo de usuario
-				//$_SESSION['tipo_usuario'] = $row['id_tipo'];
+				$_SESSION['tipo_usuario'] = $respuesta[0];
 			}
 			else{
 				echo "incorrecto";

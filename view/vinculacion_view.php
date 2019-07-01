@@ -197,6 +197,11 @@ session_start();
             <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[20] ?></td>
             <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[42] ?></td>
 
+            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[1] ?></td>
+            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[2] ?></td>
+            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[3] ?></td>
+            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[4] ?></td>
+
             <td><button type="button" class="btn btn-primary editar_vinculacion" data-toggle="modal" data-target=".editar_vinculacion_modal">E</button></td>
           </tr>
         
@@ -393,12 +398,22 @@ session_start();
               
                                           
             <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[6] ?></td>
-            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[24] ?></td>             
-            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[35] 
-            ?></td>
-            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[20] ?></td>
-            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[42] ?></td>
+            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[24] ?></td> 
+             <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[35] 
+            ?></td>            
+            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[38] 
+            ?></td>           
+            <!--<td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[20] ?></td>
+            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[42] ?></td>-->
 
+            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[43] ?></td>
+
+            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[1] ?></td>
+            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[2] ?></td>
+            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[3] ?></td>
+            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[4] ?></td>
+            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[43] ?></td>
+            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[46] ?></td>
             <td><button type="button" class="btn btn-primary editar_vinculacion" data-toggle="modal" data-target=".editar_vinculacion_modal">E</button>
               <button class="btn btn-secondary imprimir_vinculacion">I</button>
             </td>
@@ -622,7 +637,7 @@ session_start();
               <?php 
               foreach ($empresa as $value) {
              ?>           
-            <option value="<?php echo $value[0] ?>"><?php echo $value[2] ?></option>           
+            <option value="<?php echo $value[0] ?>"><?php echo $value[0] ?></option>           
             <?php } ?>
           </select>
         </div>
@@ -632,7 +647,7 @@ session_start();
               <?php 
               foreach ($carrera as $value) {
              ?>           
-            <option value="<?php echo $value['id_carr'] ?>"><?php echo $value['descripcion_carr'] ?></option>           
+            <option value="<?php echo $value['id_carr'] ?>"><?php echo $value['id_carr'] ?></option>           
             <?php } ?>
           </select>
         </div>
@@ -642,7 +657,7 @@ session_start();
               <?php 
               foreach ($cfp as $value) {
              ?>           
-            <option value="<?php echo $value['id_cfp'] ?>"><?php echo $value['descripcion_cfp'] ?></option>           
+            <option value="<?php echo $value['id_cfp'] ?>"><?php echo $value['id_cfp'] ?></option>           
             <?php } ?>
           </select>
         </div> 
@@ -652,7 +667,7 @@ session_start();
               <?php 
               foreach ($semestre as $value) {
              ?>           
-            <option value="<?php echo $value['id_sem'] ?>"><?php echo $value['descripcion_sem'] ?></option>           
+            <option value="<?php echo $value['id_sem'] ?>"><?php echo $value['id_sem'] ?></option>           
             <?php } ?>
           </select>
         </div> 
@@ -678,7 +693,7 @@ session_start();
               <?php 
               foreach ($monitor as $value) {
              ?>           
-            <option value="<?php echo $value['id_mon'] ?>"><?php echo $value['apellidos_mon']." ".$value['nombres_mon']?></option>            
+            <option value="<?php echo $value['id_mon'] ?>"><?php echo $value['id_mon']." ".$value['id_mon']?></option>            
             <?php } ?>
           </select>
         </div>
@@ -688,7 +703,7 @@ session_start();
               <?php 
               foreach ($convenio as $value) {
              ?>           
-            <option value="<?php echo $value['id_conv'] ?>"><?php echo $value['desc_conv'] ?></option>           
+            <option value="<?php echo $value['id_conv'] ?>"><?php echo $value['id_conv'] ?></option>           
             <?php } ?>
           </select>
         </div>

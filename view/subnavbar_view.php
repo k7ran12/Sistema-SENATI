@@ -1,11 +1,37 @@
 <?php   
 $url= $_SERVER["REQUEST_URI"];
 
+$tipo_usuario = $_SESSION['tipo_usuario'];
+
  ?>
 <div class="subnavbar">
   <div class="subnavbar-inner">
     <div class="container">
-      <ul class="mainnav">        
+      <ul class="mainnav">   
+      <?php 
+        if ($tipo_usuario == "Usuario") {
+          ?>
+
+          <li class="<?php if ("/sena/view/actividad_empresa_view.php" == $url) { echo "active";} ?>"><a href="actividad_empresa_view.php"><i class="icon-bar-chart"></i><span>Actividad</span> </a> </li>
+          <li class="<?php if ("/sena/view/aprendiz_view.php" == $url) { echo "active";} ?>"><a href="aprendiz_view.php"><i class="icon-code"></i><span>Aprendiz</span> </a> </li>
+          <li class="<?php if ("/sena/view/empresa_view.php" == $url) { echo "active";} ?>"><a href="empresa_view.php"><i class="icon-code"></i><span>Empresa</span> </a> </li>
+          <li class="<?php if ("/sena/view/monitor_view.php" == $url) { echo "active";} ?>"><a href="monitor_view.php"><i class="icon-code"></i><span>Monitor</span> </a> </li>
+          <li class="<?php if ("/sena/view/vinculacion_view.php" == $url) { echo "active";} ?>"><a href="vinculacion_view.php"><i class="icon-code"></i><span>Vinculacion</span> </a> </li>
+
+          <?php 
+        }
+        elseif ($tipo_usuario == "Especialista") {
+          ?>
+
+          <li class="<?php if ("/sena/view/actividad_empresa_view.php" == $url) { echo "active";} ?>"><a href="actividad_empresa_view.php"><i class="icon-bar-chart"></i><span>Actividad</span> </a> </li>          
+          <li class="<?php if ("/sena/view/empresa_view.php" == $url) { echo "active";} ?>"><a href="empresa_view.php"><i class="icon-code"></i><span>Empresa</span> </a> </li>
+          <li class="<?php if ("/sena/view/monitor_view.php" == $url) { echo "active";} ?>"><a href="monitor_view.php"><i class="icon-code"></i><span>Monitor</span> </a> </li>
+          <li class="<?php if ("/sena/view/vinculacion_view.php" == $url) { echo "active";} ?>"><a href="vinculacion_view.php"><i class="icon-code"></i><span>Vinculacion</span> </a> </li>
+
+          <?php 
+        }
+        else{
+       ?>     
         <li class="<?php if ("/sena/view/cfp_view.php" == $url) { echo "active";} ?>"><a href="cfp_view.php"><i class="icon-list-alt"></i><span>CFP</span> </a> </li>
         <li class="<?php if ("/sena/view/carrera_view.php" == $url) { echo "active";} ?>"><a href="carrera_view.php"><i class="icon-facetime-video"></i><span>Carrera</span> </a></li>
         <li class="<?php if ("/sena/view/actividad_empresa_view.php" == $url) { echo "active";} ?>"><a href="actividad_empresa_view.php"><i class="icon-bar-chart"></i><span>Actividad</span> </a> </li>
@@ -17,6 +43,7 @@ $url= $_SERVER["REQUEST_URI"];
         <li class="<?php if ("/sena/view/monitor_view.php" == $url) { echo "active";} ?>"><a href="monitor_view.php"><i class="icon-code"></i><span>Monitor</span> </a> </li>
         <li class="<?php if ("/sena/view/semestre_view.php" == $url) { echo "active";} ?>"><a href="semestre_view.php"><i class="icon-code"></i><span>Semestre</span> </a> </li>
         <li class="<?php if ("/sena/view/vinculacion_view.php" == $url) { echo "active";} ?>"><a href="vinculacion_view.php"><i class="icon-code"></i><span>Vinculacion</span> </a> </li>
+        <?php } ?>
        <!--  <li class="dropdown">
           <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"><i class=""></i>            
           </i><span>Drops&nbsp;<i class="fas fa-caret-down"></i></span>

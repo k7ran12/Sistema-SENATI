@@ -1071,6 +1071,12 @@
 
     $(".editar_vinculacion").click(function() {
 
+      //$('#form_editar_vinculacion')[0].reset();
+
+      $('.editar_vinculacion_modal').find('#form_editar_vinculacion')[0].reset(); 
+
+      //$('#form_editar_vinculacion').trigger("reset");
+
         //var valores = "";
         var valores = [];
 
@@ -1079,21 +1085,26 @@
         $(this).parents("tr").find(".datos_editar_vinculacion").each(function() {
           valores.push($(this).html());
         });
+        
         $("#id_emp").val(valores[0]);
 
          //Fecha
-        $("#editar_fechaini_prac").val(valores[1]);
-        $("#editar_fechafin_prac").val(valores[2]);
-        $("#editar_fechaini_sem").val(valores[3]);
-        $("#editar_fechafin_sem").val(valores[4]);
+        $("#editar_fechaini_prac").val(valores[12]);
+        $("#editar_fechafin_prac").val(valores[13]);
+        $("#editar_fechaini_sem").val(valores[14]);
+        $("#editar_fechafin_sem").val(valores[15]);
 
         $("#editar_grupo").val(valores[5]);
         
         $("#editar_aprendiz option[value='"+valores[36]+"'").attr("selected", true);
-        $("#editar_empresa option[value='"+valores[37]+"'").attr("selected", true);
-        $("#editar_carrera option[value='"+valores[38]+"'").attr("selected", true);
-        $("#editar_cfp option[value='"+valores[39]+"'").attr("selected", true);
-        $("#editar_semestre option[value='"+valores[40]+"'").attr("selected", true);
+        $("#editar_empresa option[value='"+valores[8]+"'").attr("selected", true);
+        $("#editar_carrera option[value='"+valores[9]+"'").attr("selected", true);
+        $("#editar_cfp option[value='"+valores[10]+"'").attr("selected", true);
+        $("#editar_semestre option[value='"+valores[11]+"'").attr("selected", true);
+
+        $("#editar_monitor option[value='"+valores[16]+"'").attr("selected", true);
+        $("#editar_convenio option[value='"+valores[17]+"'").attr("selected", true);
+
 
         console.log(valores);
 
@@ -1104,35 +1115,6 @@
        
       });
 
-    $(".imprimir_vinculacion").click(function() {
-
-        //var valores = "";
-        var valores = [];
-
-        // Obtenemos todos los valores contenidos en los <td> de la fila
-        // seleccionada
-        $(this).parents("tr").find(".datos_editar_vinculacion").each(function() {
-          valores.push($(this).html());
-        });
-         var id_vinculacion = valores[0]; 
-
-         console.log(id_vinculacion);             
-
-        $.ajax({
-          method : "POST",
-          url : "imprimir_carta.php",
-           data: "id_vinculacion=xDddd"
-        })
-        .done(function( msg ){
-           //window.open("../librerias/tcpdf_master/examples/imprimir.php?id_vinculacion="+id_vinculacion, '', '');
-           //window.open("../librerias/tcpdf_master/examples/imprimir.php?id_vinculacion="+id_vinculacion, '', '');
-
-          window.open('http://URL.....1...', '_blank');
-          window.open('http://URL.....2...', '_blank');
-        })
-        
-       
-      });
     /* Agregar Datos */
       
 

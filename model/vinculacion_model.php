@@ -56,6 +56,11 @@
 				$array[29] = $datos[29];
 				$array[30] = $datos[30];
 				$array[31] = $datos[31];
+				$array[35] = $datos[35];
+				$array[38] = $datos[38];
+				$array[42] = $datos[42];
+				$array[43] = $datos[43];
+				$array[46] = $datos[46];
 
 				array_push($array_vinculacion, $array);
 			}

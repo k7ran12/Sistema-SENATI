@@ -118,7 +118,8 @@ session_start();
 			  <div class="form-group">
 			  	  <label>Nivel</label>			  	  
 			  	  <select class="custom-select" name="nivel">			  	  					  	
-				  	<option value="Admin">Admin</option>				  	
+				  	<option value="Admin">Admin</option>				  					  	
+				  	<option value="Especialista">Especialista</option>
 				  	<option value="Usuario">Usuario</option>
 				  </select>
 			  </div>
@@ -171,6 +172,7 @@ session_start();
 			  	  <label>Nivel de Usuario</label>			  	  
 			  	  <select class="custom-select" name="editar_nivel" id="editar_nivel">
 				  	<option value="Admin">Admin</option>		  	
+				  	<option value="Especialista">Especialista</option>
 				  	<option value="Usuario">Usuario</option>
 				  </select>
 			  </div>
