@@ -24,9 +24,9 @@ session_start();
 		$_SESSION["buscar"] = $busqueda;
 
 	}
-	else{
-		$_SESSION["buscar"] = "";
-	}	
+	
+
+	echo $_SESSION['buscar'];	
 
 	
 	$ubicacion = new ubigeo_model();	
@@ -145,6 +145,9 @@ session_start();
 					 else{
 					 	$sig = $_GET['pagina'] + 1;
 					 }
+				}
+				else{
+					$sig = 1;
 				}
 				
 

@@ -1075,7 +1075,12 @@
 
       $('.editar_vinculacion_modal').find('#form_editar_vinculacion')[0].reset(); 
 
-      //$('#form_editar_vinculacion').trigger("reset");
+      $('#editar_empresa option:selected').removeAttr('selected');
+      $('#editar_carrera option:selected').removeAttr('selected');
+      $('#editar_cfp option:selected').removeAttr('selected');
+      $('#editar_semestre option:selected').removeAttr('selected');
+      $('#editar_monitor option:selected').removeAttr('selected');
+      $('#editar_convenio option:selected').removeAttr('selected');
 
         //var valores = "";
         var valores = [];

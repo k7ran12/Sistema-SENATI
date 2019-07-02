@@ -22,7 +22,7 @@ session_start();
   $monitor_model = new monitor_model();
   $convenio_model = new convenio_model();
 
-  $datos_vinculacion = $vinculacion_model->mostrar_vinculacion();
+  //$datos_vinculacion = $vinculacion_model->mostrar_vinculacion();
   $cfp = $cfp_model->mostrar_cfp();
   $aprendiz = $aprendiz_model->select_aprendiz();
   $empresa = $empresa_model->mostrar_empresa();
@@ -30,6 +30,29 @@ session_start();
   $semestre = $semestre_model->mostrar_semestre();
   $monitor = $monitor_model->mostrar_monitor();
   $convenio = $convenio_model->mostrar_convenio();
+
+
+  if (isset($_GET['pagina'])) {
+    $pagina = $_GET['pagina'];
+  }
+  else{
+    $pagina = 0;
+  }
+
+  if (isset($_POST['buscar'])) {
+    $busqueda = $_POST['buscar'];
+    $_SESSION["buscar"] = $busqueda;
+
+  }
+  
+
+  $datos_vinculacion = $vinculacion_model->mostrar_vinculacion($pagina, $_SESSION["buscar"]);
+
+  $cantidad_de_datos = count($datos_vinculacion);
+
+  $cantidad_de_datos = $vinculacion_model->catidad_de_datos_vinculacion($_SESSION["buscar"]);
+
+  $cantidad_f = $cantidad_de_datos - 1;
 
 
  ?>
@@ -61,359 +84,54 @@ session_start();
 </div>
 
 <div style="float: right;">
-  <form class="form-inline my-2 my-lg-0" action="vinculacion" method="POST">
+  <form class="form-inline my-2 my-lg-0" action="vinculacion_view.php" method="POST">
       <input id="buscar" name="buscar" class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
       <button id="buscar_cfp" class="btn btn-outline-primary my-2 my-sm-0" type="submit">Buscar</button>
     </form>
 </div><br><br><br>
 
 <?php 
-  if (!empty($_POST['buscar'])) {
-
-    $buscar = $_POST['buscar'];
-
-    $datos_empresa_buscar = $empresa_model->buscar_datos_empresa($buscar);
-
-    if (!empty($datos_empresa_buscar)) {
-      ?>
-      <div class="table-responsive">
-      <table class="table table-hover">
-          <tr>
-            <!-- 
-            <th>Inicio Practicas</th>
-            <th>Fin Practicas</th>
-            <th>Inicio Semestre</th>
-            <th>Fin Semestre</th>
-            <th>Grupo</th>
-             -->
-            
-            <th>DNI Aprendiz</th>
-            <th>Nombres Apellidos Aprendiz</th>
-            <th>Telefono Aprendiz</th>
-            <!-- 
-            <th>Correo Aprendiz</th>
-            <th>Direccion Aprendiz</th>
-            <th>Referencia</th>
-            <th>DNI Apoderado</th>
-            <th>Nombre Apellido Apoderado</th>
-            <th>Telefono Apoderado</th>
-             -->
-            
-            <th>Id SENATI Aprendiz</th>
-            <!-- 
-            <th>Bloque</th>           
-            <th>Programa</th>
-            <th>Genero</th>
-            -->  
-            <th>RUC Empresa</th>                  
-            <th>Razon Social</th>
-            <th>Accion</th>
-            <!-- 
-            <th>Direccion Empresa</th>
-            <th>Telefono Empresa</th>
-            <th>Correo Empresa</th>
-            <th>Representante Empresa</th>
-            <th>DNI Representante</th>
-            <th>Carrera</th>
-            <th>CFP</th>
-            <TH>Direccion CFP</TH>
-            <th>Descripcion Semestre</th>
-            <th>Nombre Monitor</th>
-            <th>DNI Monitor</th>
-            <th>Telefono Monitor</th>
-            <th>Cargo</th>
-            <th>Correo Monitor</th>
-            <th>Convenio</th>
-             -->
-            
-          </tr>
-      <?php 
-      foreach ($datos_empresa_buscar as $value) {
-        ?>        
-          <tr>
-            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[0] ?></td>            
-            <!-- 
-            <td class="datos_editar_vinculacion"><?php echo $value[1] ?></td>
-            <td class="datos_editar_vinculacion"><?php echo $value[2] ?></td>
-            <td class="datos_editar_vinculacion"><?php echo $value[3] ?></td>
-            <td class="datos_editar_vinculacion"><?php echo $value[4] ?></td>
-            <td class="datos_editar_vinculacion"><?php echo $value[5] ?></td> 
-            -->
-            
-            
-            <td class="datos_editar_vinculacion"><?php echo $value[7] ?></td>
-
-            <td class="datos_editar_vinculacion"><?php echo $value[8]. " ".$value[9] ?></td>
-            <td class="datos_editar_vinculacion"><?php echo $value[10] ?></td>
-
-            <!-- 
-            <td class="datos_editar_vinculacion"><?php echo $value[11] ?></td>
-            <td class="datos_editar_vinculacion"><?php echo $value[12] ?></td>
-            <td class="datos_editar_vinculacion"><?php echo $value[13] ?></td>
-
-            <td class="datos_editar_vinculacion"><?php echo $value[15] ?></td>
-            <td class="datos_editar_vinculacion"><?php echo $value[16] ?></td>
-            <td class="datos_editar_vinculacion"><?php echo $value[17] ?></td>
-            <td class="datos_editar_vinculacion"><?php echo $value[18] ?></td>
-             -->
-              
-
-            <td class="datos_editar_vinculacion"><?php echo $value[18] ?></td>
-            <!-- 
-            <td class="datos_editar_vinculacion"><?php echo $value[22] ?></td>
-            <td class="datos_editar_vinculacion"><?php echo $value[23] ?></td>
-             -->
-            
-
-            <td class="datos_editar_vinculacion"><?php echo $value[25] ?></td>  
-            <td class="datos_editar_vinculacion"><?php echo $value[26] ?></td>  
-            <!-- 
-              
-            <td class="datos_editar_vinculacion"><?php echo $value[27] ?></td>  
-            <td class="datos_editar_vinculacion"><?php echo $value[28] ?></td>
-            <td class="datos_editar_vinculacion"><?php echo $value[29] ?></td>
-            <td class="datos_editar_vinculacion"><?php echo $value[30] ?></td>
-            <td class="datos_editar_vinculacion"><?php echo $value[31] ?></td>
-
-            <td class="datos_editar_vinculacion"><?php echo $value[37] ?></td>
-
-            <td class="datos_editar_vinculacion"><?php echo $value[40] ?></td>
-            <td class="datos_editar_vinculacion"><?php echo $value[41] ?></td>
-
-            <td class="datos_editar_vinculacion"><?php echo $value[45] ?></td>
-            <td class="datos_editar_vinculacion"><?php echo $value[47]. " " . $value[48] ?></td>
-            <td class="datos_editar_vinculacion"><?php echo $value[49] ?></td>
-            <td class="datos_editar_vinculacion"><?php echo $value[50] ?></td>
-            <td class="datos_editar_vinculacion"><?php echo $value[51] ?></td>
-            <td class="datos_editar_vinculacion"><?php echo $value[52] ?></td>
-            <td class="datos_editar_vinculacion"><?php echo $value[54] ?></td>
-             -->
-              
-                                          
-            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[6] ?></td>
-            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[24] ?></td>             
-            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[35] 
-            ?></td>
-            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[20] ?></td>
-            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[42] ?></td>
-
-            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[1] ?></td>
-            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[2] ?></td>
-            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[3] ?></td>
-            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[4] ?></td>
-
-            <td><button type="button" class="btn btn-primary editar_vinculacion" data-toggle="modal" data-target=".editar_vinculacion_modal">E</button></td>
-          </tr>
-        
-        
-        <?php 
-      }
-      ?>
-      </table>
-      </div>
-      <?php 
-    }
+  
     
-    else{
+    if($datos_vinculacion != ""){
       ?>
-      <div class="table-responsive">
+     <div class="table-responsive">
       <table class="table table-hover">
-          <tr>
-            <!-- 
-            <th>Inicio Practicas</th>
-            <th>Fin Practicas</th>
-            <th>Inicio Semestre</th>
-            <th>Fin Semestre</th>
-            <th>Grupo</th>
-             -->
-            
+          <tr>           
             <th>DNI Aprendiz</th>
             <th>Nombres Apellidos Aprendiz</th>
-            <th>Telefono Aprendiz</th>
-            <!-- 
-            <th>Correo Aprendiz</th>
-            <th>Direccion Aprendiz</th>
-            <th>Referencia</th>
-            <th>DNI Apoderado</th>
-            <th>Nombre Apellido Apoderado</th>
-            <th>Telefono Apoderado</th>
-             -->
-            
-            <th>Id SENATI</th>
-            <!-- 
-            <th>Bloque</th>           
-            <th>Programa</th>
-            <th>Genero</th>
-            -->  
+            <th>Telefono Aprendiz</th>            
+            <th>Id SENATI</th>           
             <th>RUC Empresa</th>                  
             <th>Razon Social</th>
-            <th>Accion</th>
-            <!-- 
-            <th>Direccion Empresa</th>
-            <th>Telefono Empresa</th>
-            <th>Correo Empresa</th>
-            <th>Representante Empresa</th>
-            <th>DNI Representante</th>
-            <th>Carrera</th>
-            <th>CFP</th>
-            <TH>Direccion CFP</TH>
-            <th>Descripcion Semestre</th>
-            <th>Nombre Monitor</th>
-            <th>DNI Monitor</th>
-            <th>Telefono Monitor</th>
-            <th>Cargo</th>
-            <th>Correo Monitor</th>
-            <th>Convenio</th>
-             -->
-            
-          </tr>
-        <tr>
-          <td class="alert alert-danger" role="alert" colspan="36"><center><h5>No hay datos</h5></center></td>
-        </tr>
-      </table>
-      <div>
-      <?php 
-    }
-
-
-  }
-  else{
-
-    //$datos_cfp = $cfp_model->mostrar_cfp();
-
-    if (!empty($datos_vinculacion)) {
-      ?>
-      <div class="table-responsive">
-      <table class="table table-hover">
-          <tr>
-            <!-- 
-            <th>Inicio Practicas</th>
-            <th>Fin Practicas</th>
-            <th>Inicio Semestre</th>
-            <th>Fin Semestre</th>
-            <th>Grupo</th>
-             -->
-            
-            <th>DNI Aprendiz</th>
-            <th>Nombres Apellidos Aprendiz</th>
-            <th>Telefono Aprendiz</th>
-            <!-- 
-            <th>Correo Aprendiz</th>
-            <th>Direccion Aprendiz</th>
-            <th>Referencia</th>
-            <th>DNI Apoderado</th>
-            <th>Nombre Apellido Apoderado</th>
-            <th>Telefono Apoderado</th>
-             -->
-            
-            <th>Id SENATI</th>
-            <!-- 
-            <th>Bloque</th>           
-            <th>Programa</th>
-            <th>Genero</th>
-            -->  
-            <th>RUC Empresa</th>                  
-            <th>Razon Social</th>
-            <th style="width: 9%;">Accion</th>
-            <!-- 
-            <th>Direccion Empresa</th>
-            <th>Telefono Empresa</th>
-            <th>Correo Empresa</th>
-            <th>Representante Empresa</th>
-            <th>DNI Representante</th>
-            <th>Carrera</th>
-            <th>CFP</th>
-            <TH>Direccion CFP</TH>
-            <th>Descripcion Semestre</th>
-            <th>Nombre Monitor</th>
-            <th>DNI Monitor</th>
-            <th>Telefono Monitor</th>
-            <th>Cargo</th>
-            <th>Correo Monitor</th>
-            <th>Convenio</th>
-             -->
-            
+            <th style="width: 9%;">Accion</th>            
           </tr>
       <?php 
       foreach ($datos_vinculacion as $value) {
         ?>        
           <tr>
-            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[0] ?></td>            
-            <!-- 
-            <td class="datos_editar_vinculacion"><?php echo $value[1] ?></td>
-            <td class="datos_editar_vinculacion"><?php echo $value[2] ?></td>
-            <td class="datos_editar_vinculacion"><?php echo $value[3] ?></td>
-            <td class="datos_editar_vinculacion"><?php echo $value[4] ?></td>
-            <td class="datos_editar_vinculacion"><?php echo $value[5] ?></td> 
-            -->
-            
-            
-            <td class="datos_editar_vinculacion"><?php echo $value[7] ?></td>
+            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value['id_vin'] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value['dni_ap'] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value['apellidos_ap']. ", ".$value['nombres_ap'] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value['telefono_ap'] ?></td>
+            <td class="datos_editar_vinculacion"><?php echo $value['id_senati_ap'] ?></td>            
+            <td class="datos_editar_vinculacion"><?php echo $value['ruc_emp'] ?></td>  
+            <td class="datos_editar_vinculacion"><?php echo $value['razonsocial_emp'] ?></td>
 
-            <td class="datos_editar_vinculacion"><?php echo $value[8]. " ".$value[9] ?></td>
-            <td class="datos_editar_vinculacion"><?php echo $value[10] ?></td>
-
-            <!-- 
-            <td class="datos_editar_vinculacion"><?php echo $value[11] ?></td>
-            <td class="datos_editar_vinculacion"><?php echo $value[12] ?></td>
-            <td class="datos_editar_vinculacion"><?php echo $value[13] ?></td>
-
-            <td class="datos_editar_vinculacion"><?php echo $value[15] ?></td>
-            <td class="datos_editar_vinculacion"><?php echo $value[16] ?></td>
-            <td class="datos_editar_vinculacion"><?php echo $value[17] ?></td>
-            <td class="datos_editar_vinculacion"><?php echo $value[18] ?></td>
-             -->
-              
-
-            <td class="datos_editar_vinculacion"><?php echo $value[18] ?></td>
-            <!-- 
-            <td class="datos_editar_vinculacion"><?php echo $value[22] ?></td>
-            <td class="datos_editar_vinculacion"><?php echo $value[23] ?></td>
-             -->
-            
-
-            <td class="datos_editar_vinculacion"><?php echo $value[25] ?></td>  
-            <td class="datos_editar_vinculacion"><?php echo $value[26] ?></td>  
-            <!-- 
-              
-            <td class="datos_editar_vinculacion"><?php echo $value[27] ?></td>  
-            <td class="datos_editar_vinculacion"><?php echo $value[28] ?></td>
-            <td class="datos_editar_vinculacion"><?php echo $value[29] ?></td>
-            <td class="datos_editar_vinculacion"><?php echo $value[30] ?></td>
-            <td class="datos_editar_vinculacion"><?php echo $value[31] ?></td>
-
-            <td class="datos_editar_vinculacion"><?php echo $value[37] ?></td>
-
-            <td class="datos_editar_vinculacion"><?php echo $value[40] ?></td>
-            <td class="datos_editar_vinculacion"><?php echo $value[41] ?></td>
-
-            <td class="datos_editar_vinculacion"><?php echo $value[45] ?></td>
-            <td class="datos_editar_vinculacion"><?php echo $value[47]. " " . $value[48] ?></td>
-            <td class="datos_editar_vinculacion"><?php echo $value[49] ?></td>
-            <td class="datos_editar_vinculacion"><?php echo $value[50] ?></td>
-            <td class="datos_editar_vinculacion"><?php echo $value[51] ?></td>
-            <td class="datos_editar_vinculacion"><?php echo $value[52] ?></td>
-            <td class="datos_editar_vinculacion"><?php echo $value[54] ?></td>
-             -->
-              
-                                          
-            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[6] ?></td>
-            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[24] ?></td> 
-             <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[35] 
+            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value['id_ap'] ?></td>
+            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value['id_emp'] ?></td> 
+             <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value['id_carr'] 
             ?></td>            
-            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[38] 
-            ?></td>           
-            <!--<td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[20] ?></td>
-            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[42] ?></td>-->
+            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value['id_cfp'] 
+            ?></td>
+            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value['id_sem'] ?></td>
 
-            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[43] ?></td>
-
-            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[1] ?></td>
-            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[2] ?></td>
-            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[3] ?></td>
-            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[4] ?></td>
-            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[43] ?></td>
-            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value[46] ?></td>
+            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value['fechaini_prac_vin'] ?></td>
+            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value['fechafin_prac_vin'] ?></td>
+            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value['fechaini_sem_vin'] ?></td>
+            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value['fechafin_sem_vin'] ?></td>
+            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value['id_mon'] ?></td>
+            <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value['id_conv'] ?></td>
             <td><button type="button" class="btn btn-primary editar_vinculacion" data-toggle="modal" data-target=".editar_vinculacion_modal">E</button>
               <button class="btn btn-secondary imprimir_vinculacion">I</button>
             </td>
@@ -426,6 +144,8 @@ session_start();
       </div>
       <?php 
     }
+
+       
     else{
       ?>
     <div class="table-responsive">
@@ -484,7 +204,7 @@ session_start();
       </table>
       </div>
       <?php 
-    }
+    
 
   }
  ?>
@@ -637,7 +357,7 @@ session_start();
               <?php 
               foreach ($empresa as $value) {
              ?>           
-            <option value="<?php echo $value[0] ?>"><?php echo $value[0] ?></option>           
+            <option value="<?php echo $value[0] ?>"><?php echo $value[2] ?></option>           
             <?php } ?>
           </select>
         </div>
@@ -647,7 +367,7 @@ session_start();
               <?php 
               foreach ($carrera as $value) {
              ?>           
-            <option value="<?php echo $value['id_carr'] ?>"><?php echo $value['id_carr'] ?></option>           
+            <option value="<?php echo $value['id_carr'] ?>"><?php echo $value['descripcion_carr'] ?></option>           
             <?php } ?>
           </select>
         </div>
@@ -657,7 +377,7 @@ session_start();
               <?php 
               foreach ($cfp as $value) {
              ?>           
-            <option value="<?php echo $value['id_cfp'] ?>"><?php echo $value['id_cfp'] ?></option>           
+            <option value="<?php echo $value['id_cfp'] ?>"><?php echo $value['descripcion_cfp'] ?></option>           
             <?php } ?>
           </select>
         </div> 
@@ -667,7 +387,7 @@ session_start();
               <?php 
               foreach ($semestre as $value) {
              ?>           
-            <option value="<?php echo $value['id_sem'] ?>"><?php echo $value['id_sem'] ?></option>           
+            <option value="<?php echo $value['id_sem'] ?>"><?php echo $value['descripcion_sem'] ?></option>           
             <?php } ?>
           </select>
         </div> 
@@ -693,7 +413,7 @@ session_start();
               <?php 
               foreach ($monitor as $value) {
              ?>           
-            <option value="<?php echo $value['id_mon'] ?>"><?php echo $value['id_mon']." ".$value['id_mon']?></option>            
+            <option value="<?php echo $value['id_mon'] ?>"><?php echo $value['apellidos_mon']." ".$value['nombres_mon']?></option>            
             <?php } ?>
           </select>
         </div>
@@ -703,7 +423,7 @@ session_start();
               <?php 
               foreach ($convenio as $value) {
              ?>           
-            <option value="<?php echo $value['id_conv'] ?>"><?php echo $value['id_conv'] ?></option>           
+            <option value="<?php echo $value['id_conv'] ?>"><?php echo $value['desc_conv'] ?></option>           
             <?php } ?>
           </select>
         </div>

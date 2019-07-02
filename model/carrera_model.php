@@ -15,7 +15,7 @@
 		public function mostrar_carrera()
 		{
 			
-			$consulta = "SELECT * FROM carrera ORDER BY codigo_carr LIMIT 10";
+			$consulta = "SELECT * FROM carrera";
 
 			$query = mysqli_query($this->con, $consulta);
 			$array_carrera = array();

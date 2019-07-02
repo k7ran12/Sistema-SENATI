@@ -18,6 +18,7 @@
 
 			$query = mysqli_query($this->con, $consulta);
 			$array_empresa = array();
+			$i = 1;
 			while ($datos = mysqli_fetch_array($query, MYSQLI_NUM)) {
 				$array[0] = $datos[0];
 				$array[1] = $datos[1];
@@ -44,6 +45,8 @@
 				$array[22] = $datos[22];
 				$array[23] = $datos[23];
 				$array[24] = $datos[24];
+
+				$array['incrementador'] = $i++;
 				
 				array_push($array_empresa, $array);
 			}

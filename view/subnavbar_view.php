@@ -42,7 +42,8 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
         <li class="<?php if ("/sena/view/empresa_view.php" == $url) { echo "active";} ?>"><a href="empresa_view.php"><i class="icon-code"></i><span>Empresa</span> </a> </li>
         <li class="<?php if ("/sena/view/monitor_view.php" == $url) { echo "active";} ?>"><a href="monitor_view.php"><i class="icon-code"></i><span>Monitor</span> </a> </li>
         <li class="<?php if ("/sena/view/semestre_view.php" == $url) { echo "active";} ?>"><a href="semestre_view.php"><i class="icon-code"></i><span>Semestre</span> </a> </li>
-        <li class="<?php if ("/sena/view/vinculacion_view.php" == $url) { echo "active";} ?>"><a href="vinculacion_view.php"><i class="icon-code"></i><span>Vinculacion</span> </a> </li>
+        <li class="<?php if ("/sena/view/vinculacion_view.php" == $url) { echo "active";} ?>"><a href="vinculacion_view.php"><i class="icon-code"></i><span>Vinculacion</span> </a> </li>   
+        <li class="<?php if ("/sena/view/reporte_empresa.php" == $url) { echo "active";} ?>"><a href="reporte_empresa.php"><i class="icon-code"></i><span>Reporte</span> </a> </li>       
         <?php } ?>
        <!--  <li class="dropdown">
           <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"><i class=""></i>            
