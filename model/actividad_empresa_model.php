@@ -12,9 +12,80 @@
 			$this->con = parent::conectar();
 		}
 
-		public function mostrar_actividad_empresa()
+		public function catidad_de_datos_ae($buscar){
+			if ($buscar != "") {
+
+				$consulta = "SELECT * FROM actvidadempresa WHERE codigo_ae = '$buscar'";
+
+				$query = mysqli_query($this->con , $consulta);
+
+				$columnas = mysqli_num_rows ($query);
+
+				$pag = $columnas / 10;
+
+				return ceil ($pag);
+			}
+			else{
+				$consulta = "SELECT * FROM actvidadempresa";
+
+				$query = mysqli_query($this->con , $consulta);
+
+				$columnas = mysqli_num_rows ($query);
+
+				$pag = $columnas / 10;
+
+				return ceil ($pag);
+			}
+		}
+
+
+		public function mostrar_actividad_empresa($inicio_pag, $busqueda)
 		{
 			
+			$cantidad_datos = 10;
+
+			$total_paginas = $inicio_pag * $cantidad_datos;
+
+			if ($busqueda != "") {				
+
+				$total_paginas = $inicio_pag * $cantidad_datos;
+
+			$consulta = "SELECT * FROM actvidadempresa WHERE codigo_ae = '$busqueda'";
+			$query = mysqli_query($this->con, $consulta);
+			$array_actividad_empresa = array();
+			while ($datos = mysqli_fetch_assoc($query)) {
+				$array['id_ae'] = $datos['id_ae'];
+				$array['codigo_ae'] = $datos['codigo_ae'];
+				$array['descripcion_ae'] = $datos['descripcion_ae'];
+
+				array_push($array_actividad_empresa, $array);	
+			}
+
+			return $array_actividad_empresa;
+			}
+			else{
+				
+				$consulta = "SELECT * FROM actvidadempresa LIMIT $total_paginas , $cantidad_datos";
+			$query = mysqli_query($this->con, $consulta);
+			$array_actividad_empresa = array();
+			while ($datos = mysqli_fetch_assoc($query)) {
+				$array['id_ae'] = $datos['id_ae'];
+				$array['codigo_ae'] = $datos['codigo_ae'];
+				$array['descripcion_ae'] = $datos['descripcion_ae'];							
+				array_push($array_actividad_empresa, $array);
+			}
+
+			return $array_actividad_empresa;
+
+			}
+
+
+			//Codigo Aparte
+			
+		}
+
+		public function mostrar_todo_ae()
+		{
 			$consulta = "SELECT * FROM actvidadempresa ORDER BY codigo_ae";
 
 			$query = mysqli_query($this->con, $consulta);
@@ -29,25 +100,7 @@
 			}
 
 			return $array_actividad_empresa;
-		}				
-		
-		public function buscar_actividad_empresa($buscar){
-
-			$consulta = "SELECT * FROM actvidadempresa WHERE codigo_ae = '$buscar'";
-
-			$query = mysqli_query($this->con, $consulta);
-			$array_carrera = array();
-			while ($datos = mysqli_fetch_assoc($query)) 
-			{
-				$array['id_ae'] = $datos['id_ae'];
-				$array['codigo_ae'] = $datos['codigo_ae'];
-				$array['descripcion_ae'] = $datos['descripcion_ae'];							
-				array_push($array_carrera, $array);
-			}
-
-			return $array_carrera;
-			
-		}
+		}	
 
 		public function agregar_datos_actividad_empresa($codigo_actividad, $descripcion_actividad)
 		{

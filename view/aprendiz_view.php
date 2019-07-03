@@ -54,11 +54,13 @@ session_start();
 		<center><h2>Aprendiz</h2></center>
 
 
+<?php if ($_SESSION['tipo_usuario'] == 'Admin'): ?>
 <div style="float: left;">
 	
      <button type="button" class="btn btn-success my-2 my-sm-0" data-toggle="modal" data-target=".agregar_aprendiz">Agregar</button>      
     
 </div>
+<?php endif ?>
 
 <div style="float: right;">
 	<form class="form-inline my-2 my-lg-0" action="aprendiz_view.php" method="POST">
@@ -67,110 +69,9 @@ session_start();
     </form>
 </div><br><br><br>
 
-<?php 
-	if (!empty($_POST['buscar'])) {
+<?php 	
 
-		$buscar = $_POST['buscar'];
-
-		$datos_aprendiz_buscar = $aprendiz_model->buscar_datos_aprendi($buscar);
-
-		if (!empty($datos_aprendiz_buscar)) {
-			?>
-			<div class="table-responsive">
-			<table class="table table-hover">
-					<tr>
-						<th>DNI</th>
-						<th>Nombres</th>
-						<th>Apellidos</th>
-						<th>Telefono</th>						
-						<th>Id SENATI</th>
-						<th>CFP Descripcion</th>
-						<th>Bloque</th>			
-						<th>Accion</th>						
-					</tr>
-			<?php 
-			foreach ($datos_aprendiz_buscar as $value) {
-				?>				
-					<tr>
-						<td style="display: none;" class="datos_aprendiz_editar"><?php echo $value[0] ?></td>
-						<td class="datos_aprendiz_editar"><?php echo $value[1] ?></td>
-						<td class="datos_aprendiz_editar"><?php echo $value[2] ?></td>
-						<td class="datos_aprendiz_editar"><?php echo $value[3] ?></td>
-						<td class="datos_aprendiz_editar"><?php echo $value[4] ?></td>
-						<td class="datos_aprendiz_editar"><?php echo $value[12] ?></td>
-						<!-- 
-						
-						
-						<td class="datos_aprendiz_editar"><?php echo $value[6] ?></td>						
-						<td class="datos_aprendiz_editar"><?php echo $value[7] ?></td>
-						<td class="datos_aprendiz_editar"><?php echo $value[9] ?></td>
-						<td class="datos_aprendiz_editar"><?php echo $value[10] ?></td>
-						<td class="datos_aprendiz_editar"><?php echo $value[11] ?></td>
-						 -->
-						<!-- 
-						<td class="datos_aprendiz_editar"><?php echo $value[12] ?></td>
-						<td class="datos_aprendiz_editar"><?php echo $value[13] ?></td>
-						<td class="datos_aprendiz_editar"><?php echo $value[15] ?></td>
-						<td class="datos_aprendiz_editar"><?php echo $value[16] ?></td>
-						<td class="datos_aprendiz_editar"><?php echo $value[17] ?></td>
-						 -->
-						
-						
-						<td class="datos_aprendiz_editar"><?php echo $value[19] ?></td>
-						<td class="datos_aprendiz_editar"><?php echo $value[8] ?></td>
-						<!-- 
-							<td class="datos_aprendiz_editar"><?php echo $value[22] ?></td>
-						<td class="datos_aprendiz_editar"><?php echo $value[23] ?></td>
-						<td class="datos_aprendiz_editar"><?php echo $value[24] ?></td>
-						<td class="datos_aprendiz_editar"><?php echo $value[25] ?></td>
-						<td class="datos_aprendiz_editar"><?php echo $value[26] ?></td>
-						<td class="datos_aprendiz_editar"><?php echo $value[27] ?></td>
-						<td class="datos_aprendiz_editar"><?php echo $value[28] ?></td>
-						<td class="datos_aprendiz_editar"><?php echo $value[29] ?></td>
-						 -->
-																			
-						<td><button type="button" class="btn btn-primary editar_aprendiz" data-toggle="modal" data-target=".editar_aprendiz_modal">E</button></td>
-					</tr>
-				
-				
-				
-				<?php 
-			}
-			?>
-			</table>
-			</div>
-			<?php 
-		}
-		
-		else{
-			?>
-			<div class="table-responsive">
-			<table class="table table-hover">
-					<tr>
-						<th>DNI</th>
-						<th>Nombres</th>
-						<th>Apellidos</th>
-						<th>Telefono</th>						
-						<th>Id SENATI</th>
-						<th>CFP Descripcion</th>
-						<th>Bloque</th>			
-						<th>Accion</th>						
-					</tr>
-				<tr>
-					<td class="alert alert-danger" role="alert" colspan="27"><center><h5>No hay datos</h5></center></td>
-				</tr>
-			</table>
-			<div>
-			<?php 
-		}
-
-
-	}
-	else{
-
-		//$datos_cfp = $cfp_model->mostrar_cfp();
-
-		if (!empty($datos_aprendiz)) {
+	if (!empty($datos_aprendiz)) {
 			?>
 			<div class="table-responsive">
 			<table class="table table-hover">
@@ -226,7 +127,9 @@ session_start();
 						 -->
 																			
 						<td>
+							<?php if ($_SESSION['tipo_usuario'] == 'Admin'): ?>
 							<button type="button" class="btn btn-primary editar_aprendiz" data-toggle="modal" data-target=".editar_aprendiz_modal">E</button>
+							<?php endif ?>
 							<button type="button" class="btn btn-primary editar_aprendiz" data-toggle="modal" data-target=".mas_datos_aprendiz_modal">+</button>
 						</td>						
 
@@ -311,7 +214,7 @@ session_start();
 			<?php 
 		}
 
-	}
+	
  ?>
 
 <!--==============================================

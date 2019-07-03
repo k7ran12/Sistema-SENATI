@@ -12,16 +12,46 @@
 			$this->con = parent::conectar();
 		}
 
-		public function mostrar_monitor()
-		{
-			
-			$consulta = "SELECT * FROM monitor";
+		public function catidad_de_datos_empresa($buscar){
+			if ($buscar != "") {
 
+				$consulta = "SELECT * FROM monitor WHERE dni_mon = '$buscar'";
+
+				$query = mysqli_query($this->con , $consulta);
+
+				$columnas = mysqli_num_rows ($query);
+
+				$pag = $columnas / 10;
+
+				return ceil ($pag);
+			}
+			else{
+				$consulta = "SELECT * FROM monitor";
+
+				$query = mysqli_query($this->con , $consulta);
+
+				$columnas = mysqli_num_rows ($query);
+
+				$pag = $columnas / 10;
+
+				return ceil ($pag);
+			}
+		}
+
+		public function mostrar_monitor($inicio_pag, $busqueda)
+		{
+			$cantidad_datos = 10;
+
+			$total_paginas = $inicio_pag * $cantidad_datos;
+
+			if ($busqueda != "") {				
+
+				$total_paginas = $inicio_pag * $cantidad_datos;
+
+			$consulta = "SELECT * FROM monitor WHERE dni_mon = '$busqueda'";
 			$query = mysqli_query($this->con, $consulta);
 			$array_monitor = array();
-
-			while ($datos = mysqli_fetch_assoc($query)) 
-			{
+			while ($datos = mysqli_fetch_assoc($query)) {
 				$array['id_mon'] = $datos['id_mon'];
 				$array['apellidos_mon'] = $datos['apellidos_mon'];
 				$array['nombres_mon'] = $datos['nombres_mon'];							
@@ -33,29 +63,49 @@
 			}
 
 			return $array_monitor;
-		}				
-		
-		public function buscar_datos_monitor($buscar){
-
-			$consulta = "SELECT * FROM monitor WHERE dni_mon = '$buscar'";
-
+			}
+			else{
+				
+				$consulta = "SELECT * FROM monitor LIMIT $total_paginas , $cantidad_datos";
 			$query = mysqli_query($this->con, $consulta);
 			$array_monitor = array();
-			while ($datos = mysqli_fetch_assoc($query)) 
-			{
+			while ($datos = mysqli_fetch_assoc($query)) {
 				$array['id_mon'] = $datos['id_mon'];
 				$array['apellidos_mon'] = $datos['apellidos_mon'];
 				$array['nombres_mon'] = $datos['nombres_mon'];							
 				$array['dni_mon'] = $datos['dni_mon'];	
 				$array['telefono_mon'] = $datos['telefono_mon'];	
 				$array['cargo_mon'] = $datos['cargo_mon'];
-				$array['correo_mon'] = $datos['correo_mon'];							
+				$array['correo_mon'] = $datos['correo_mon'];
 				array_push($array_monitor, $array);
 			}
 
 			return $array_monitor;
-			
+
+			}
+
+
+			//Codigo Aparte		
 		}
+
+		public function mostrar_todo_monitor()
+		{
+			$consulta = "SELECT * FROM monitor";
+			$query = mysqli_query($this->con, $consulta);
+			$array_monitor = array();
+			while ($datos = mysqli_fetch_assoc($query)) {
+				$array['id_mon'] = $datos['id_mon'];
+				$array['apellidos_mon'] = $datos['apellidos_mon'];
+				$array['nombres_mon'] = $datos['nombres_mon'];							
+				$array['dni_mon'] = $datos['dni_mon'];	
+				$array['telefono_mon'] = $datos['telefono_mon'];	
+				$array['cargo_mon'] = $datos['cargo_mon'];
+				$array['correo_mon'] = $datos['correo_mon'];
+				array_push($array_monitor, $array);
+			}
+
+			return $array_monitor;
+		}			
 
 		public function agregar_datos_monitor($apellidos, $nombres, $dni, $telefono, $cargo, $correo)
 		{

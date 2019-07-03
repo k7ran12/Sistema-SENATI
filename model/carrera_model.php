@@ -12,16 +12,47 @@
 			$this->con = parent::conectar();
 		}
 
-		public function mostrar_carrera()
+		public function catidad_de_datos_carrera($buscar){
+			if ($buscar != "") {
+
+				$consulta = "SELECT * FROM carrera WHERE codigo_carr = '$buscar'";
+
+				$query = mysqli_query($this->con , $consulta);
+
+				$columnas = mysqli_num_rows ($query);
+
+				$pag = $columnas / 10;
+
+				return ceil ($pag);
+			}
+			else{
+				$consulta = "SELECT * FROM carrera";
+
+				$query = mysqli_query($this->con , $consulta);
+
+				$columnas = mysqli_num_rows ($query);
+
+				$pag = $columnas / 10;
+
+				return ceil ($pag);
+			}
+		}
+
+		public function mostrar_carrera($inicio_pag, $busqueda)
 		{
 			
-			$consulta = "SELECT * FROM carrera";
+			$cantidad_datos = 10;
 
+			$total_paginas = $inicio_pag * $cantidad_datos;
+
+			if ($busqueda != "") {				
+
+				$total_paginas = $inicio_pag * $cantidad_datos;
+
+			$consulta = "SELECT * FROM carrera WHERE codigo_carr = '$busqueda'";
 			$query = mysqli_query($this->con, $consulta);
 			$array_carrera = array();
-
-			while ($datos = mysqli_fetch_assoc($query)) 
-			{
+			while ($datos = mysqli_fetch_assoc($query)) {
 				$array['id_carr'] = $datos['id_carr'];
 				$array['codigo_carr'] = $datos['codigo_carr'];
 				$array['descripcion_carr'] = $datos['descripcion_carr'];							
@@ -29,25 +60,27 @@
 			}
 
 			return $array_carrera;
+			}
+			else{
+				
+				$consulta = "SELECT * FROM carrera LIMIT $total_paginas , $cantidad_datos";
+			$query = mysqli_query($this->con, $consulta);
+			$array_carrera = array();
+			while ($datos = mysqli_fetch_assoc($query)) {
+				$array['id_carr'] = $datos['id_carr'];
+				$array['codigo_carr'] = $datos['codigo_carr'];
+				$array['descripcion_carr'] = $datos['descripcion_carr'];							
+				array_push($array_carrera, $array);
+			}
+
+			return $array_carrera;
+
+			}
+
+
+			//Codigo Aparte
 		}				
-		
-		public function buscar_datos_carrera($buscar){
-
-			$consulta = "SELECT * FROM carrera WHERE codigo_carr = '$buscar'";
-
-			$query = mysqli_query($this->con, $consulta);
-			$array_carrera = array();
-			while ($datos = mysqli_fetch_assoc($query)) 
-			{
-				$array['id_carr'] = $datos['id_carr'];
-				$array['codigo_carr'] = $datos['codigo_carr'];
-				$array['descripcion_carr'] = $datos['descripcion_carr'];							
-				array_push($array_carrera, $array);
-			}
-
-			return $array_carrera;
-			
-		}
+				
 
 		public function agregar_datos_carrera($codigo_carrera, $descripcion_carrera)
 		{

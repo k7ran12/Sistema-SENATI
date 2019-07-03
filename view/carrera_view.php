@@ -15,6 +15,30 @@ session_start();
 	$ubi = $ubicacion->mostrar_ubigeo();
   //$carr = $carrera->mostrar_carrera();
 
+  //Datos Pagina
+
+  if (isset($_GET['pagina'])) {
+    $pagina = $_GET['pagina'];
+  }
+  else{
+    $pagina = 0;
+  }
+
+  if (isset($_POST['buscar'])) {
+    $busqueda = $_POST['buscar'];
+    $_SESSION["buscar"] = $busqueda;
+
+  }
+  
+
+  $datos_carrera = $carrera->mostrar_carrera($pagina, $_SESSION["buscar"]);
+
+  $cantidad_de_datos = count($datos_carrera);
+
+  $cantidad_de_datos = $carrera->catidad_de_datos_carrera($_SESSION["buscar"]);
+
+  $cantidad_f = $cantidad_de_datos - 1;
+
  ?>
 
  <!DOCTYPE html>
@@ -43,20 +67,14 @@ session_start();
 </div>
 
 <div style="float: right;">
-  <form class="form-inline my-2 my-lg-0" action="carrera" method="POST">
+  <form class="form-inline my-2 my-lg-0" action="carrera_view.php" method="POST">
       <input name="buscar" class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
       <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Buscar</button>
     </form>
 </div><br><br><br>
 
 
-<?php 
-  if (!empty($_POST['buscar'])) {
-
-    $buscar = $_POST['buscar'];
-
-    $datos_carrera = $carrera->buscar_datos_carrera($buscar);
-
+<?php     
     if (!empty($datos_carrera)) {
       ?>
       <table class="table table-hover">
@@ -79,52 +97,66 @@ session_start();
       }
       ?>
       </table>
-      <?php 
-    }
-    
-    else{
-      ?>
-      <table class="table table-hover">
-         <tr>
-            <th>Codigo CARRERA</th>
-            <th>Descripcion CARRERA</th>            
-            <th>Accion</th>           
-          </tr>
-        <tr>
-          <td class="alert alert-danger" role="alert" colspan="3"><center><h5>No hay datos</h5></center></td>
-        </tr>
-      </table>
-      <?php 
-    }
 
+      <!-- Paginacion  -->
 
-  }
-  else{
-
-    $datos_carrera = $carrera->mostrar_carrera();
-
-    if (!empty($datos_carrera)) {
-      ?>
-      <table class="table table-hover">
-          <tr>
-            <th>Codigo CARRERA</th>
-            <th>Descripcion CARRERA</th>            
-            <th>Accion</th>           
-          </tr>
-      <?php 
-      foreach ($datos_carrera as $value) {
-        ?>        
-          <tr>
-            <td style="display: none;" class="datos_carrera_editar"><?php echo $value['id_carr'] ?></td>
-            <td class="datos_carrera_editar"><?php echo $value['codigo_carr'] ?></td>
-            <td class="datos_carrera_editar"><?php echo $value['descripcion_carr'] ?></td>
-            <td><button type="button" class="btn btn-primary editar_carrera" data-toggle="modal" data-target=".editar_carrera_modal">E</button></td>
-          </tr>
-        
+      <ul class="pagination" style="float: left;">
         <?php 
-      }
-      ?>
-      </table>
+
+        if (isset($_GET['pagina'])) {
+          if ($_GET['pagina'] == 0) {
+            $pag = 0;
+           }
+           else{
+            $pag = $_GET['pagina'] - 1;
+           }
+        }
+        else{
+          $pag = 0;
+        }
+
+
+
+        ?>
+        <li class="page-item <?php if(!isset($_GET['pagina'])){echo 'disabled';} elseif($pag == 0){ echo 'disabled';} ?>"><a id="a_pagina" href="carrera_view.php?pagina=<?php echo $pag ?>" class="page-link a_pagina">Anterior</a></li>
+      </ul>
+
+      <nav aria-label="Page navigation example" style="width: 84%;float: left;">
+        <div class="table-responsive">
+          <ul class="pagination">                      
+            <?php for ($i=0; $i < $cantidad_de_datos; $i++) { 
+
+             ?>            
+            <li class="page-item <?php if($i == $_GET['pagina']){ echo 'active';} ?>"><a class="page-link" href="carrera_view.php?pagina=<?php echo $i ?>" value="<?php echo $i; ?>"><?php echo $i; ?></a></li>
+            
+            <?php } ?>                   
+        </ul>
+        </div>
+      </nav>  
+
+      <?php 
+
+        if (isset($_GET['pagina'])) {
+          if ($_GET['pagina'] == $cantidad_f) {
+            $sig = $cantidad_f;
+           }
+           else{
+            $sig = $_GET['pagina'] + 1;
+           }
+        }
+        else{
+          $sig = 1;
+        }
+        
+
+       ?>
+
+      <ul class="pagination" style="float: right;">
+        <li class="page-item <?php if($_GET['pagina'] == $cantidad_f){ echo 'disabled';} ?>"><a id="s_pagina" href="carrera_view.php?pagina=<?php echo $sig ?>" class="page-link s_pagina">Siguiente</a></li>
+      </ul>
+
+      <!-- Fin Paginacion -->
+      
       <?php 
     }
     else{
@@ -142,7 +174,7 @@ session_start();
       <?php 
     }
 
-  }
+  
  ?>
 
 

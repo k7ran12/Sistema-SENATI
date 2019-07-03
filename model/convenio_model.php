@@ -12,40 +12,73 @@
 			$this->con = parent::conectar();
 		}
 
-		public function mostrar_convenio()
+		public function catidad_de_datos_ae($buscar){
+			if ($buscar != "") {
+
+				$consulta = "SELECT * FROM convenio WHERE desc_conv = '$buscar'";
+
+				$query = mysqli_query($this->con , $consulta);
+
+				$columnas = mysqli_num_rows ($query);
+
+				$pag = $columnas / 10;
+
+				return ceil ($pag);
+			}
+			else{
+				$consulta = "SELECT * FROM convenio";
+
+				$query = mysqli_query($this->con , $consulta);
+
+				$columnas = mysqli_num_rows ($query);
+
+				$pag = $columnas / 10;
+
+				return ceil ($pag);
+			}
+		}
+
+		public function mostrar_convenio($inicio_pag, $busqueda)
 		{
 			
-			$consulta = "SELECT * FROM convenio ORDER BY id_conv LIMIT 10";
+			$cantidad_datos = 10;
 
+			$total_paginas = $inicio_pag * $cantidad_datos;
+
+			if ($busqueda != "") {				
+
+				$total_paginas = $inicio_pag * $cantidad_datos;
+
+			$consulta = "SELECT * FROM convenio WHERE desc_conv = '$busqueda'";
 			$query = mysqli_query($this->con, $consulta);
 			$array_carrera = array();
+			while ($datos = mysqli_fetch_assoc($query)) {
+				$array['id_conv'] = $datos['id_conv'];				
+				$array['desc_conv'] = $datos['desc_conv'];							
+				array_push($array_carrera, $array);	
+			}
 
-			while ($datos = mysqli_fetch_assoc($query)) 
-			{
+			return $array_carrera;
+			}
+			else{
+				
+				$consulta = "SELECT * FROM convenio LIMIT $total_paginas , $cantidad_datos";
+			$query = mysqli_query($this->con, $consulta);
+			$array_carrera = array();
+			while ($datos = mysqli_fetch_assoc($query)) {
 				$array['id_conv'] = $datos['id_conv'];				
 				$array['desc_conv'] = $datos['desc_conv'];							
 				array_push($array_carrera, $array);
 			}
 
 			return $array_carrera;
-		}				
-		
-		public function buscar_datos_convenio($buscar){
 
-			$consulta = "SELECT * FROM convenio WHERE id_conv = '$buscar'";
-
-			$query = mysqli_query($this->con, $consulta);
-			$array_carrera = array();
-			while ($datos = mysqli_fetch_assoc($query)) 
-			{
-				$array['id_conv'] = $datos['id_conv'];				
-				$array['des_conv'] = $datos['des_conv'];							
-				array_push($array_carrera, $array);
 			}
 
-			return $array_carrera;
-			
-		}
+
+			//Codigo Aparte
+		}				
+		
 
 		public function agregar_datos_convenio($descripcion_convenio)
 		{

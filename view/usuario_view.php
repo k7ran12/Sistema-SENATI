@@ -43,7 +43,9 @@ session_start();
 </div><br><br><br>
 
 <div>
-	<table class="table table-hover">
+
+<?php if($usu != ""){ ?>
+<table class="table table-hover">
   <thead>
     <tr>    
       <th scope="col">Nro</th>  
@@ -69,6 +71,29 @@ session_start();
     <?php } ?>    
   </tbody>
 </table>
+<?php } else{?>
+
+
+
+	<table class="table table-hover">
+  <thead>
+    <tr>    
+      <th scope="col">Nro</th>  
+      <th scope="col">Nick</th>      
+      <th scope="col">Nombres</th>
+      <th scope="col">Apellidos</th>
+      <th scope="col">Nivel</th>
+      <th scope="col">Accion</th>
+    </tr>
+  </thead>
+  <tbody>
+  	<td class="alert alert-danger" role="alert" colspan="6"><center><h5>No hay datos</h5></center></td>  
+  </tbody>
+</table>
+
+<?php } ?>
+
+
 <nav aria-label="Page navigation example">
   <ul class="pagination justify-content-center">
     <li class="page-item disabled">

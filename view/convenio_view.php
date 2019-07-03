@@ -13,6 +13,28 @@ session_start();
 
   $conv = new convenio_model();
 
+  if (isset($_GET['pagina'])) {
+    $pagina = $_GET['pagina'];
+  }
+  else{
+    $pagina = 0;
+  }
+
+  if (isset($_POST['buscar'])) {
+    $busqueda = $_POST['buscar'];
+    $_SESSION["buscar"] = $busqueda;
+
+  }
+  
+
+  $datos_convenio = $conv->mostrar_convenio($pagina, $_SESSION["buscar"]);
+
+  $cantidad_de_datos = count($datos_convenio);
+
+  $cantidad_de_datos = $conv->catidad_de_datos_ae($_SESSION["buscar"]);
+
+  $cantidad_f = $cantidad_de_datos - 1;
+
  ?>
 
 <!DOCTYPE html>
@@ -41,61 +63,16 @@ session_start();
 </div>
 
 <div style="float: right;">
-  <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
+  <form class="form-inline my-2 my-lg-0" action="convenio_view.php" method="POST">
+      <input name="buscar" class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
       <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Buscar</button>
     </form>
 </div><br><br><br>
 
 <?php 
-  if (!empty($_POST['buscar'])) {
+  
 
-    $buscar = $_POST['buscar'];
-
-    $datos_convenio = $conv->buscar_datos_convenio($buscar);
-
-    if (!empty($datos_convenio)) {
-      ?>
-      <table class="table table-hover">
-          <tr>            
-            <th>Descripcion Convenio</th>            
-            <th>Accion</th>           
-          </tr>
-      <?php 
-      foreach ($datos_convenio as $value) {
-        ?>        
-          <tr>
-            <td style="display: none;" class="datos_convenio_editar"><?php echo $value['id_conv'] ?></td>           
-            <td class="datos_convenio_editar"><?php echo $value['desc_conv'] ?></td>
-            <td><button type="button" class="btn btn-primary editar_convenio" data-toggle="modal" data-target=".editar_convenio_modal">E</button></td>
-          </tr>
-        
-        <?php 
-      }
-      ?>
-      </table>
-      <?php 
-    }
-    
-    else{
-      ?>
-      <table class="table table-hover">
-         <tr>           
-            <th>Descripcion Convenio</th>            
-            <th>Accion</th>           
-          </tr>
-        <tr>
-          <td class="alert alert-danger" role="alert" colspan="3"><center><h5>No hay datos</h5></center></td>
-        </tr>
-      </table>
-      <?php 
-    }
-
-
-  }
-  else{
-
-    $datos_convenio = $conv->mostrar_convenio();
+    //$datos_convenio = $conv->mostrar_convenio();
 
     if (!empty($datos_convenio)) {
       ?>
@@ -117,6 +94,66 @@ session_start();
       }
       ?>
       </table>
+
+      <!-- Paginacion  -->
+
+      <ul class="pagination" style="float: left;">
+        <?php 
+
+        if (isset($_GET['pagina'])) {
+          if ($_GET['pagina'] == 0) {
+            $pag = 0;
+           }
+           else{
+            $pag = $_GET['pagina'] - 1;
+           }
+        }
+        else{
+          $pag = 0;
+        }
+
+
+
+        ?>
+        <li class="page-item <?php if(!isset($_GET['pagina'])){echo 'disabled';} elseif($pag == 0){ echo 'disabled';} ?>"><a id="a_pagina" href="convenio_view.php?pagina=<?php echo $pag ?>" class="page-link a_pagina">Anterior</a></li>
+      </ul>
+
+      <nav aria-label="Page navigation example" style="width: 84%;float: left;">
+        <div class="table-responsive">
+          <ul class="pagination">                      
+            <?php for ($i=0; $i < $cantidad_de_datos; $i++) { 
+
+             ?>            
+            <li class="page-item <?php if($i == $_GET['pagina']){ echo 'active';} ?>"><a class="page-link" href="convenio_view.php?pagina=<?php echo $i ?>" value="<?php echo $i; ?>"><?php echo $i; ?></a></li>
+            
+            <?php } ?>                   
+        </ul>
+        </div>
+      </nav>  
+
+      <?php 
+
+        if (isset($_GET['pagina'])) {
+          if ($_GET['pagina'] == $cantidad_f) {
+            $sig = $cantidad_f;
+           }
+           else{
+            $sig = $_GET['pagina'] + 1;
+           }
+        }
+        else{
+          $sig = 1;
+        }
+        
+
+       ?>
+
+      <ul class="pagination" style="float: right;">
+        <li class="page-item <?php if($_GET['pagina'] == $cantidad_f){ echo 'disabled';} ?>"><a id="s_pagina" href="convenio_view.php?pagina=<?php echo $sig ?>" class="page-link s_pagina">Siguiente</a></li>
+      </ul>
+
+      <!-- Fin Paginacion -->
+      
       <?php 
     }
     else{
@@ -133,7 +170,7 @@ session_start();
       <?php 
     }
 
-  }
+  
  ?>
 <!--==============================================
 =            Modal Formulario Agregar            =

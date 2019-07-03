@@ -25,10 +25,10 @@ session_start();
   //$datos_vinculacion = $vinculacion_model->mostrar_vinculacion();
   $cfp = $cfp_model->mostrar_cfp();
   $aprendiz = $aprendiz_model->select_aprendiz();
-  $empresa = $empresa_model->mostrar_empresa();
+  $empresa = $empresa_model->mostrar_todo_empresa();
   $carrera = $carrera_model->mostrar_carrera();
   $semestre = $semestre_model->mostrar_semestre();
-  $monitor = $monitor_model->mostrar_monitor();
+  $monitor = $monitor_model->mostrar_todo_monitor();
   $convenio = $convenio_model->mostrar_convenio();
 
 
@@ -77,11 +77,13 @@ session_start();
       
       <center><h2>Vinculacion</h2></center>
 
+<?php if ($_SESSION['tipo_usuario'] == 'Admin'): ?>
 <div style="float: left;">
   
      <button type="button" class="btn btn-success my-2 my-sm-0" data-toggle="modal" data-target=".agregar_vinculacion">Agregar</button>      
     
 </div>
+<?php endif ?>
 
 <div style="float: right;">
   <form class="form-inline my-2 my-lg-0" action="vinculacion_view.php" method="POST">
@@ -103,8 +105,9 @@ session_start();
             <th>Telefono Aprendiz</th>            
             <th>Id SENATI</th>           
             <th>RUC Empresa</th>                  
-            <th>Razon Social</th>
-            <th style="width: 9%;">Accion</th>            
+            <th>Razon Social</th>            
+            <th style="width: 9%;">Accion</th>             
+                       
           </tr>
       <?php 
       foreach ($datos_vinculacion as $value) {
@@ -132,7 +135,10 @@ session_start();
             <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value['fechafin_sem_vin'] ?></td>
             <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value['id_mon'] ?></td>
             <td style="display: none;" class="datos_editar_vinculacion"><?php echo $value['id_conv'] ?></td>
-            <td><button type="button" class="btn btn-primary editar_vinculacion" data-toggle="modal" data-target=".editar_vinculacion_modal">E</button>
+            <td>
+              <?php if ($_SESSION['tipo_usuario'] == 'Admin'): ?>
+            <button type="button" class="btn btn-primary editar_vinculacion" data-toggle="modal" data-target=".editar_vinculacion_modal">E</button>
+              <?php endif ?>
               <button class="btn btn-secondary imprimir_vinculacion">I</button>
             </td>
           </tr>

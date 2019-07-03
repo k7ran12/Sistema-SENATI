@@ -10,7 +10,31 @@ session_start();
 
   $monitor_model = new monitor_model();
 
-  $monitor = $monitor_model->mostrar_monitor();
+  //$monitor = $monitor_model->mostrar_monitor();
+
+  //Datos Pagina
+
+  if (isset($_GET['pagina'])) {
+    $pagina = $_GET['pagina'];
+  }
+  else{
+    $pagina = 0;
+  }
+
+  if (isset($_POST['buscar'])) {
+    $busqueda = $_POST['buscar'];
+    $_SESSION["buscar"] = $busqueda;
+
+  }
+  
+
+  $monitor = $monitor_model->mostrar_monitor($pagina, $_SESSION["buscar"]);
+
+  $cantidad_de_datos = count($monitor);
+
+  $cantidad_de_datos = $monitor_model->catidad_de_datos_empresa($_SESSION["buscar"]);
+
+  $cantidad_f = $cantidad_de_datos - 1;
 	
 
  ?>
@@ -35,80 +59,24 @@ session_start();
     
     <center><h2>Monitor</h2></center>
 
+<?php if ($_SESSION['tipo_usuario'] == 'Admin'): ?>
 <div style="float: left;">
   
      <button type="button" class="btn btn-success my-2 my-sm-0" data-toggle="modal" data-target=".agregar_monitor">Agregar</button>      
     
 </div>
+<?php endif ?>
 
 <div style="float: right;">
-  <form class="form-inline my-2 my-lg-0" action="actividadEmpresa" method="POST">
+  <form class="form-inline my-2 my-lg-0" action="monitor_view.php" method="POST">
       <input name="buscar" class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
       <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Buscar</button>
     </form>
 </div><br><br><br>
 
 
-<?php 
-  if (!empty($_POST['buscar'])) {
-
-    $buscar = $_POST['buscar'];
-
-    $datos_carrera = $actividad_empresa_model->buscar_actividad_empresa($buscar);
-
-    if (!empty($datos_carrera)) {
-      ?>
-      <table class="table table-hover">
-           <tr>
-            <th>Apellidos</th>
-            <th>Nombres</th>            
-            <th>DNI</th>  
-            <th>Telefono</th>
-            <th>Cargo</th>            
-            <th>Correo</th>           
-          </tr>
-      <?php 
-      foreach ($datos_carrera as $value) {
-        ?>        
-          <tr>
-            <td style="display: none;" class="datos_empresa_editar"><?php echo $value['id_mon'] ?></td>
-            <td class="datos_empresa_editar"><?php echo $value['apellidos_mon'] ?></td>
-            <td class="datos_empresa_editar"><?php echo $value['nombres_mon'] ?></td>
-            <td class="datos_empresa_editar"><?php echo $value['dni_mon'] ?></td>
-            <td class="datos_empresa_editar"><?php echo $value['telefono_mon'] ?></td>
-            <td class="datos_empresa_editar"><?php echo $value['cargo_mon'] ?></td>
-            <td class="datos_empresa_editar"><?php echo $value['correo_mon'] ?></td>
-            <td><button type="button" class="btn btn-primary editar_monitor" data-toggle="modal" data-target=".editar_monitor_modal">E</button></td>
-          </tr>
-        
-        <?php 
-      }
-      ?>
-      </table>
-      <?php 
-    }
-    
-    else{
-      ?>
-      <table class="table table-hover">
-          <tr>
-            <th>Apellidos</th>
-            <th>Nombres</th>            
-            <th>DNI</th>  
-            <th>Telefono</th>
-            <th>Cargo</th>            
-            <th>Correo</th>           
-          </tr>
-        <tr>
-          <td class="alert alert-danger" role="alert" colspan="6"><center><h5>No hay datos</h5></center></td>
-        </tr>
-      </table>
-      <?php 
-    }
-
-
-  }
-  else{
+<?php   
+  
 
     //$datos_ae = $actividad_empresa_model->mostrar_actividad_empresa();
 
@@ -122,6 +90,9 @@ session_start();
             <th>Telefono</th>
             <th>Cargo</th>            
             <th>Correo</th>           
+            <?php if ($_SESSION['tipo_usuario'] == 'Admin'): ?>
+            <th>Accion</th>
+             <?php endif ?> 
           </tr>
       <?php 
       foreach ($monitor as $value) {
@@ -134,7 +105,9 @@ session_start();
             <td class="datos_empresa_editar"><?php echo $value['telefono_mon'] ?></td>
             <td class="datos_empresa_editar"><?php echo $value['cargo_mon'] ?></td>
             <td class="datos_empresa_editar"><?php echo $value['correo_mon'] ?></td>
+            <?php if ($_SESSION['tipo_usuario'] == 'Admin'): ?>
             <td><button type="button" class="btn btn-primary editar_monitor" data-toggle="modal" data-target=".editar_monitor_modal">E</button></td>
+            <?php endif ?>
           </tr>
         
         <?php 
@@ -161,7 +134,7 @@ session_start();
       <?php 
     }
 
-  }
+  
  ?>
 <!--==============================================
 =            Modal Formulario Agregar            =

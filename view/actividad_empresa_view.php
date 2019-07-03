@@ -14,6 +14,30 @@ session_start();
 
 	$ubi = $ubicacion->mostrar_ubigeo();
 
+  //Datos Pagina
+
+  if (isset($_GET['pagina'])) {
+    $pagina = $_GET['pagina'];
+  }
+  else{
+    $pagina = 0;
+  }
+
+  if (isset($_POST['buscar'])) {
+    $busqueda = $_POST['buscar'];
+    $_SESSION["buscar"] = $busqueda;
+
+  }
+  
+
+  $datos_ae = $actividad_empresa_model->mostrar_actividad_empresa($pagina, $_SESSION["buscar"]);
+
+  $cantidad_de_datos = count($datos_ae);
+
+  $cantidad_de_datos = $actividad_empresa_model->catidad_de_datos_ae($_SESSION["buscar"]);
+
+  $cantidad_f = $cantidad_de_datos - 1;
+
  ?>
 
 <!DOCTYPE html>
@@ -35,72 +59,26 @@ session_start();
   <div class="container">
       <center><h2>Actividad Empresa</h2></center>
 
-<div style="float: left;">
+<?php if ($_SESSION['tipo_usuario'] == 'Admin'): ?>
+
+  <div style="float: left;">
   
      <button type="button" class="btn btn-success my-2 my-sm-0" data-toggle="modal" data-target=".agregar_actividad_empresa">Agregar</button>      
     
-</div>
+  </div>
+  
+<?php endif ?>
 
 <div style="float: right;">
-  <form class="form-inline my-2 my-lg-0" action="actividadEmpresa" method="POST">
+  <form class="form-inline my-2 my-lg-0" action="actividad_empresa_view.php" method="POST">
       <input name="buscar" class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
       <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Buscar</button>
     </form>
 </div><br><br><br>
 
-
 <?php 
-  if (!empty($_POST['buscar'])) {
 
-    $buscar = $_POST['buscar'];
-
-    $datos_carrera = $actividad_empresa_model->buscar_actividad_empresa($buscar);
-
-    if (!empty($datos_carrera)) {
-      ?>
-      <table class="table table-hover">
-          <tr>
-            <th>Codigo Actividad</th>
-            <th>Descripcion Actividad</th>            
-            <th>Accion</th>           
-          </tr>
-      <?php 
-      foreach ($datos_carrera as $value) {
-        ?>        
-          <tr>
-            <td style="display: none;" class="datos_actividad_empresa_editar"><?php echo $value['id_ae'] ?></td>
-            <td class="datos_actividad_empresa_editar"><?php echo $value['codigo_ae'] ?></td>
-            <td class="datos_actividad_empresa_editar"><?php echo $value['descripcion_ae'] ?></td>
-            <td><button type="button" class="btn btn-primary editar_actividad_empresa" data-toggle="modal" data-target=".editar_actividad_empresa_modal">E</button></td>
-          </tr>
-        
-        <?php 
-      }
-      ?>
-      </table>
-      <?php 
-    }
-    
-    else{
-      ?>
-      <table class="table table-hover">
-         <tr>
-            <th>Codigo Actividad</th>
-            <th>Descripcion Actividad</th>            
-            <th>Accion</th>           
-          </tr>
-        <tr>
-          <td class="alert alert-danger" role="alert" colspan="3"><center><h5>No hay datos</h5></center></td>
-        </tr>
-      </table>
-      <?php 
-    }
-
-
-  }
-  else{
-
-    $datos_ae = $actividad_empresa_model->mostrar_actividad_empresa();
+    //$datos_ae = $actividad_empresa_model->mostrar_actividad_empresa();
 
     if (!empty($datos_ae)) {
       ?>
@@ -108,7 +86,9 @@ session_start();
           <tr>
             <th>Codigo Actividad</th>
             <th>Descripcion Actividad</th>            
-            <th>Accion</th>           
+            <?php if ($_SESSION['tipo_usuario'] == 'Admin'): ?>
+            <th>Accion</th>             
+            <?php endif ?>          
           </tr>
       <?php 
       foreach ($datos_ae as $value) {
@@ -117,13 +97,76 @@ session_start();
             <td style="display: none;" class="datos_actividad_empresa_editar"><?php echo $value['id_ae'] ?></td>
             <td class="datos_actividad_empresa_editar"><?php echo $value['codigo_ae'] ?></td>
             <td class="datos_actividad_empresa_editar"><?php echo $value['descripcion_ae'] ?></td>
+            <?php if ($_SESSION['tipo_usuario'] == 'Admin'): ?>
             <td><button type="button" class="btn btn-primary editar_actividad_empresa" data-toggle="modal" data-target=".editar_actividad_empresa_modal">E</button></td>
+            <?php endif ?>
           </tr>
         
         <?php 
       }
       ?>
       </table>
+
+      <!-- Paginacion  -->
+
+      <ul class="pagination" style="float: left;">
+        <?php 
+
+        if (isset($_GET['pagina'])) {
+          if ($_GET['pagina'] == 0) {
+            $pag = 0;
+           }
+           else{
+            $pag = $_GET['pagina'] - 1;
+           }
+        }
+        else{
+          $pag = 0;
+        }
+
+
+
+        ?>
+        <li class="page-item <?php if(!isset($_GET['pagina'])){echo 'disabled';} elseif($pag == 0){ echo 'disabled';} ?>"><a id="a_pagina" href="actividad_empresa_view.php?pagina=<?php echo $pag ?>" class="page-link a_pagina">Anterior</a></li>
+      </ul>
+
+      <nav aria-label="Page navigation example" style="width: 84%;float: left;">
+        <div class="table-responsive">
+          <ul class="pagination">                      
+            <?php for ($i=0; $i < $cantidad_de_datos; $i++) { 
+
+             ?>            
+            <li class="page-item <?php if($i == $_GET['pagina']){ echo 'active';} ?>"><a class="page-link" href="actividad_empresa_view.php?pagina=<?php echo $i ?>" value="<?php echo $i; ?>"><?php echo $i; ?></a></li>
+            
+            <?php } ?>                   
+        </ul>
+        </div>
+      </nav>  
+
+      <?php 
+
+        if (isset($_GET['pagina'])) {
+          if ($_GET['pagina'] == $cantidad_f) {
+            $sig = $cantidad_f;
+           }
+           else{
+            $sig = $_GET['pagina'] + 1;
+           }
+        }
+        else{
+          $sig = 1;
+        }
+        
+
+       ?>
+
+      <ul class="pagination" style="float: right;">
+        <li class="page-item <?php if($_GET['pagina'] == $cantidad_f){ echo 'disabled';} ?>"><a id="s_pagina" href="actividad_empresa_view.php?pagina=<?php echo $sig ?>" class="page-link s_pagina">Siguiente</a></li>
+      </ul>
+
+      <!-- Fin Paginacion -->
+      
+      
       <?php 
     }
     else{
@@ -141,7 +184,7 @@ session_start();
       <?php 
     }
 
-  }
+  
  ?>
 <!--==============================================
 =            Modal Formulario Agregar            =

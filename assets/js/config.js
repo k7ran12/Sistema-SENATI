@@ -768,6 +768,10 @@
     /* Datos Para Editar Empresa */
     $(".editar_empresa").click(function() {
 
+      $('#editar_ubicacion_em option:selected').removeAttr('selected');
+      $('#editar_actividad_empresa option:selected').removeAttr('selected');      
+      $('#editar_cfp option:selected').removeAttr('selected');
+
         //var valores = "";
         var valores = [];
 
@@ -781,14 +785,14 @@
         $("#editar_ruc").val(valores[1]);
         $("#editar_razon_social").val(valores[2]);
         $("#editar_direccion").val(valores[3]);
-        $("#editar_telefono").val(valores[4]);        
-        $("#editar_correo").val(valores[5]);  
-        $("#editar_representante").val(valores[6]);
-        $("#editar_dni_representante").val(valores[7]);
+        $("#editar_telefono").val(valores[11]);        
+        $("#editar_correo").val(valores[4]);  
+        $("#editar_representante").val(valores[5]);
+        $("#editar_dni_representante").val(valores[6]);
 
-        $("#editar_ubicacion_em option[value='"+valores[21]+"'").attr("selected", true);
-        $("#editar_actividad_empresa option[value='"+valores[22]+"'").attr("selected", true);
-        $("#editar_cfp option[value='"+valores[23]+"'").attr("selected", true);
+        $("#editar_ubicacion_em option[value='"+valores[7]+"'").attr("selected", true);
+        $("#editar_actividad_empresa option[value='"+valores[8]+"'").attr("selected", true);
+        $("#editar_cfp option[value='"+valores[10]+"'").attr("selected", true);
         
        
 
@@ -1073,7 +1077,7 @@
 
       //$('#form_editar_vinculacion')[0].reset();
 
-      $('.editar_vinculacion_modal').find('#form_editar_vinculacion')[0].reset(); 
+      //$('.editar_vinculacion_modal').find('#form_editar_vinculacion')[0].reset(); 
 
       $('#editar_empresa option:selected').removeAttr('selected');
       $('#editar_carrera option:selected').removeAttr('selected');
@@ -1124,7 +1128,7 @@
       
 
       $( "#form_agregar_vinculacion" ).on( "submit", function( event ) {
-        console.log("hola");
+        
     event.preventDefault();   
     let form_vinculacion = $( this ).serialize();
     console.log(form_vinculacion);

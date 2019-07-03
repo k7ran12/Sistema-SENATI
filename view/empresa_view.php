@@ -4,6 +4,8 @@ session_start();
 		header('Location: ../');
 	}
 
+	$actividad_empresa = "";
+
 	require_once("../model/ubigeo_model.php");
 	require_once("../model/empresa_model.php");
 	require_once("../model/cfp_model.php");
@@ -14,10 +16,36 @@ session_start();
 	$ubicacion = new ubigeo_model();
 	$actividad_empresa_model = new actividad_empresa_model();
 
-	$datos_empresa = $empresa_model->mostrar_empresa();
+	//$datos_empresa = $empresa_model->mostrar_empresa();
 	$ubi = $ubicacion->mostrar_ubigeo();
 	$cfp = $cfp_model->mostrar_cfp();
-	$ae = $actividad_empresa_model->mostrar_actividad_empresa();
+	$ae = $actividad_empresa_model->mostrar_todo_ae();
+
+
+	//Datos Pagina
+
+  if (isset($_GET['pagina'])) {
+    $pagina = $_GET['pagina'];
+  }
+  else{
+    $pagina = 0;
+  }
+
+  if (isset($_POST['buscar'])) {
+    $busqueda = $_POST['buscar'];
+    $_SESSION["buscar"] = $busqueda;
+
+  }
+  
+  //echo $_SESSION['buscar'];
+
+  $datos_empresa = $empresa_model->mostrar_empresa($pagina, $_SESSION["buscar"]);
+
+  $cantidad_de_datos = count($datos_empresa);
+
+  $cantidad_de_datos = $empresa_model->catidad_de_datos_empresa($_SESSION["buscar"]);
+
+  $cantidad_f = $cantidad_de_datos - 1;
 
 
  ?>
@@ -42,27 +70,25 @@ session_start();
 		
 		<center><h2>Empresa</h2></center>
 
+<?php if ($_SESSION['tipo_usuario'] == 'Admin'): ?>
 <div style="float: left;">
 	
      <button type="button" class="btn btn-success my-2 my-sm-0" data-toggle="modal" data-target=".agregar_empresa">Agregar</button>      
     
 </div>
+<?php endif ?>
 
 <div style="float: right;">
-	<form class="form-inline my-2 my-lg-0" action="empresa" method="POST">
+	<form class="form-inline my-2 my-lg-0" action="empresa_view.php" method="POST">
       <input id="buscar" name="buscar" class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
       <button id="buscar_cfp" class="btn btn-outline-primary my-2 my-sm-0" type="submit">Buscar</button>
     </form>
 </div><br><br><br>
 
-<?php 
-	if (!empty($_POST['buscar'])) {
+<?php 	
+	
 
-		$buscar = $_POST['buscar'];
-
-		$datos_empresa_buscar = $empresa_model->buscar_datos_empresa($buscar);
-
-		if (!empty($datos_empresa_buscar)) {
+	if (!empty($datos_empresa)) {
 			?>
 			<div class="table-responsive">
 			<table class="table table-hover">
@@ -75,101 +101,9 @@ session_start();
 						<th>Correo</th>
 						<th>Representante</th>
 						<th>DNI Representante</th>						
+						<?php if ($_SESSION['tipo_usuario'] == 'Admin'): ?>
 						<th>Accion</th>
-					</tr>
-			<?php 
-			foreach ($datos_empresa_buscar as $value) {
-				?>				
-					<tr>
-						<td style="display: none;" class="datos_empresa_editar"><?php echo $value[0] ?></td>						
-						<td class="datos_empresa_editar"><?php echo $value[1] ?></td>
-						<td class="datos_empresa_editar"><?php echo $value[2] ?></td>
-						<td class="datos_empresa_editar"><?php echo $value[3] ?></td>
-						<!-- <td class="datos_empresa_editar"><?php echo $value[4] ?></td> -->
-						
-						<td class="datos_empresa_editar"><?php echo $value[5] ?></td>
-						<td class="datos_empresa_editar"><?php echo $value[6] ?></td>
-						<td class="datos_empresa_editar"><?php echo $value[7] ?></td>
-
-						<!-- 
-						<td class="datos_empresa_editar"><?php echo $value[9] ?></td>
-						<td class="datos_empresa_editar"><?php echo $value[10] ?></td>
-						<td class="datos_empresa_editar"><?php echo $value[11] ?></td>
-						<td class="datos_empresa_editar"><?php echo $value[12] ?></td>
-
-						<td class="datos_empresa_editar"><?php echo $value[14] ?></td>
-						<td class="datos_empresa_editar"><?php echo $value[15] ?></td>
-
-						<td class="datos_empresa_editar"><?php echo $value[17] ?></td>
-						<td class="datos_empresa_editar"><?php echo $value[18] ?></td>
-
-						<td class="datos_empresa_editar"><?php echo $value[20] ?></td>
-						<td class="datos_empresa_editar"><?php echo $value[21] ?></td>
-						<td class="datos_empresa_editar"><?php echo $value[22] ?></td>		
-						<td class="datos_empresa_editar"><?php echo $value[23] ?></td>	
-						<td class="datos_empresa_editar"><?php echo $value[24] ?></td>
-						 -->	
-								
-																					
-						<td style="display: none;" class="datos_empresa_editar"><?php echo $value[8] ?></td>
-						<td style="display: none;" class="datos_empresa_editar"><?php echo $value[13] ?></td>
-						<td style="display: none;" class="datos_empresa_editar"><?php echo $value[14] ?></td>	
-						<td style="display: none;" class="datos_empresa_editar"><?php echo $value[16] ?></td>
-						<td><button type="button" class="btn btn-primary editar_empresa" data-toggle="modal" data-target=".editar_empresa_modal">E</button></td>
-					</tr>
-				
-				
-				<?php 
-			}
-			?>
-			</table>
-			</div>
-			<?php 
-		}
-		
-		else{
-			?>
-			<div class="table-responsive">
-			<table class="table table-hover">
-					<tr>
-						<th>RUC</th>
-						<th>Razon Social</th>
-						<th>Direccion</th>
-						<!-- <th>Telefono</th> -->
-						
-						<th>Correo</th>
-						<th>Representante</th>
-						<th>DNI Representante</th>						
-						<th>Accion</th>
-					</tr>
-				<tr>
-					<td class="alert alert-danger" role="alert" colspan="27"><center><h5>No hay datos</h5></center></td>
-				</tr>
-			</table>
-			<div>
-			<?php 
-		}
-
-
-	}
-	else{
-
-		//$datos_cfp = $cfp_model->mostrar_cfp();
-
-		if (!empty($datos_empresa)) {
-			?>
-			<div class="table-responsive">
-			<table class="table table-hover">
-					<tr>
-						<th>RUC</th>
-						<th>Razon Social</th>
-						<th>Direccion</th>
-						<!-- <th>Telefono</th> -->
-						
-						<th>Correo</th>
-						<th>Representante</th>
-						<th>DNI Representante</th>						
-						<th>Accion</th>
+						<?php endif ?>
 					</tr>
 			<?php 
 			foreach ($datos_empresa as $value) {
@@ -209,16 +143,80 @@ session_start();
 						<td style="display: none;" class="datos_empresa_editar"><?php echo $value[13] ?></td>
 						<td style="display: none;" class="datos_empresa_editar"><?php echo $value[14] ?></td>	
 						<td style="display: none;" class="datos_empresa_editar"><?php echo $value[16] ?></td>
+						<td style="display: none;" class="datos_empresa_editar"><?php echo $value[4] ?></td>
+						<?php if ($_SESSION['tipo_usuario'] == 'Admin'): ?>
 						<td><button type="button" class="btn btn-primary editar_empresa" data-toggle="modal" data-target=".editar_empresa_modal">E</button></td>
+						<?php endif ?>
 					</tr>
 				
 				<?php 
 			}
+
 			?>
 			</table>
 			</div>
+
+			<!-- Paginacion  -->
+
+      <ul class="pagination" style="float: left;">
+        <?php 
+
+        if (isset($_GET['pagina'])) {
+          if ($_GET['pagina'] == 0) {
+            $pag = 0;
+           }
+           else{
+            $pag = $_GET['pagina'] - 1;
+           }
+        }
+        else{
+          $pag = 0;
+        }
+
+
+
+        ?>
+        <li class="page-item <?php if(!isset($_GET['pagina'])){echo 'disabled';} elseif($pag == 0){ echo 'disabled';} ?>"><a id="a_pagina" href="empresa_view.php?pagina=<?php echo $pag ?>" class="page-link a_pagina">Anterior</a></li>
+      </ul>
+
+      <nav aria-label="Page navigation example" style="width: 84%;float: left;">
+        <div class="table-responsive">
+          <ul class="pagination">                      
+            <?php for ($i=0; $i < $cantidad_de_datos; $i++) { 
+
+             ?>            
+            <li class="page-item <?php if($i == $_GET['pagina']){ echo 'active';} ?>"><a class="page-link" href="empresa_view.php?pagina=<?php echo $i ?>" value="<?php echo $i; ?>"><?php echo $i; ?></a></li>
+            
+            <?php } ?>                   
+        </ul>
+        </div>
+      </nav>  
+
+      <?php 
+
+        if (isset($_GET['pagina'])) {
+          if ($_GET['pagina'] == $cantidad_f) {
+            $sig = $cantidad_f;
+           }
+           else{
+            $sig = $_GET['pagina'] + 1;
+           }
+        }
+        else{
+          $sig = 1;
+        }
+        
+
+       ?>
+
+      <ul class="pagination" style="float: right;">
+        <li class="page-item <?php if($_GET['pagina'] == $cantidad_f){ echo 'disabled';} ?>"><a id="s_pagina" href="empresa_view.php?pagina=<?php echo $sig ?>" class="page-link s_pagina">Siguiente</a></li>
+      </ul>
+
+      <!-- Fin Paginacion -->
+
 			<?php 
-		}
+		 } 
 		else{
 			?>
 			<table class="table table-hover">
@@ -226,33 +224,20 @@ session_start();
 						<th>RUC</th>
 						<th>Razon Social</th>
 						<th>Direccion</th>
-						<th>Telefono</th>
+						<!-- <th>Telefono</th> -->
+						
 						<th>Correo</th>
 						<th>Representante</th>
-						<th>DNI Representante</th>
-						<th>Codigo</th>
-						<th>Departamento</th>
-						<th>Provincia</th>
-						<th>Distrito</th>
-						<th>Codigo Actividad</th>
-						<th>Descripcion Actividad</th>
-						<th>Codigo CFP</th>
-						<th>Descripcion CFP</th>
-						<th>Direccion CFP</th>
-						<th>Codigo Ubicacion CFP</th>
-						<th>Departamento Ubicacion CFP</th>
-						<th>Provincia Ubicacion CFP</th>									
-						<th>Distrito Ubicacion CFP</th>
+						<th>DNI Representante</th>						
 						<th>Accion</th>
 					</tr>
-				<tr>
 					<td class="alert alert-danger" role="alert" colspan="21"><center><h5>No hay datos</h5></center></td>
 				</tr>
 			</table>
 			<?php 
 		}
 
-	}
+	
  ?>
 
 <!--==============================================
