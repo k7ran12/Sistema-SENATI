@@ -3,7 +3,7 @@
 	require_once("../model/empresa_model.php");
 
 	$empresa_model = new empresa_model();
-	$empresa = $empresa_model->mostrar_empresa();	
+	$empresa = $empresa_model->mostrar_todo_empresa();	
  ?>
 <!DOCTYPE html>
 <html>

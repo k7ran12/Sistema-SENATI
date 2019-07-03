@@ -26,10 +26,10 @@ session_start();
   $cfp = $cfp_model->mostrar_cfp();
   $aprendiz = $aprendiz_model->select_aprendiz();
   $empresa = $empresa_model->mostrar_todo_empresa();
-  $carrera = $carrera_model->mostrar_carrera();
+  $carrera = $carrera_model->mostrar_todo_carrera();
   $semestre = $semestre_model->mostrar_semestre();
   $monitor = $monitor_model->mostrar_todo_monitor();
-  $convenio = $convenio_model->mostrar_convenio();
+  $convenio = $convenio_model->mostrar_todo_convenio();
 
 
   if (isset($_GET['pagina'])) {

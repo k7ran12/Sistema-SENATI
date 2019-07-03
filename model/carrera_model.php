@@ -79,6 +79,21 @@
 
 
 			//Codigo Aparte
+		}
+
+		public function mostrar_todo_carrera()
+		{
+			$consulta = "SELECT * FROM carrera ";
+			$query = mysqli_query($this->con, $consulta);
+			$array_carrera = array();
+			while ($datos = mysqli_fetch_assoc($query)) {
+				$array['id_carr'] = $datos['id_carr'];
+				$array['codigo_carr'] = $datos['codigo_carr'];
+				$array['descripcion_carr'] = $datos['descripcion_carr'];							
+				array_push($array_carrera, $array);
+			}
+
+			return $array_carrera;
 		}				
 				
 

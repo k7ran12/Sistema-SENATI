@@ -80,6 +80,20 @@
 		}				
 		
 
+		public function mostrar_todo_convenio()
+		{
+			$consulta = "SELECT * FROM convenio";
+			$query = mysqli_query($this->con, $consulta);
+			$array_carrera = array();
+			while ($datos = mysqli_fetch_assoc($query)) {
+				$array['id_conv'] = $datos['id_conv'];				
+				$array['desc_conv'] = $datos['desc_conv'];							
+				array_push($array_carrera, $array);
+			}
+
+			return $array_carrera;
+		}
+
 		public function agregar_datos_convenio($descripcion_convenio)
 		{
 			$consulta = "INSERT INTO convenio (desc_conv) VALUES('$descripcion_convenio')";
