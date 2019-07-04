@@ -1,5 +1,8 @@
 <?php 
 	session_start();
+
+	$sub_navbar = $_SERVER["REQUEST_URI"]."reporte_empresa";
+
 	require_once("../model/empresa_model.php");
 
 	$empresa_model = new empresa_model();

@@ -2,6 +2,12 @@
 
 session_start();
 
+
+
+//echo $_SESSION["carro"];
+
+	$sub_navbar = $_SERVER["REQUEST_URI"]."cfp";
+
 	if (empty($_SESSION['usuario'])) {
 		header('Location: ../');
 	}
@@ -12,35 +18,34 @@ session_start();
 	$cfp_model = new cfp_model();
 	$ubicacion = new ubigeo_model();
 
-	$datos_cfp = $cfp_model->mostrar_cfp();
+	//$datos_cfp = $cfp_model->mostrar_cfp();
 	$ubi = $ubicacion->mostrar_ubigeo();	
 
 	
 
-	if (isset($_GET['pagina'])) {
-		$pagina = $_GET['pagina'];
-	}
-	else{
-		$pagina = 0;
+	if(!$_GET){
+		header('Location:cfp_view.php?pagina=1');
 	}
 
-	//Verificar si hay un post con datos para la busqueda
-	//
+	//Verificar si hay un post con datos para la busqueda		
 
-	if (isset($_POST['buscar'])) {
-		$busqueda = $_POST['buscar'];
-		$_SESSION["buscar"] = $busqueda;
+	//Datos Pagina
 
-	}
-	else{
-		$_SESSION["buscar"] = "";
-	}
 
-	$cantidad_datos_cfp = $cfp_model->catidad_de_datos_cfp($_SESSION["buscar"]);
+  if (isset($_POST['buscar'])) {
+    $busqueda = $_POST['buscar'];
+    $_SESSION["buscar"] = $busqueda;
 
-	echo $cantidad_datos_cfp;
+  }
+  
 
-	$cantidad_f = $cantidad_datos_cfp - 1;
+  $datos_cfp = $cfp_model->mostrar_cfp($_GET['pagina'], $_SESSION["buscar"]);
+
+  $cantidad_de_datos = count($datos_cfp);
+
+  $cantidad_de_datos = $cfp_model->catidad_de_datos_cfp($_SESSION["buscar"]);
+
+  $cantidad_de_datos;
 
  ?>
 
@@ -76,71 +81,10 @@ session_start();
     </form>
 </div><br><br><br>
 
-<?php 
-	if (!empty($_POST['buscar'])) {
+<?php 	
 
-		$buscar = $_POST['buscar'];
 
-		$datos_cfp = $cfp_model->buscar_datos_cfp($buscar);
-
-		if (!empty($datos_cfp)) {
-			?>
-			<table class="table table-hover">
-					<tr>
-						<th>Codigo CFP</th>
-						<th>Descripcion CFP</th>
-						<th>Direccion CFP</th>
-						<th>Departamento Ubicacion</th>
-						<th>Provincia Ubicacion</th>
-						<th>Distrito Ubicacion</th>
-						<th>Accion</th>						
-					</tr>
-			<?php 
-			foreach ($datos_cfp as $value) {
-				?>				
-					<tr>
-						<td style="display: none;" class="datos_cfp_editar"><?php echo $value['id_cfp'] ?></td>
-						<td style="display: none;" class="datos_cfp_editar"><?php echo $value['id_ubi'] ?></td>
-						<td class="datos_cfp_editar"><?php echo $value['codigo_cfp'] ?></td>
-						<td class="datos_cfp_editar"><?php echo $value['descripcion_cfp'] ?></td>
-						<td class="datos_cfp_editar"><?php echo $value['direccion_cfp'] ?></td>
-						<td class="datos_cfp_editar"><?php echo $value['departamento_ubi'] ?></td>
-						<td class="datos_cfp_editar"><?php echo $value['provincia_ubi'] ?></td>
-						<td class="datos_cfp_editar"><?php echo $value['distrito_ubi'] ?></td>
-						<td><button type="button" class="btn btn-primary editar_cfp" data-toggle="modal" data-target=".editar_cfp_modal">E</button></td>
-					</tr>
-				
-				<?php 
-			}
-			?>
-			</table>
-			<?php 
-		}
 		
-		else{
-			?>
-			<table class="table table-hover">
-					<tr>
-						<th>Codigo CFP</th>
-						<th>Descripcion CFP</th>
-						<th>Direccion CFP</th>
-						<th>Departamento Ubicacion</th>
-						<th>Provincia Ubicacion</th>
-						<th>Distrito Ubicacion</th>
-						<th>Accion</th>						
-					</tr>
-				<tr>
-					<td class="alert alert-danger" role="alert" colspan="7"><center><h5>No hay datos</h5></center></td>
-				</tr>
-			</table>
-			<?php 
-		}
-
-
-	}
-	else{
-
-		$datos_cfp = $cfp_model->mostrar_cfp();
 
 		if (!empty($datos_cfp)) {
 			?>
@@ -174,51 +118,31 @@ session_start();
 			?>
 			</table>
 
-			<ul class="pagination" style="float: left;">
-				<?php 
+			<!-- Paginacion  -->
 
-				$pag = isset($_GET['pagina']) - 1;
-				
+      <ul class="pagination" style="float: left;">
+        
+        <li class="page-item <?php echo $_GET['pagina']<= 1? 'disabled' : '' ?>"><a id="a_pagina" href="cfp_view.php?pagina=<?php echo $_GET['pagina'] - 1 ?>" class="page-link a_pagina">Anterior</a></li>
+      </ul>
 
+      <nav aria-label="Page navigation example" style="width: 84%;float: left;">
+        <div class="table-responsive">
+          <ul class="pagination">                      
+            <?php for ($i=0; $i < $cantidad_de_datos; $i++) { 
 
+             ?>            
+            <li class="page-item <?php echo $_GET['pagina'] == $i + 1  ? 'active' : '' ?>"><a class="page-link" href="cfp_view.php?pagina=<?php echo $i + 1 ?>" value="<?php echo $i + 1; ?>"><?php echo $i + 1; ?></a></li>
+            
+            <?php } ?>                   
+        </ul>
+        </div>
+      </nav> 
 
-				?>
-				<li class="page-item <?php if(!isset($_GET['pagina']) || $_GET['pagina'] == 0){echo 'disabled';} ?>"><a id="a_pagina" href="cfp_view.php?pagina=<?php echo $pag ?>" class="page-link a_pagina">Anterior</a></li>
-			</ul>
+      <ul class="pagination" style="float: right;">
+        <li class="page-item <?php echo $_GET['pagina']>=$cantidad_de_datos? 'disabled' : '' ?>"><a id="s_pagina" href="cfp_view.php?pagina=<?php echo $_GET['pagina'] + 1 ?>" class="page-link s_pagina">Siguiente</a></li>
+      </ul>
 
-			<nav aria-label="Page navigation example" style="width: 84%;float: left;">
-				<div class="table-responsive">
-				  <ul class="pagination">							  	     
-				    <?php for ($i=0; $i < $cantidad_datos_cfp; $i++) { 
-
-				     ?>				     
-				    <li class="page-item <?php if($i == $_GET['pagina']){ echo 'active';} ?>"><a class="page-link" href="cfp_view.php?pagina=<?php echo $i ?>" value="<?php echo $i; ?>"><?php echo $i; ?></a></li>
-				    
-				    <?php } ?>				    		   
-			 	</ul>
-			  </div>
-			</nav>	
-
-			<?php 
-				$sig = 1;
-				if (isset($_GET['pagina'])) {
-					if ($_GET['pagina'] == $cantidad_f) {
-					 	$sig = $cantidad_f;
-					 }
-					 else{
-					 	$sig = $_GET['pagina'] + 1;
-					 }
-				}
-				else{
-					$sig = $sig++;
-				}
-				
-
-			 ?>
-
-			<ul class="pagination" style="float: right;">
-				<li class="page-item <?php if($_GET['pagina'] == $cantidad_f){ echo 'disabled';} ?>"><a id="s_pagina" href="cfp_view.php?pagina=<?php echo $sig ?>" class="page-link s_pagina">Siguiente</a></li>
-			</ul>
+      <!-- Fin Paginacion -->
 
 
 			<?php 
@@ -242,7 +166,7 @@ session_start();
 			<?php 
 		}
 
-	}
+	
  ?>
 
 <!--==============================================

@@ -1,5 +1,8 @@
 <?php 
 session_start();
+
+$sub_navbar = $_SERVER["REQUEST_URI"]."monitor";
+
 	if (empty($_SESSION['usuario'])) {
 		header('Location: ../');
 	}

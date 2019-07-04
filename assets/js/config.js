@@ -135,6 +135,9 @@
 
     $(".editar_usuario").click(function() {
 
+      $('#editar_nivel option:selected').removeAttr('selected');
+      
+
         //var valores = "";
         var valores = [];
 

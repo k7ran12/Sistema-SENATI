@@ -6,6 +6,7 @@
 	class empresa_model extends conexion_model
 	{
 		private $con;
+		private $cantidad_filas = 3;
 
 		function __construct()
 		{
@@ -21,7 +22,7 @@
 
 				$columnas = mysqli_num_rows ($query);
 
-				$pag = $columnas / 10;
+				$pag = $columnas / $this->cantidad_filas;
 
 				return ceil ($pag);
 			}
@@ -32,7 +33,7 @@
 
 				$columnas = mysqli_num_rows ($query);
 
-				$pag = $columnas / 10;
+				$pag = $columnas / $this->cantidad_filas;
 
 				return ceil ($pag);
 			}
@@ -41,13 +42,13 @@
 
 		public function mostrar_empresa($inicio_pag, $busqueda){
 			
-				$cantidad_datos = 10;
+				$cantidad_datos = $this->cantidad_filas;
 
-			$total_paginas = $inicio_pag * $cantidad_datos;
+			$total_paginas = ($inicio_pag - 1) * $cantidad_datos;
 
 			if ($busqueda != "") {				
 
-				$total_paginas = $inicio_pag * $cantidad_datos;
+				//$total_paginas = $inicio_pag * $cantidad_datos;
 
 			$consulta = "SELECT e.`id_emp`, e.`ruc_emp`, e.`razonsocial_emp`, e.`direccion_emp`, e.`telefono_emp`, e.`correo_emp`, e.`representante_emp`, e.`dnirepresentante_emp`, u.*, ae.*, c.*, ubigeo.cod_ubi, ubigeo.departamento_ubi, ubigeo.provincia_ubi, ubigeo.distrito_ubi FROM empresa e INNER JOIN ubigeo u ON e.id_ubi = u.id_ubi INNER JOIN actvidadempresa ae ON ae.id_ae = e.id_ae INNER JOIN cfp c ON e.id_cfp = c.id_cfp INNER JOIN ubigeo ON ubigeo.id_ubi = c.id_ubi WHERE e.ruc_emp = '$busqueda'";
 

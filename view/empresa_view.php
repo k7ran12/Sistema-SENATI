@@ -1,7 +1,14 @@
 <?php 
 session_start();
+
+$sub_navbar = $_SERVER["REQUEST_URI"]."empresa";
+
 	if (empty($_SESSION['usuario'])) {
 		header('Location: ../');
+	}
+
+	if(!$_GET){
+		header('Location:empresa_view.php?pagina=1');
 	}
 
 	$actividad_empresa = "";
@@ -18,18 +25,12 @@ session_start();
 
 	//$datos_empresa = $empresa_model->mostrar_empresa();
 	$ubi = $ubicacion->mostrar_ubigeo();
-	$cfp = $cfp_model->mostrar_cfp();
+	$cfp = $cfp_model->mostrar_todo_cfp();
 	$ae = $actividad_empresa_model->mostrar_todo_ae();
 
 
 	//Datos Pagina
-
-  if (isset($_GET['pagina'])) {
-    $pagina = $_GET['pagina'];
-  }
-  else{
-    $pagina = 0;
-  }
+ 
 
   if (isset($_POST['buscar'])) {
     $busqueda = $_POST['buscar'];
@@ -39,13 +40,15 @@ session_start();
   
   //echo $_SESSION['buscar'];
 
-  $datos_empresa = $empresa_model->mostrar_empresa($pagina, $_SESSION["buscar"]);
+  $datos_empresa = $empresa_model->mostrar_empresa($_GET['pagina'], $_SESSION["buscar"]);
 
   $cantidad_de_datos = count($datos_empresa);
 
-  $cantidad_de_datos = $empresa_model->catidad_de_datos_empresa($_SESSION["buscar"]);
+  $cantida = $empresa_model->catidad_de_datos_empresa($_SESSION["buscar"]);
 
-  $cantidad_f = $cantidad_de_datos - 1;
+  //echo $cantida;
+
+  
 
 
  ?>
@@ -159,58 +162,25 @@ session_start();
 			<!-- Paginacion  -->
 
       <ul class="pagination" style="float: left;">
-        <?php 
-
-        if (isset($_GET['pagina'])) {
-          if ($_GET['pagina'] == 0) {
-            $pag = 0;
-           }
-           else{
-            $pag = $_GET['pagina'] - 1;
-           }
-        }
-        else{
-          $pag = 0;
-        }
-
-
-
-        ?>
-        <li class="page-item <?php if(!isset($_GET['pagina'])){echo 'disabled';} elseif($pag == 0){ echo 'disabled';} ?>"><a id="a_pagina" href="empresa_view.php?pagina=<?php echo $pag ?>" class="page-link a_pagina">Anterior</a></li>
+        
+        <li class="page-item <?php echo $_GET['pagina']<= 1? 'disabled' : '' ?>"><a id="a_pagina" href="empresa_view.php?pagina=<?php echo $_GET['pagina'] - 1 ?>" class="page-link a_pagina">Anterior</a></li>
       </ul>
 
       <nav aria-label="Page navigation example" style="width: 84%;float: left;">
         <div class="table-responsive">
           <ul class="pagination">                      
-            <?php for ($i=0; $i < $cantidad_de_datos; $i++) { 
+            <?php for ($i=0; $i < $cantida; $i++) { 
 
              ?>            
-            <li class="page-item <?php if($i == $_GET['pagina']){ echo 'active';} ?>"><a class="page-link" href="empresa_view.php?pagina=<?php echo $i ?>" value="<?php echo $i; ?>"><?php echo $i; ?></a></li>
+            <li class="page-item <?php echo $_GET['pagina'] == $i + 1  ? 'active' : '' ?>"><a class="page-link" href="empresa_view.php?pagina=<?php echo $i + 1 ?>" value="<?php echo $i + 1; ?>"><?php echo $i + 1; ?></a></li>
             
             <?php } ?>                   
         </ul>
         </div>
-      </nav>  
-
-      <?php 
-
-        if (isset($_GET['pagina'])) {
-          if ($_GET['pagina'] == $cantidad_f) {
-            $sig = $cantidad_f;
-           }
-           else{
-            $sig = $_GET['pagina'] + 1;
-           }
-        }
-        else{
-          $sig = 1;
-        }
-        
-
-       ?>
+      </nav> 
 
       <ul class="pagination" style="float: right;">
-        <li class="page-item <?php if($_GET['pagina'] == $cantidad_f){ echo 'disabled';} ?>"><a id="s_pagina" href="empresa_view.php?pagina=<?php echo $sig ?>" class="page-link s_pagina">Siguiente</a></li>
+        <li class="page-item <?php echo $_GET['pagina']>=$cantida? 'disabled' : '' ?>"><a id="s_pagina" href="empresa_view.php?pagina=<?php echo $_GET['pagina'] + 1 ?>" class="page-link s_pagina">Siguiente</a></li>
       </ul>
 
       <!-- Fin Paginacion -->

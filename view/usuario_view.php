@@ -1,12 +1,41 @@
 <?php 
 session_start();
+
+$sub_navbar = $_SERVER["REQUEST_URI"]."usuario";
+
 	if (empty($_SESSION['usuario'])) {
 		header('Location: ../');
 	}
 
+	if(!$_GET){
+		header('Location:usuario_view.php?pagina=1');
+	}
+
 	require_once("../model/login_model.php");
 	$usuarios = new login_model();
-	$usu = $usuarios->mostrar_usuarios();
+	//$usu = $usuarios->mostrar_usuarios();
+
+	//Datos Pagina
+
+
+
+  if (isset($_POST['buscar'])) {
+    $busqueda = $_POST['buscar'];
+    $_SESSION["buscar"] = $busqueda;
+
+  }
+  
+
+  $usu = $usuarios->mostrar_usuarios($_GET['pagina'], $_SESSION["buscar"]);
+
+  $cantidad_de_datos = count($usu);
+
+  //echo $cantidad_de_datos;
+
+  $cantida = $usuarios->catidad_de_datos_login($_SESSION["buscar"]);
+
+  //echo $cantida;
+
 
  ?>
 
@@ -36,8 +65,8 @@ session_start();
 </div>
 
 <div style="float: right;">
-	<form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
+	<form class="form-inline my-2 my-lg-0" method="POST">
+      <input class="form-control mr-sm-2" type="search" name="buscar" placeholder="Buscar" aria-label="Search">
       <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Buscar</button>
     </form>
 </div><br><br><br>
@@ -71,6 +100,33 @@ session_start();
     <?php } ?>    
   </tbody>
 </table>
+
+<!-- Paginacion  -->
+
+      <ul class="pagination" style="float: left;">
+        
+        <li class="page-item <?php echo $_GET['pagina']<= 1? 'disabled' : '' ?>"><a id="a_pagina" href="usuario_view.php?pagina=<?php echo $_GET['pagina'] - 1 ?>" class="page-link a_pagina">Anterior</a></li>
+      </ul>
+
+      <nav aria-label="Page navigation example" style="width: 84%;float: left;">
+        <div class="table-responsive">
+          <ul class="pagination">                      
+            <?php for ($i=0; $i < $cantida; $i++) { 
+
+             ?>            
+            <li class="page-item <?php echo $_GET['pagina'] == $i + 1  ? 'active' : '' ?>"><a class="page-link" href="usuario_view.php?pagina=<?php echo $i + 1 ?>" value="<?php echo $i + 1; ?>"><?php echo $i + 1; ?></a></li>
+            
+            <?php } ?>                   
+        </ul>
+        </div>
+      </nav> 
+
+      <ul class="pagination" style="float: right;">
+        <li class="page-item <?php echo $_GET['pagina']>=$cantida? 'disabled' : '' ?>"><a id="s_pagina" href="usuario_view.php?pagina=<?php echo $_GET['pagina'] + 1 ?>" class="page-link s_pagina">Siguiente</a></li>
+      </ul>
+
+      <!-- Fin Paginacion -->
+
 <?php } else{?>
 
 
@@ -94,20 +150,7 @@ session_start();
 <?php } ?>
 
 
-<nav aria-label="Page navigation example">
-  <ul class="pagination justify-content-center">
-    <li class="page-item disabled">
-      <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-    </li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item">
-      <a class="page-link" href="#">Next</a>
-    </li>
-  </ul>
-</nav>
-</div>
+
 
 <!--==============================================
 =            Modal Formulario Agregar            =

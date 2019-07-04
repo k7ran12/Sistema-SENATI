@@ -1,9 +1,15 @@
 <?php 
 session_start();
 
+$sub_navbar = $_SERVER["REQUEST_URI"]."convenio";
+
 	if (empty($_SESSION['usuario'])) {
 		header('Location: ../');
 	}
+
+  if(!$_GET){
+    header('Location:convenio_view.php?pagina=1');
+  }
 
 	require_once("../model/ubigeo_model.php");
   require_once("../model/convenio_model.php");
@@ -98,24 +104,8 @@ session_start();
       <!-- Paginacion  -->
 
       <ul class="pagination" style="float: left;">
-        <?php 
-
-        if (isset($_GET['pagina'])) {
-          if ($_GET['pagina'] == 0) {
-            $pag = 0;
-           }
-           else{
-            $pag = $_GET['pagina'] - 1;
-           }
-        }
-        else{
-          $pag = 0;
-        }
-
-
-
-        ?>
-        <li class="page-item <?php if(!isset($_GET['pagina'])){echo 'disabled';} elseif($pag == 0){ echo 'disabled';} ?>"><a id="a_pagina" href="convenio_view.php?pagina=<?php echo $pag ?>" class="page-link a_pagina">Anterior</a></li>
+        
+        <li class="page-item <?php echo $_GET['pagina']<= 1? 'disabled' : '' ?>"><a id="a_pagina" href="convenio_view.php?pagina=<?php echo $_GET['pagina'] - 1 ?>" class="page-link a_pagina">Anterior</a></li>
       </ul>
 
       <nav aria-label="Page navigation example" style="width: 84%;float: left;">
@@ -124,32 +114,15 @@ session_start();
             <?php for ($i=0; $i < $cantidad_de_datos; $i++) { 
 
              ?>            
-            <li class="page-item <?php if($i == $_GET['pagina']){ echo 'active';} ?>"><a class="page-link" href="convenio_view.php?pagina=<?php echo $i ?>" value="<?php echo $i; ?>"><?php echo $i; ?></a></li>
+            <li class="page-item <?php echo $_GET['pagina'] == $i + 1  ? 'active' : '' ?>"><a class="page-link" href="convenio_view.php?pagina=<?php echo $i + 1 ?>" value="<?php echo $i + 1; ?>"><?php echo $i + 1; ?></a></li>
             
             <?php } ?>                   
         </ul>
         </div>
-      </nav>  
-
-      <?php 
-
-        if (isset($_GET['pagina'])) {
-          if ($_GET['pagina'] == $cantidad_f) {
-            $sig = $cantidad_f;
-           }
-           else{
-            $sig = $_GET['pagina'] + 1;
-           }
-        }
-        else{
-          $sig = 1;
-        }
-        
-
-       ?>
+      </nav> 
 
       <ul class="pagination" style="float: right;">
-        <li class="page-item <?php if($_GET['pagina'] == $cantidad_f){ echo 'disabled';} ?>"><a id="s_pagina" href="convenio_view.php?pagina=<?php echo $sig ?>" class="page-link s_pagina">Siguiente</a></li>
+        <li class="page-item <?php echo $_GET['pagina']>=$cantidad_de_datos? 'disabled' : '' ?>"><a id="s_pagina" href="convenio_view.php?pagina=<?php echo $_GET['pagina'] + 1 ?>" class="page-link s_pagina">Siguiente</a></li>
       </ul>
 
       <!-- Fin Paginacion -->
