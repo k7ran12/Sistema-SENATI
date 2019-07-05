@@ -6,6 +6,7 @@
 	class vinculacion_model extends conexion_model
 	{
 		private $con;
+		private $cantidad_filas = 3;
 
 		function __construct()
 		{
@@ -22,7 +23,7 @@
 
 				$columnas = mysqli_num_rows ($query);
 
-				$pag = $columnas / 10;
+				$pag = $columnas / $this->cantidad_filas;
 
 				return ceil ($pag);
 			}
@@ -33,7 +34,7 @@
 
 				$columnas = mysqli_num_rows ($query);
 
-				$pag = $columnas / 10;
+				$pag = $columnas / $this->cantidad_filas;
 
 				return ceil ($pag);
 			}
@@ -42,9 +43,9 @@
 
 		public function mostrar_vinculacion($inicio_pag, $busqueda){
 
-			$cantidad_datos = 10;
+			$cantidad_datos = $this->cantidad_filas;
 
-			$total_paginas = $inicio_pag * $cantidad_datos;
+			$total_paginas = ($inicio_pag - 1) * $cantidad_datos;
 
 			if ($busqueda != "") {				
 

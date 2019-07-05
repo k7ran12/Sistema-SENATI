@@ -6,7 +6,7 @@
 	class aprendiz_model extends conexion_model
 	{
 		private $con;
-		private $cantidad_filas = 250;
+		private $cantidad_filas = 100;
 
 		function __construct()
 		{

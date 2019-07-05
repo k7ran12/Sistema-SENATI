@@ -1,12 +1,51 @@
 <?php 
 	session_start();
 
+	if (empty($_SESSION['usuario'])) {
+		header('Location: ../');
+	}
+	if(!$_GET){
+    header('Location:reporte_empresa.php?pagina=1');
+  }
+
+
+  if (isset($_POST['buscar'])) {
+    $busqueda = $_POST['buscar'];
+    $_SESSION["buscar"] = $busqueda;
+
+  }
+
+
 	$sub_navbar = $_SERVER["REQUEST_URI"]."reporte_empresa";
 
 	require_once("../model/empresa_model.php");
 
-	$empresa_model = new empresa_model();
-	$empresa = $empresa_model->mostrar_todo_empresa();	
+	$actividad_empresa = "";
+
+	$empresa_model = new empresa_model();	
+
+	//Datos Pagina
+ 
+
+  if (isset($_POST['buscar'])) {
+    $busqueda = $_POST['buscar'];
+    $_SESSION["buscar"] = $busqueda;
+
+  }
+  
+  //echo $_SESSION['buscar'];
+
+  $datos_empresa = $empresa_model->mostrar_empresa($_GET['pagina'], $_SESSION["buscar"]);
+
+  $cantidad_de_datos = count($datos_empresa);
+
+  $cantida = $empresa_model->catidad_de_datos_empresa($_SESSION["buscar"]);
+
+  //echo $cantida;
+
+  
+
+
  ?>
 <!DOCTYPE html>
 <html>
@@ -43,7 +82,7 @@
 	     		<th>Ruc</th>
 	     	</tr>
 	     	
-	     		<?php foreach ($empresa as $value) {	     			
+	     		<?php foreach ($datos_empresa as $value) {	     			
 	     		 ?>
 	     		 <tr>
 	     		 <td><?php echo $value['incrementador'] ?></td>
@@ -54,6 +93,33 @@
 	     		
 	     	
 	     </table>
+
+	     <!-- Paginacion  -->
+
+      <ul class="pagination" style="float: left;">
+        
+        <li class="page-item <?php echo $_GET['pagina']<= 1? 'disabled' : '' ?>"><a id="a_pagina" href="reporte_empresa.php?pagina=<?php echo $_GET['pagina'] - 1 ?>" class="page-link a_pagina">Anterior</a></li>
+      </ul>
+
+      <nav aria-label="Page navigation example" style="width: 84%;float: left;">
+        <div class="table-responsive">
+          <ul class="pagination">                      
+            <?php for ($i=0; $i < $cantida; $i++) { 
+
+             ?>            
+            <li class="page-item <?php echo $_GET['pagina'] == $i + 1  ? 'active' : '' ?>"><a class="page-link" href="reporte_empresa.php?pagina=<?php echo $i + 1 ?>" value="<?php echo $i + 1; ?>"><?php echo $i + 1; ?></a></li>
+            
+            <?php } ?>                   
+        </ul>
+        </div>
+      </nav> 
+
+      <ul class="pagination" style="float: right;">
+        <li class="page-item <?php echo $_GET['pagina']>=$cantida? 'disabled' : '' ?>"><a id="s_pagina" href="reporte_empresa.php?pagina=<?php echo $_GET['pagina'] + 1 ?>" class="page-link s_pagina">Siguiente</a></li>
+      </ul>
+
+      <!-- Fin Paginacion -->
+      
     </div>
 
 </body>

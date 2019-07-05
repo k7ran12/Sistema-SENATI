@@ -21,13 +21,7 @@ session_start();
 	$ubi = $ubicacion->mostrar_ubigeo();
 
   //Datos Pagina
-
-  if (isset($_GET['pagina'])) {
-    $pagina = $_GET['pagina'];
-  }
-  else{
-    $pagina = 0;
-  }
+  
 
   if (isset($_POST['buscar'])) {
     $busqueda = $_POST['buscar'];
@@ -36,7 +30,7 @@ session_start();
   }
   
 
-  $datos_ae = $actividad_empresa_model->mostrar_actividad_empresa($pagina, $_SESSION["buscar"]);
+  $datos_ae = $actividad_empresa_model->mostrar_actividad_empresa($_GET['pagina'], $_SESSION["buscar"]);
 
   $cantidad_de_datos = count($datos_ae);
 

@@ -26,10 +26,13 @@
 				$dni_representante = $_POST['dni_representante'];
 				$ubicacion_em = $_POST['ubicacion_em'];
 				$actividad_empresa = $_POST['actividad_empresa'];
-				$cfp = $_POST['cfp'];				
+				$cfp = $_POST['cfp'];	
+				$estado = $_POST['estado'];
+				$condicion = $_POST['condicion'];
+
 				
 
-				$agregar = $empresa_model->agregar_datos_empresa($ruc, $razon_social, $direccion, $telefono, $correo, $representante, $dni_representante, $ubicacion_em, $actividad_empresa,$cfp );
+				$agregar = $empresa_model->agregar_datos_empresa($ruc, $razon_social, $direccion, $telefono, $correo, $representante, $dni_representante, $ubicacion_em, $actividad_empresa,$cfp , $estado, $condicion);
 
 				if ($agregar == true) 
 					{

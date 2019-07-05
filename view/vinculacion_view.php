@@ -7,6 +7,10 @@ $sub_navbar = $_SERVER["REQUEST_URI"]."vinculacion";
     header('Location: ../');
   }
 
+  if(!$_GET){
+    header('Location:vinculacion_view.php?pagina=1');
+  }
+
   require_once("../model/vinculacion_model.php");
   require_once("../model/cfp_model.php");
   require_once("../model/aprendiz_model.php");
@@ -26,21 +30,15 @@ $sub_navbar = $_SERVER["REQUEST_URI"]."vinculacion";
   $convenio_model = new convenio_model();
 
   //$datos_vinculacion = $vinculacion_model->mostrar_vinculacion();
-  $cfp = $cfp_model->mostrar_cfp();
+  $cfp = $cfp_model->mostrar_todo_cfp();
   $aprendiz = $aprendiz_model->select_aprendiz();
   $empresa = $empresa_model->mostrar_todo_empresa();
   $carrera = $carrera_model->mostrar_todo_carrera();
-  $semestre = $semestre_model->mostrar_semestre();
+  $semestre = $semestre_model->mostrar_todo_semestre();
   $monitor = $monitor_model->mostrar_todo_monitor();
   $convenio = $convenio_model->mostrar_todo_convenio();
 
 
-  if (isset($_GET['pagina'])) {
-    $pagina = $_GET['pagina'];
-  }
-  else{
-    $pagina = 0;
-  }
 
   if (isset($_POST['buscar'])) {
     $busqueda = $_POST['buscar'];
@@ -49,13 +47,13 @@ $sub_navbar = $_SERVER["REQUEST_URI"]."vinculacion";
   }
   
 
-  $datos_vinculacion = $vinculacion_model->mostrar_vinculacion($pagina, $_SESSION["buscar"]);
+  $datos_vinculacion = $vinculacion_model->mostrar_vinculacion($_GET['pagina'], $_SESSION["buscar"]);
 
   $cantidad_de_datos = count($datos_vinculacion);
 
-  $cantidad_de_datos = $vinculacion_model->catidad_de_datos_vinculacion($_SESSION["buscar"]);
+  $cantida = $vinculacion_model->catidad_de_datos_vinculacion($_SESSION["buscar"]);
 
-  $cantidad_f = $cantidad_de_datos - 1;
+  //$cantidad_f = $cantidad_de_datos - 1;
 
 
  ?>
@@ -150,6 +148,34 @@ $sub_navbar = $_SERVER["REQUEST_URI"]."vinculacion";
       }
       ?>
       </table>
+
+      <!-- Paginacion  -->
+
+      <ul class="pagination" style="float: left;">
+        
+        <li class="page-item <?php echo $_GET['pagina']<= 1? 'disabled' : '' ?>"><a id="a_pagina" href="semestre_view.php?pagina=<?php echo $_GET['pagina'] - 1 ?>" class="page-link a_pagina">Anterior</a></li>
+      </ul>
+
+      <nav aria-label="Page navigation example" style="width: 84%;float: left;">
+        <div class="table-responsive">
+          <ul class="pagination">                      
+            <?php for ($i=0; $i < $cantida; $i++) { 
+
+             ?>            
+            <li class="page-item <?php echo $_GET['pagina'] == $i + 1  ? 'active' : '' ?>"><a class="page-link" href="semestre_view.php?pagina=<?php echo $i + 1 ?>" value="<?php echo $i + 1; ?>"><?php echo $i + 1; ?></a></li>
+            
+            <?php } ?>                   
+        </ul>
+        </div>
+      </nav> 
+
+      <ul class="pagination" style="float: right;">
+        <li class="page-item <?php echo $_GET['pagina']>=$cantida? 'disabled' : '' ?>"><a id="s_pagina" href="semestre_view.php?pagina=<?php echo $_GET['pagina'] + 1 ?>" class="page-link s_pagina">Siguiente</a></li>
+      </ul>
+
+      <!-- Fin Paginacion -->
+
+
       </div>
       <?php 
     }

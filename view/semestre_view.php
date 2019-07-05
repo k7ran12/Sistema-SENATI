@@ -7,12 +7,29 @@ $sub_navbar = $_SERVER["REQUEST_URI"]."semestre";
 		header('Location: ../');
 	}
 
+  if(!$_GET){
+    header('Location:semestre_view.php?pagina=1');
+  }
+
 	
   require_once("../model/semestre_model.php");
 
   $semestre_model = new semestre_model();
 
-  $semestre = $semestre_model->mostrar_semestre();
+  //$semestre = $semestre_model->mostrar_semestre();
+
+   if (isset($_POST['buscar'])) {
+    $busqueda = $_POST['buscar'];
+    $_SESSION["buscar"] = $busqueda;
+
+  }
+
+
+    $semestre = $semestre_model->mostrar_semestre($_GET['pagina'], $_SESSION["buscar"]);
+
+  $cantidad_de_datos = count($semestre);
+
+  $cantida = $semestre_model->catidad_de_datos_semestre($_SESSION["buscar"]);
 
 	
 
@@ -53,55 +70,8 @@ $sub_navbar = $_SERVER["REQUEST_URI"]."semestre";
 
 
 <?php 
-  if (!empty($_POST['buscar'])) {
-
-    $buscar = $_POST['buscar'];
-
-    $datos_semestre = $semestre_model->buscar_datos_semestre($buscar);
-
-    if (!empty($datos_semestre)) {
-      ?>
-      <table class="table table-hover">
-          <tr>
-            <th>Codigo Semestre</th>
-            <th>Descripcion Semestre</th>            
-            <th>Accion</th>           
-          </tr>
-      <?php 
-      foreach ($datos_semestre as $value) {
-        ?>        
-          <tr>
-            <td style="display: none;" class="datos_empresa_editar"><?php echo $value['id_sem'] ?></td>
-            <td class="datos_empresa_editar"><?php echo $value['codigo_sem'] ?></td>
-            <td class="datos_empresa_editar"><?php echo $value['descripcion_sem'] ?></td>
-            <td><button type="button" class="btn btn-primary editar_semestre" data-toggle="modal" data-target=".editar_semestre_modal">E</button></td>
-          </tr>
-        
-        <?php 
-      }
-      ?>
-      </table>
-      <?php 
-    }
-    
-    else{
-      ?>
-      <table class="table table-hover">
-         <tr>
-            <th>Codigo Semestre</th>
-            <th>Descripcion Semestre</th>            
-            <th>Accion</th>           
-          </tr>
-        <tr>
-          <td class="alert alert-danger" role="alert" colspan="3"><center><h5>No hay datos</h5></center></td>
-        </tr>
-      </table>
-      <?php 
-    }
-
-
-  }
-  else{
+  
+  
     
     if (!empty($semestre)) {
       ?>
@@ -125,6 +95,32 @@ $sub_navbar = $_SERVER["REQUEST_URI"]."semestre";
       }
       ?>
       </table>
+      <!-- Paginacion  -->
+
+      <ul class="pagination" style="float: left;">
+        
+        <li class="page-item <?php echo $_GET['pagina']<= 1? 'disabled' : '' ?>"><a id="a_pagina" href="semestre_view.php?pagina=<?php echo $_GET['pagina'] - 1 ?>" class="page-link a_pagina">Anterior</a></li>
+      </ul>
+
+      <nav aria-label="Page navigation example" style="width: 84%;float: left;">
+        <div class="table-responsive">
+          <ul class="pagination">                      
+            <?php for ($i=0; $i < $cantida; $i++) { 
+
+             ?>            
+            <li class="page-item <?php echo $_GET['pagina'] == $i + 1  ? 'active' : '' ?>"><a class="page-link" href="semestre_view.php?pagina=<?php echo $i + 1 ?>" value="<?php echo $i + 1; ?>"><?php echo $i + 1; ?></a></li>
+            
+            <?php } ?>                   
+        </ul>
+        </div>
+      </nav> 
+
+      <ul class="pagination" style="float: right;">
+        <li class="page-item <?php echo $_GET['pagina']>=$cantida? 'disabled' : '' ?>"><a id="s_pagina" href="semestre_view.php?pagina=<?php echo $_GET['pagina'] + 1 ?>" class="page-link s_pagina">Siguiente</a></li>
+      </ul>
+
+      <!-- Fin Paginacion -->
+      
       <?php 
     }
     else{
@@ -142,7 +138,6 @@ $sub_navbar = $_SERVER["REQUEST_URI"]."semestre";
       <?php 
     }
 
-  }
  ?>
 <!--==============================================
 =            Modal Formulario Agregar            =

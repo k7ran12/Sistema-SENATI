@@ -176,9 +176,9 @@
 			}			
 			
 
-		public function agregar_datos_empresa($ruc, $razon_social, $direccion, $telefono, $correo, $representante, $dni_representante, $ubicacion_em, $actividad_empresa,$cfp )
+		public function agregar_datos_empresa($ruc, $razon_social, $direccion, $telefono, $correo, $representante, $dni_representante, $ubicacion_em, $actividad_empresa,$cfp , $estado, $condicion)
 		{
-			$consulta = "INSERT INTO `empresa` (`id_emp`, `ruc_emp`, `razonsocial_emp`, `direccion_emp`, `telefono_emp`, `correo_emp`, `representante_emp`, `dnirepresentante_emp`, `id_ubi`, `id_ae`, `id_cfp`) VALUES (NULL, '$ruc', '$razon_social', '$direccion', '$telefono', '$correo', '$representante', '$dni_representante', '$ubicacion_em', '$actividad_empresa', '$cfp');";
+			$consulta = "INSERT INTO `empresa` (`id_emp`, `ruc_emp`, `razonsocial_emp`, `direccion_emp`, `telefono_emp`, `correo_emp`, `representante_emp`, `dnirepresentante_emp`, `estado_emp`, `condicion_emp`, `id_ubi`, `id_ae`, `id_cfp`) VALUES (NULL, '$ruc', '$razon_social', '$direccion', '$telefono', '$correo', '$representante', '$dni_representante', '$estado', '$condicion', '$ubicacion_em', '$actividad_empresa', '$cfp');";
 
 			
 			$query = mysqli_query($this->con, $consulta);

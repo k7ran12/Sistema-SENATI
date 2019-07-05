@@ -254,6 +254,20 @@ $sub_navbar = $_SERVER["REQUEST_URI"]."empresa";
 			    <input type="text" class="form-control" id="dni_representante" name="dni_representante">
 			  </div>
 			  <div class="form-group">
+			  	  <label>Estado</label>			  	  
+			  	  <select class="custom-select" name="estado">			  	  					  	
+				  	<option value="Activo">Activo</option>				  					  	
+				  	<option value="No Activo">No Activo</option>				  	
+				  </select>
+			  </div>
+			  <div class="form-group">
+			  	  <label>Condicion</label>			  	  
+			  	  <select class="custom-select" name="condicion">			  	  					  	
+				  	<option value="Habido">Habido</option>				  					  	
+				  	<option value="No Habido">No Habido</option>				  	
+				  </select>
+			  </div>
+			  <div class="form-group">
 			  	  <label>Ubicacion</label><br>		  	  
 			  	  <select style="width: 100%;" class="custom-select" name="ubicacion_em" id="ubicacion_em">
 			  	  	<?php 

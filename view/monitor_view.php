@@ -7,6 +7,11 @@ $sub_navbar = $_SERVER["REQUEST_URI"]."monitor";
 		header('Location: ../');
 	}
 
+   if(!$_GET){
+    header('Location:monitor_view.php?pagina=1');
+  }
+
+
 	
   require_once("../model/monitor_model.php");
 
@@ -15,14 +20,7 @@ $sub_navbar = $_SERVER["REQUEST_URI"]."monitor";
 
   //$monitor = $monitor_model->mostrar_monitor();
 
-  //Datos Pagina
-
-  if (isset($_GET['pagina'])) {
-    $pagina = $_GET['pagina'];
-  }
-  else{
-    $pagina = 0;
-  }
+  
 
   if (isset($_POST['buscar'])) {
     $busqueda = $_POST['buscar'];
@@ -31,13 +29,13 @@ $sub_navbar = $_SERVER["REQUEST_URI"]."monitor";
   }
   
 
-  $monitor = $monitor_model->mostrar_monitor($pagina, $_SESSION["buscar"]);
+  $monitor = $monitor_model->mostrar_monitor($_GET['pagina'], $_SESSION["buscar"]);
 
   $cantidad_de_datos = count($monitor);
 
-  $cantidad_de_datos = $monitor_model->catidad_de_datos_empresa($_SESSION["buscar"]);
+  $cantida = $monitor_model->catidad_de_datos_empresa($_SESSION["buscar"]);
 
-  $cantidad_f = $cantidad_de_datos - 1;
+  //$cantidad_f = $cantidad_de_datos - 1;
 	
 
  ?>
@@ -117,6 +115,33 @@ $sub_navbar = $_SERVER["REQUEST_URI"]."monitor";
       }
       ?>
       </table>
+
+      <!-- Paginacion  -->
+
+      <ul class="pagination" style="float: left;">
+        
+        <li class="page-item <?php echo $_GET['pagina']<= 1? 'disabled' : '' ?>"><a id="a_pagina" href="monitor_view.php?pagina=<?php echo $_GET['pagina'] - 1 ?>" class="page-link a_pagina">Anterior</a></li>
+      </ul>
+
+      <nav aria-label="Page navigation example" style="width: 84%;float: left;">
+        <div class="table-responsive">
+          <ul class="pagination">                      
+            <?php for ($i=0; $i < $cantida; $i++) { 
+
+             ?>            
+            <li class="page-item <?php echo $_GET['pagina'] == $i + 1  ? 'active' : '' ?>"><a class="page-link" href="monitor_view.php?pagina=<?php echo $i + 1 ?>" value="<?php echo $i + 1; ?>"><?php echo $i + 1; ?></a></li>
+            
+            <?php } ?>                   
+        </ul>
+        </div>
+      </nav> 
+
+      <ul class="pagination" style="float: right;">
+        <li class="page-item <?php echo $_GET['pagina']>=$cantida? 'disabled' : '' ?>"><a id="s_pagina" href="monitor_view.php?pagina=<?php echo $_GET['pagina'] + 1 ?>" class="page-link s_pagina">Siguiente</a></li>
+      </ul>
+
+      <!-- Fin Paginacion -->
+      
       <?php 
     }
     else{

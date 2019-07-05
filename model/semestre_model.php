@@ -6,22 +6,89 @@
 	class semestre_model extends conexion_model
 	{
 		private $con;
+		private $cantidad_filas = 3;
 
 		function __construct()
 		{
 			$this->con = parent::conectar();
 		}
 
-		public function mostrar_semestre()
+		public function catidad_de_datos_semestre($buscar){
+			if ($buscar != "") {
+
+				$consulta = "SELECT * FROM semestre WHERE codigo_sem = '$buscar'";
+
+				$query = mysqli_query($this->con , $consulta);
+
+				$columnas = mysqli_num_rows ($query);
+
+				$pag = $columnas / $this->cantidad_filas;
+
+				return ceil ($pag);
+			}
+			else{
+				$consulta = "SELECT * FROM semestre";
+
+				$query = mysqli_query($this->con , $consulta);
+
+				$columnas = mysqli_num_rows ($query);
+
+				$pag = $columnas / $this->cantidad_filas;
+
+				return ceil ($pag);
+			}
+		}
+
+
+		public function mostrar_semestre($inicio_pag, $busqueda)
 		{
 			
-			$consulta = "SELECT * FROM semestre ORDER BY codigo_sem";
+			$cantidad_datos = $this->cantidad_filas;
 
+			$total_paginas = ($inicio_pag - 1) * $cantidad_datos;
+
+			if ($busqueda != "") {				
+
+				$total_paginas = $inicio_pag * $cantidad_datos;
+
+			$consulta = "SELECT * FROM semestre  WHERE codigo_sem = '$busqueda'";
 			$query = mysqli_query($this->con, $consulta);
 			$array_semestre = array();
+			while ($datos = mysqli_fetch_assoc($query)) {
+				$array['id_sem'] = $datos['id_sem'];
+				$array['codigo_sem'] = $datos['codigo_sem'];
+				$array['descripcion_sem'] = $datos['descripcion_sem'];							
+				array_push($array_semestre, $array);	
+			}
 
-			while ($datos = mysqli_fetch_assoc($query)) 
-			{
+			return $array_semestre;
+			}
+			else{
+				
+				$consulta = "SELECT * FROM semestre  LIMIT $total_paginas , $cantidad_datos";
+			$query = mysqli_query($this->con, $consulta);
+			$array_semestre = array();
+			while ($datos = mysqli_fetch_assoc($query)) {
+				$array['id_sem'] = $datos['id_sem'];
+				$array['codigo_sem'] = $datos['codigo_sem'];
+				$array['descripcion_sem'] = $datos['descripcion_sem'];							
+				array_push($array_semestre, $array);
+			}
+
+			return $array_semestre;
+
+			}
+
+
+			//Codigo Aparte
+		}
+
+		public function mostrar_todo_semestre()
+		{
+			$consulta = "SELECT * FROM semestre";
+			$query = mysqli_query($this->con, $consulta);
+			$array_semestre = array();
+			while ($datos = mysqli_fetch_assoc($query)) {
 				$array['id_sem'] = $datos['id_sem'];
 				$array['codigo_sem'] = $datos['codigo_sem'];
 				$array['descripcion_sem'] = $datos['descripcion_sem'];							

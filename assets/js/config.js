@@ -228,19 +228,6 @@
    =            Tabla CFP            =
    =================================*/
    
-   function datos_tabla_cfp(){
-   	$.ajax({
-   		method: "POST",
-   		url: "controller/cfp_controller.php",
-   		success: function(datos){
-   			$("#tabla_cfp_view").html(datos);
-   		}
-   	});
-   }
-
-   datos_tabla_cfp();
-
-   
 
    /* Agregar datos CFP */
    $( "#from_agregar_cfp" ).on( "submit", function( event ) {
@@ -278,6 +265,8 @@
    /* Datos CFP para editar */
 
    	$(".editar_cfp").click(function() {
+
+      $('#ubicacion_cfp_editar option:selected').removeAttr('selected');
 
         //var valores = "";
         var valores = [];
@@ -647,6 +636,9 @@
    /* Datos Aprendiz Editar */
 
    $(".editar_aprendiz").click(function() {
+
+    $('#editar_ubicacion_ap option:selected').removeAttr('selected');
+    //$('#editar_ubicacion_em option:selected').removeAttr('selected');
 
         //var valores = "";
         var valores = [];
